@@ -96,6 +96,44 @@ public class StreamBasics {
 
 
     System.out.println("All of the shapes have been measured");
+    System.out.println();
+
+
+    //SOURCE
+    //Creates a INFINITE stream of annoying strings.
+    Stream<String> roadtripStream = Stream.generate(() -> "Are we there yet?");
+
+    //INTERMEDIATE FUNCTION.
+    //Limits the stream to at most 10 items.
+    //Does not execute the stream.
+    Stream<String> toleranceStream = roadtripStream
+        .map(question -> question + " No.")
+        .limit(10);
+    toleranceStream.forEach(System.out::println);
+
+    System.out.println("Okay I have had enough");
+    System.out.println();
+
+    Stream.of("one","two","three")
+        .limit(10)
+        .forEach(System.out::println);
+
+    System.out.println("Done Counting!");
+    System.out.println();
+
+    Stream.of("One,two,skip,my,shoe".split(","))
+        .skip(3)
+        .forEach(System.out::println);
+
+    System.out.println("Done Skipping!");
+    System.out.println();
+
+    Stream.of("One,two,skip,my,shoe".split(","))
+        .skip(10)
+        .forEach(System.out::println);
+
+    System.out.println("Skipped all of the things!");
+    System.out.println();
   }
 
   //todo: remember when creating lambdas to watchout for names and scope collisions
