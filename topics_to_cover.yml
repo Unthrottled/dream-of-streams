@@ -1,0 +1,29 @@
+Functional Programming:
+  Streams:
+    Sources:
+      - Primitive Streams
+    IntermediateOperations:
+      - Peek
+      - Map
+      - Filter
+      - flatmap
+      - limit
+      - skip
+      - distinct
+    TerminalOperations:
+      - reduce
+      collect:
+        collectors:
+          - map
+          - list
+          - set
+          - joining
+        primitiveStreams:
+          - reduction
+        concurrency:
+  Optionals:
+    Sources:
+    IntermediatOperations:
+    TerminalOperations:
+  Lambdas:
+  Method_References:
