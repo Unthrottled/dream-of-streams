@@ -137,10 +137,6 @@ public class StreamBasics {
     System.out.println();
 
 
-    //terminal operations
-    //allmatch, nonmatch, anymatch, count, findany min max
-
-
     Stream<String> questionsOfLife = Stream.generate(() -> "Do you know the way?");
 
     Optional<String> lostTraveler = questionsOfLife.findFirst();
@@ -175,6 +171,17 @@ public class StreamBasics {
 
     System.out.println("All of the numbers were less than 7: " + nonMatch);
     System.out.println();
+
+    System.out.println("Any numbers where even: " + Stream.iterate(1, a-> a+3)
+        .anyMatch(i-> i%2==0));
+    System.out.println();
+
+
+
+
+
+    //terminal operations
+    //count, findany min max
   }
 
   //todo: remember when creating lambdas to watchout for names and scope collisions
