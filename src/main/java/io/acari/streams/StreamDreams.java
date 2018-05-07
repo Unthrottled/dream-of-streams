@@ -7,9 +7,6 @@ public class StreamDreams {
 
   public static void main(String... args) {
 
-    //terminal operations
-    //allmatch, nonmatch, anymatch, count, findany min max
-
     LinkedList<Integer> numbers = Stream.iterate(1, a -> ++a)
         .limit(6)
         .collect(

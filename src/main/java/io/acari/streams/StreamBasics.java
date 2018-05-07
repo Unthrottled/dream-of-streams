@@ -2,6 +2,7 @@ package io.acari.streams;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class StreamBasics {
@@ -133,6 +134,29 @@ public class StreamBasics {
         .forEach(System.out::println);
 
     System.out.println("Skipped all of the things!");
+    System.out.println();
+
+
+    //terminal operations
+    //allmatch, nonmatch, anymatch, count, findany min max
+
+
+    Stream<String> questionsOfLife = Stream.generate(() -> "Do you know the way?");
+
+    Optional<String> lostTraveler = questionsOfLife.findFirst();
+
+    lostTraveler.ifPresent(System.out::println);
+
+    System.out.println("Asks the lost traveler");
+    System.out.println();
+
+    Stream<String> noQuestions = Stream.<String>empty();
+
+    Optional<String> saidNoOne = noQuestions.findAny();
+
+    saidNoOne.ifPresent(System.out::println);
+
+    System.out.println("Said no one, ever");
     System.out.println();
   }
 
