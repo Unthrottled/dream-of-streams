@@ -7,6 +7,33 @@ public class StreamDreams {
 
   public static void main(String... args) {
 
+
+    Stream<String> truthStream = Stream.of("streams", "are", "awesome");
+
+    //INTERMEDIATE OPERATION
+    //Does not execute the stream process
+    //But applies a function that takes a string and
+    //Capitalizes the first letter and returns that value to
+    //to be processed by the further methods downstream.
+    Stream<String> capitalizedTruthStream = truthStream.map(streamString ->
+        streamString.substring(0, 1).toUpperCase() + streamString.substring(1));
+
+    //postfixes ever string in the stream with a "..."
+    Stream<String> shatnerStream = capitalizedTruthStream
+        .map(streamString -> streamString + "...");
+
+    //TERMINAL OPERATION
+    //Reduces the stream into one string by first starting
+    //with the Identity string (the base string)
+    //and post-fixes each incoming string and returns that as the
+    //new identity result.
+    String truthStreamMessage = shatnerStream
+        .reduce("", (identity, streamString) -> identity + " " + streamString);
+    //NOTE: By default streams are ordered and are processed from left to right.
+
+    System.out.println("\"" + truthStreamMessage + "\"");//todo: make note of needing to trim
+    System.out.println();
+
     LinkedList<Integer> numbers = Stream.iterate(1, a -> ++a)
         .limit(6)
         .collect(

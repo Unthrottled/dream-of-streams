@@ -38,18 +38,12 @@ public class StreamBasics {
 
     //postfixes ever string in the stream with a "..."
     Stream<String> shatnerStream = capitalizedTruthStream
-        .map(streamString -> streamString + "...");
+        .map(streamString -> streamString + "... ");
 
-    //TERMINAL OPERATION
-    //Reduces the stream into one string by first starting
-    //with the Identity string (the base string)
-    //and post-fixes each incoming string and returns that as the
-    //new identity result.
-    String truthStreamMessage = shatnerStream
-        .reduce("", (identity, streamString) -> identity + " " + streamString);
+    shatnerStream.forEach(System.out::print);
     //NOTE: By default streams are ordered and are processed from left to right.
 
-    System.out.println("\"" + truthStreamMessage + "\"");//todo: make note of needing to trim
+    System.out.println();
     System.out.println();
 
     Stream<Shape> shapeStream = Stream.of(
