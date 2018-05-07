@@ -177,11 +177,21 @@ public class StreamBasics {
     System.out.println();
 
 
+    System.out.println("Convoluted word count: " +
+        Stream.of("This was totally necessary, for serious".split(" ")).count());
 
+    System.out.println();
 
+    System.out.println("The largest word in the sentence is: " +
+        Stream.of("This was totally necessary, for serious".split(" "))
+            .max((stringOne, stringTwo)-> stringOne.compareTo(stringTwo)));
 
-    //terminal operations
-    //count, findany min max
+    System.out.println();
+
+    System.out.println("The smallest word in the sentence is: " +
+        Stream.of("This was totally necessary, for serious".split(" "))
+            .min(String::compareTo));
+    System.out.println();
   }
 
   //todo: remember when creating lambdas to watchout for names and scope collisions
