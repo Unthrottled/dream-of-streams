@@ -74,6 +74,7 @@ public class StreamBasics {
     //it does not cause the stream to execute
     Stream<Shape> peekedShapes = shapeStream.peek(shape -> System.out.println(shape + " is about to be measured."));
 
+    //todo: remember when creating lambdas to watchout for names and scope collisions
     Point2D youMustBeThisTall = new Point2D.Double(0,2.5d);
 
     //INTERMEDIATE OPERATION
@@ -187,6 +188,4 @@ public class StreamBasics {
             .min(String::compareTo));
     System.out.println();
   }
-
-  //todo: remember when creating lambdas to watchout for names and scope collisions
 }

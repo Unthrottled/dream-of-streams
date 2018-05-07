@@ -1,13 +1,12 @@
 package io.acari.streams;
 
 import java.util.LinkedList;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class StreamDreams {
 
   public static void main(String... args) {
-
-
     Stream<String> truthStream = Stream.of("streams", "are", "awesome");
 
     //INTERMEDIATE OPERATION
@@ -31,8 +30,24 @@ public class StreamDreams {
         .reduce("", (identity, streamString) -> identity + " " + streamString);
     //NOTE: By default streams are ordered and are processed from left to right.
 
+
     System.out.println("\"" + truthStreamMessage + "\"");//todo: make note of needing to trim
     System.out.println();
+
+    String itsSomething = Stream.<String>empty()
+        .reduce("well you got this", String::concat);
+
+    System.out.println(itsSomething);
+    System.out.println();
+
+    Optional<String> probablyNothing = Stream.<String>empty()
+        .reduce(String::concat);
+
+    probablyNothing.ifPresent(System.out::println);
+
+    System.out.println("*NOTHING*");
+    System.out.println();
+
 
     LinkedList<Integer> numbers = Stream.iterate(1, a -> ++a)
         .limit(6)
@@ -42,5 +57,11 @@ public class StreamDreams {
             (listOne, listTwo) -> listOne.addAll(listTwo)//merges multiple data collections into one
             //This will be covered in stream intervention
         );
+
+    numbers.stream()
+        .map(number -> number + " ")
+        .forEach(System.out::print);
+    System.out.println();
+
   }
 }
