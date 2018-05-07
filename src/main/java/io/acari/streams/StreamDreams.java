@@ -30,7 +30,6 @@ public class StreamDreams {
         .reduce("", (identity, streamString) -> identity + " " + streamString);
     //NOTE: By default streams are ordered and are processed from left to right.
 
-
     System.out.println("\"" + truthStreamMessage + "\"");//todo: make note of needing to trim
     System.out.println();
 
@@ -47,6 +46,16 @@ public class StreamDreams {
 
     System.out.println("*NOTHING*");
     System.out.println();
+
+    String stringReduce = Stream.iterate(1, a->++a)
+        .limit(10)
+        .reduce("You Stream was: ",
+            (string, number)-> string + number,
+            String::concat);
+
+    System.out.println(stringReduce);
+    System.out.println();
+
 
 
     LinkedList<Integer> numbers = Stream.iterate(1, a -> ++a)
