@@ -1,7 +1,7 @@
 package io.acari.streams;
 
-import java.util.LinkedList;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamDreams {
@@ -72,5 +72,38 @@ public class StreamDreams {
         .forEach(System.out::print);
     System.out.println();
 
+
+    List<Integer> theNumbersMason = Stream.iterate(1, a -> ++a)
+        .limit(30)
+        .collect(Collectors.toList());
+
+    theNumbersMason.stream()
+        .map(number -> number + " ")
+        .forEach(System.out::print);
+    System.out.println();
+    System.out.println(theNumbersMason.getClass());
+    System.out.println();
+
+
+    List<Integer> theBestCollection = Stream.iterate(1, a -> ++a)
+        .limit(30)
+        .collect(Collectors.toCollection(LinkedList::new));
+
+    theBestCollection.stream()
+        .map(number -> number + " ")
+        .forEach(System.out::print);
+    System.out.println();
+    System.out.println(theBestCollection.getClass());
+    System.out.println();
+
+
+    Set<Character> theBestSet = "THIS PROBABLY HAS SOME OF THE SAME CHARACTERS"
+        .chars()
+        .mapToObj(character->(char)character)
+        .collect(Collectors.toCollection(HashSet::new));
+
+    System.out.println(theBestSet);
+    System.out.println(theBestSet.getClass());
+    System.out.println();
   }
 }
