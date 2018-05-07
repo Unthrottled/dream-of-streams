@@ -150,13 +150,30 @@ public class StreamBasics {
     System.out.println("Asks the lost traveler");
     System.out.println();
 
-    Stream<String> noQuestions = Stream.<String>empty();
+    Stream<String> noQuestions = Stream.empty();
 
     Optional<String> saidNoOne = noQuestions.findAny();
 
     saidNoOne.ifPresent(System.out::println);
 
     System.out.println("Said no one, ever");
+    System.out.println();
+
+    boolean allMatched = Stream.iterate(1, a-> ++a)
+        .limit(5)
+        .peek(System.out::println)
+        .allMatch(i -> i < 7);
+
+    System.out.println("All of the numbers were less than 7: " + allMatched);
+    System.out.println();
+
+
+    boolean nonMatch = Stream.iterate(1, a-> ++a)
+        .limit(5)
+        .peek(System.out::println)
+        .allMatch(i -> i < 0);
+
+    System.out.println("All of the numbers were less than 7: " + nonMatch);
     System.out.println();
   }
 
