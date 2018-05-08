@@ -1,6 +1,7 @@
 package io.acari.streams;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -104,6 +105,32 @@ public class StreamDreams {
 
     System.out.println(theBestSet);
     System.out.println(theBestSet.getClass());
+    System.out.println();
+
+    //todo: probably should introduce flatMap now
+
+    Integer[][] arraysAreCool = new Integer[][]{
+        {1,2,3,4,5},
+        {6,7,8,9,10}
+    };
+
+    Arrays.stream(arraysAreCool)
+        .map(Arrays::toString)
+        .forEach(System.out::print);
+    System.out.println();
+    System.out.println();
+
+    List<Integer> iHeardYouLikedStreams = Arrays.stream(arraysAreCool)
+        .map(Arrays::stream)//yo dog
+        .peek(stream-> {
+          System.out.println(stream);
+          System.out.println();
+        })
+        .flatMap(stream -> stream)
+        .peek(System.out::println)
+        .collect(Collectors.toList());
+
+    System.out.println(iHeardYouLikedStreams);
     System.out.println();
   }
 }
