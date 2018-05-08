@@ -107,6 +107,15 @@ public class StreamDreams {
     System.out.println(theBestSet.getClass());
     System.out.println();
 
+    String alphabetSoup = Stream.iterate(97, a->++a)
+        .limit(26)
+        .map(i->(char)i.intValue())
+        .map(String::valueOf)
+        .collect(Collectors.joining(", "));
+
+    System.out.println(alphabetSoup);
+    System.out.println();
+
     //todo: probably should introduce flatMap now
 
     Integer[][] arraysAreCool = new Integer[][]{
