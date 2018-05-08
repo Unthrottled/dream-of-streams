@@ -116,7 +116,14 @@ public class StreamDreams {
     System.out.println(alphabetSoup);
     System.out.println();
 
-    //todo: probably should introduce flatMap now
+    String allCapsSoup = Stream.iterate(65, a->++a)
+        .limit(26)
+        .map(i->(char)i.intValue())
+        .map(String::valueOf)
+        .collect(Collectors.joining());
+
+    System.out.println(allCapsSoup);
+    System.out.println();
 
     Integer[][] arraysAreCool = new Integer[][]{
         {1,2,3,4,5},
@@ -141,5 +148,38 @@ public class StreamDreams {
 
     System.out.println(iHeardYouLikedStreams);
     System.out.println();
+
+    Map<Boolean, List<Character>> ocdAlphabetSoup = Stream.iterate(50, a->++a)
+        .limit(100)
+        .map(i->(char)i.intValue())
+        .collect(Collectors.<Character>partitioningBy(Character::isAlphabetic));
+
+    System.out.println(ocdAlphabetSoup);
+    System.out.println();
+
+    Map<Boolean, Set<Character>> ocdSetAlphabetSoup = "ulaocedulc'dlc3d4lul.bkl891[98pbklaerbcjlk289g3pblka98dlerbasep".chars()
+        .mapToObj(i->(char)i)
+        .collect(Collectors.partitioningBy(c->Character.isAlphabetic(c), Collectors.toSet()));
+
+    System.out.println(ocdSetAlphabetSoup);
+    System.out.println();
+
+//    Stream.iterate(97, a->++a)
+//        .limit(26)
+//        .map(i->(char)i.intValue())
+//        .map(String::valueOf)
+//        .collect(Collectors.groupingBy());
+//
+//    Stream.iterate(97, a->++a)
+//        .limit(26)
+//        .map(i->(char)i.intValue())
+//        .map(String::valueOf)
+//        .collect(Collectors.mapping());
+//
+//    Stream.iterate(97, a->++a)
+//        .limit(26)
+//        .map(i->(char)i.intValue())
+//        .map(String::valueOf)
+//        .collect(Collectors.toMap());
   }
 }
