@@ -3,7 +3,9 @@ package io.acari.streams;
 import com.google.common.collect.Lists;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamAyslum {
@@ -90,6 +92,33 @@ public class StreamAyslum {
 
     System.out.println(thisShouldBeOrderedToo);
     System.out.println();
+
+
+    System.out.println(Collectors.toList().characteristics());
+    System.out.println(Collectors.toMap(Function.identity(), Function.identity())
+        .characteristics());
+    //the only two concurrent
+    System.out.println(Collectors.toConcurrentMap(Function.identity(), Function.identity())
+        .characteristics());
+    System.out.println(Collectors.groupingByConcurrent(Function.identity(), Collectors.toSet())
+        .characteristics());
+
+    LinkedList<Integer> list = Stream.iterate(1, a -> ++a)
+        .limit(10000)
+        .collect(Collectors.toCollection(LinkedList::new));
+
+    IntStream.rangeClosed(0, 25)
+        .forEach(__->{
+          LinkedList<String> listToMakeAList = list
+              .parallelStream()
+              .map(String::valueOf)
+              .collect(LinkedList::new, List::add, LinkedList::addAll);
+          System.out.println(listToMakeAList);
+        });
+
+    System.out.println("Done");
+
+    //show the fork join stuffs
 
     //map-reduce all substrings for type ahead
     //create a multi-map.
