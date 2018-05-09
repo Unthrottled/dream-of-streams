@@ -4,8 +4,11 @@ import com.google.common.collect.Lists;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamBasics {
@@ -203,7 +206,19 @@ public class StreamBasics {
     Stream<String> iCanCountStream = iCanCount.stream();
     iCanCount.add("six");
     iCanCountStream.forEach(System.out::println);
+    iCanCount.add("seven");
     System.out.println("Done!");
+    System.out.println();
+
+    Set<Integer> convolutedSetCollection = Stream.of("aso luacaoe uaa uea uerl eauola uet auesa ensta ntha hna enhaneo".split(" "))
+        .collect(Collectors.mapping(String::length, Collectors.toSet()));
+
+    Set<Integer> simplerSet = Stream.of("aso luacaoe uaa uea uerl eauola uet auesa ensta ntha hna enhaneo".split(" "))
+        .map(String::length)
+        .collect(Collectors.toSet());
+
+    System.out.println(convolutedSetCollection);
+    System.out.println(simplerSet);
     System.out.println();
   }
 }
