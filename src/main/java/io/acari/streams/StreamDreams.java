@@ -171,11 +171,19 @@ public class StreamDreams {
 
     System.out.println(allGroupedTogether);
     System.out.println();
-//
-//    Stream.iterate(97, a->++a)
-//        .limit(26)
-//        .map(i->(char)i.intValue())
-//        .map(String::valueOf)
-//        .collect(Collectors.toMap());
+
+    Map<Integer, String> collect = Stream.of("aoestuh santoeh usntahoesn tuhantoe unst ahsn ethseo auhtuao etnoua bau ohba ouhtba uthna ubnht ueaothn".split(" "))
+        .collect(Collectors.toMap(String::length, Function.identity(), (a,__)->a));
+
+    System.out.println(collect);
+    System.out.println(collect.getClass());
+    System.out.println();
+
+    Map<Integer, String> linkToThePast = Stream.of("aoestuh santoeh usntahoesn tuhantoe unst ahsn ethseo auhtuao etnoua bau ohba ouhtba uthna ubnht ueaothn".split(" "))
+        .collect(Collectors.toMap(String::length, Function.identity(), (a,__)->a, LinkedHashMap::new));
+
+    System.out.println(linkToThePast);
+    System.out.println(linkToThePast.getClass());
+    System.out.println();
   }
 }
