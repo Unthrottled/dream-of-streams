@@ -82,6 +82,7 @@ public class StreamDreams {
         .map(number -> number + " ")
         .forEach(System.out::print);
     System.out.println();
+
     System.out.println(theNumbersMason.getClass());
     System.out.println();
 
@@ -164,17 +165,12 @@ public class StreamDreams {
     System.out.println(ocdSetAlphabetSoup);
     System.out.println();
 
-//    Stream.iterate(97, a->++a)
-//        .limit(26)
-//        .map(i->(char)i.intValue())
-//        .map(String::valueOf)
-//        .collect(Collectors.groupingBy());
-//
-//    Stream.iterate(97, a->++a)
-//        .limit(26)
-//        .map(i->(char)i.intValue())
-//        .map(String::valueOf)
-//        .collect(Collectors.mapping());
+    Map<Character, List<Character>> allGroupedTogether = "acoedgadlaoldgaeodglaeldgaoldgaodlgadlgabulaubalulbarulgrauilgrigrlcihaseu".chars()
+        .mapToObj(i -> (char) i)
+        .collect(Collectors.groupingBy(Function.identity(), Collectors.toList()));
+
+    System.out.println(allGroupedTogether);
+    System.out.println();
 //
 //    Stream.iterate(97, a->++a)
 //        .limit(26)
