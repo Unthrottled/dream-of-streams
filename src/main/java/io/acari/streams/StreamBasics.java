@@ -1,7 +1,10 @@
 package io.acari.streams;
 
+import com.google.common.collect.Lists;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -75,7 +78,7 @@ public class StreamBasics {
     Stream<Shape> peekedShapes = shapeStream.peek(shape -> System.out.println(shape + " is about to be measured."));
 
     //todo: remember when creating lambdas to watchout for names and scope collisions
-    Point2D youMustBeThisTall = new Point2D.Double(0,2.5d);
+    Point2D youMustBeThisTall = new Point2D.Double(0, 2.5d);
 
     //INTERMEDIATE OPERATION
     //Filter allows us to take the current stream item
@@ -87,7 +90,7 @@ public class StreamBasics {
 
     tallShapes
         .map(Object::toString)//converts any shapes that make it pass into a string!
-        .map(tallEnoughShapeName-> tallEnoughShapeName + " is tall enough!")//turns each stream into a message!
+        .map(tallEnoughShapeName -> tallEnoughShapeName + " is tall enough!")//turns each stream into a message!
         .forEach(System.out::println);
 
 
@@ -110,11 +113,19 @@ public class StreamBasics {
     System.out.println("Okay I have had enough");
     System.out.println();
 
-    Stream.of("one","two","three")
+    Stream.of("one", "two", "three")
         .limit(10)
         .forEach(System.out::println);
 
     System.out.println("Done Counting!");
+    System.out.println();
+
+    Stream.of("one", "two", "three", "four", "five")
+        .filter(s -> s.length() > 3)
+        .limit(2)
+        .forEach(System.out::println);
+
+    System.out.println("I am tired of Counting!");
     System.out.println();
 
     Stream.of("One,two,skip,my,shoe".split(","))
@@ -150,7 +161,7 @@ public class StreamBasics {
     System.out.println("Said no one, ever");
     System.out.println();
 
-    boolean allMatched = Stream.iterate(1, a-> ++a)
+    boolean allMatched = Stream.iterate(1, a -> ++a)
         .limit(5)
         .peek(System.out::println)
         .allMatch(i -> i < 7);
@@ -159,7 +170,7 @@ public class StreamBasics {
     System.out.println();
 
 
-    boolean nonMatch = Stream.iterate(1, a-> ++a)
+    boolean nonMatch = Stream.iterate(1, a -> ++a)
         .limit(5)
         .peek(System.out::println)
         .allMatch(i -> i < 0);
@@ -167,8 +178,8 @@ public class StreamBasics {
     System.out.println("All of the numbers were less than 7: " + nonMatch);
     System.out.println();
 
-    System.out.println("Any numbers where even: " + Stream.iterate(1, a-> a+3)
-        .anyMatch(i-> i%2==0));
+    System.out.println("Any numbers where even: " + Stream.iterate(1, a -> a + 3)
+        .anyMatch(i -> i % 2 == 0));
     System.out.println();
 
 
@@ -179,13 +190,20 @@ public class StreamBasics {
 
     System.out.println("The largest word in the sentence is: " +
         Stream.of("This was totally necessary, for serious".split(" "))
-            .max((stringOne, stringTwo)-> stringOne.compareTo(stringTwo)));
+            .max((stringOne, stringTwo) -> stringOne.compareTo(stringTwo)));
 
     System.out.println();
 
     System.out.println("The smallest word in the sentence is: " +
         Stream.of("This was totally necessary, for serious".split(" "))
             .min(String::compareTo));
+    System.out.println();
+
+    List<String> iCanCount = Lists.newArrayList("one two three four five".split(" "));
+    Stream<String> iCanCountStream = iCanCount.stream();
+    iCanCount.add("six");
+    iCanCountStream.forEach(System.out::println);
+    System.out.println("Done!");
     System.out.println();
   }
 }
