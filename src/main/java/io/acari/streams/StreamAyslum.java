@@ -2,10 +2,7 @@ package io.acari.streams;
 
 import com.google.common.collect.Lists;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -48,6 +45,25 @@ public class StreamAyslum {
         .map(number-> number + " ")
         .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append);
     System.out.println(twentyNumbersAlwaysTheSame.toString());
+    System.out.println();
+
+    Optional<Integer> smittyWerbenjagemangensen = Stream.iterate(1, a -> ++a)
+        .limit(30)
+        .collect(Collectors.toList())
+        .stream()
+        .findAny();
+
+    smittyWerbenjagemangensen.ifPresent(System.out::println);
+    System.out.println();
+
+    Optional<Integer> probablyNotNumberOne = Stream.iterate(1, a -> ++a)
+        .limit(30)
+        .collect(Collectors.toList())
+        .stream()
+        .parallel()
+        .findAny();//JVM selects the first thread to finish the task and retrieves its data
+
+    probablyNotNumberOne.ifPresent(System.out::println);
     System.out.println();
 
     List<String> orderIsGreat = Lists.newArrayList("i cannot think of anything clever at the moment".split(" "))
