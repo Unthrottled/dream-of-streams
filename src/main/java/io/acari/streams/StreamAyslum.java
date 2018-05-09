@@ -66,6 +66,11 @@ public class StreamAyslum {
     probablyNotNumberOne.ifPresent(System.out::println);
     System.out.println();
 
+//    Any stream operation that is based on order, including findFirst() , limit() , or
+//    skip() , may actually perform more slowly in a parallel environment.
+//    This is a result of a parallel processing task being forced to coordinate all of its threads in a synchronized-like
+//    fashion.
+
     List<String> orderIsGreat = Lists.newArrayList("i cannot think of anything clever at the moment".split(" "))
         .stream()
         .collect(LinkedList::new, List::add, (listOne, listTwo) -> {
