@@ -1,6 +1,8 @@
 package io.acari.streams;
 
+import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 
 import java.util.*;
 import java.util.function.Function;
@@ -10,7 +12,7 @@ import java.util.stream.Stream;
 
 public class StreamAyslum {
 
-  public static void main(String... args){
+  public static void main(String... args) {
     //Nest collectors.
     Map<Integer, Set<String>> loudSets = Stream.of("ao e aueta ustna ts naeua euae unaue sat uebsea uobtao eubtna ouebnhtae uotn".split(" "))
         .collect(Collectors.groupingBy(String::length,
@@ -34,7 +36,7 @@ public class StreamAyslum {
         .unordered()
         .parallel()
         .limit(20)//Put it here results are undefined
-        .map(number-> number + " ")
+        .map(number -> number + " ")
         .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append);
     System.out.println(twentyNumbers.toString());
     System.out.println();
@@ -44,7 +46,7 @@ public class StreamAyslum {
         .limit(20)//Put it here results are defined
         .unordered()
         .parallel()
-        .map(number-> number + " ")
+        .map(number -> number + " ")
         .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append);
     System.out.println(twentyNumbersAlwaysTheSame.toString());
     System.out.println();
@@ -108,7 +110,7 @@ public class StreamAyslum {
         .collect(Collectors.toCollection(LinkedList::new));
 
     IntStream.rangeClosed(0, 25)
-        .forEach(__->{
+        .forEach(__ -> {
           LinkedList<String> listToMakeAList = list
               .parallelStream()
               .map(String::valueOf)
@@ -119,8 +121,42 @@ public class StreamAyslum {
     System.out.println("Done");
 
     //show the fork join stuffs
+    IntStream.rangeClosed(0, 10)
+        .peek(__ -> System.out.println("Non-Parallel stream: " + Thread.currentThread()))
+        .reduce(0, (a, b) -> a + b);
+
+    System.out.println();
+
+    IntStream.rangeClosed(0, 10)
+        .unordered()
+        .parallel()
+        .peek(__ -> System.out.println("Parallel stream: " + Thread.currentThread()))
+        .reduce(0, (a, b) -> a + b);
+
+    System.out.println();
 
     //map-reduce all substrings for type ahead
     //create a multi-map.
+
+    Multimap<Integer, Character> multimap = IntStream.rangeClosed(0, 26)
+        .boxed()
+        .flatMap(number -> Stream.generate(() -> number)
+            .limit(number))
+        .collect(LinkedListMultimap::create, (map, number) -> {
+          map.put(number, (char) (number + 96));
+        }, Multimap::putAll);
+
+    System.out.println(multimap);
+    System.out.println();
+
+    Map<Integer, List<Character>> collect = IntStream.rangeClosed(0, 26)
+        .boxed()
+        .map(integer -> Stream.generate(() -> integer).limit(integer))
+        .flatMap(tStream -> tStream)
+        .collect(Collectors.groupingBy(Function.identity(),
+            Collectors.mapping(number->(char)(96+number), Collectors.toList())));
+
+    System.out.println(collect);
+    System.out.println();
   }
 }
