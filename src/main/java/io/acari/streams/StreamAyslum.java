@@ -154,9 +154,25 @@ public class StreamAyslum {
         .map(integer -> Stream.generate(() -> integer).limit(integer))
         .flatMap(tStream -> tStream)
         .collect(Collectors.groupingBy(Function.identity(),
-            Collectors.mapping(number->(char)(96+number), Collectors.toList())));
+            Collectors.mapping(number -> (char) (96 + number), Collectors.toList())));
 
     System.out.println(collect);
     System.out.println();
+
+    Map<String, Set<String>> subsequenceIndex =
+        Stream.of("bat cat rat mat hat".split(" "))
+            .flatMap(word -> {
+              Stream.Builder<Map.Entry<String, String>> bob = Stream.builder();
+              for (int i = 0; i < word.length(); i++) {
+                for (int j = i + 1; j <= word.length(); j++) {
+                  bob.accept(new AbstractMap.SimpleEntry<>(word, word.substring(i, j)));
+                }
+              }
+              return bob.build();
+            })
+            .collect(Collectors.groupingBy(Map.Entry::getValue,
+                Collectors.mapping(Map.Entry::getKey, Collectors.toSet())));
+
+    System.out.println(subsequenceIndex);
   }
 }
