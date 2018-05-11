@@ -8,7 +8,6 @@ import {AppComponent} from "./app.component";
 import {HttpModule} from "@angular/http";
 
 
-
 @NgModule({
     imports: [
         BrowserModule,
