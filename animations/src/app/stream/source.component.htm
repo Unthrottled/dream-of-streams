@@ -1,4 +1,7 @@
-<div [@streamSourceState]="state"
-(click)="toggleState()">
+<div
+        [@streamSourceState]="state"
+        (@streamSourceState.done)="complete()"
+        (click)="toggleState()"
+>
     ayy lemon
 </div>

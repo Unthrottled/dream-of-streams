@@ -16,6 +16,9 @@ var SourceComponent = /** @class */ (function () {
     SourceComponent.prototype.toggleState = function () {
         this.state = this.state === 'inactive' ? 'active' : 'inactive';
     };
+    SourceComponent.prototype.complete = function () {
+        console.log('something something, complete');
+    };
     SourceComponent = __decorate([
         core_1.Component({
             selector: 'stream-source',
@@ -30,8 +33,8 @@ var SourceComponent = /** @class */ (function () {
                         backgroundColor: '#cfd8dc',
                         transform: 'translateX(100%)'
                     })),
-                    animations_1.transition('inactive => active', animations_1.animate('500ms ease-in')),
-                    animations_1.transition('active => inactive', animations_1.animate('500ms ease-out'))
+                    animations_1.transition('inactive => active', animations_1.animate('1s ease-in')),
+                    animations_1.transition('active => inactive', animations_1.animate('1s ease-out'))
                 ])
             ]
         })

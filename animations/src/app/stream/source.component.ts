@@ -15,8 +15,8 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
                 backgroundColor: '#cfd8dc',
                 transform: 'translateX(100%)'
             })),
-            transition('inactive => active', animate('500ms ease-in')),
-            transition('active => inactive', animate('500ms ease-out'))
+            transition('inactive => active', animate('1s ease-in')),
+            transition('active => inactive', animate('1s ease-out'))
         ])
     ]
 })
@@ -26,6 +26,10 @@ export class SourceComponent {
 
     toggleState(){
         this.state = this.state === 'inactive' ? 'active': 'inactive';
+    }
+
+    complete(){
+        console.log('something something, complete');
     }
 
 }
