@@ -1,17 +1,13 @@
 import {NgModule} from "@angular/core";
-import {FormsModule} from "@angular/forms";
-import {AppComponent} from "../app.component";
-import {BrowserModule} from "@angular/platform-browser";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HttpClient} from "@angular/common/http";
-import {RouterModule} from "@angular/router";
+import {SourceComponent} from "./source.component";
 
 @NgModule({
-    imports: [
-    ],
+    imports: [],
     exports: [
+        SourceComponent
     ],
     declarations: [
+        SourceComponent
     ],
     providers: []
 })

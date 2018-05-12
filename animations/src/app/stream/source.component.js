@@ -7,23 +7,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var source_component_1 = require("./source.component");
-var StreamModule = /** @class */ (function () {
-    function StreamModule() {
+require("./source.component.htm");
+var SourceComponent = /** @class */ (function () {
+    function SourceComponent() {
     }
-    StreamModule = __decorate([
-        core_1.NgModule({
-            imports: [],
-            exports: [
-                source_component_1.SourceComponent
-            ],
-            declarations: [
-                source_component_1.SourceComponent
-            ],
-            providers: []
+    SourceComponent = __decorate([
+        core_1.Component({
+            selector: 'stream-source',
+            template: require('./source.component.htm')
         })
-    ], StreamModule);
-    return StreamModule;
+    ], SourceComponent);
+    return SourceComponent;
 }());
-exports.StreamModule = StreamModule;
-//# sourceMappingURL=stream.module.js.map
+exports.SourceComponent = SourceComponent;
+//# sourceMappingURL=source.component.js.map

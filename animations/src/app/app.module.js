@@ -22,7 +22,7 @@ var AppModule = /** @class */ (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
-                http_1.HttpClient,
+                http_1.HttpClientModule,
                 animations_1.BrowserAnimationsModule,
                 stream_module_1.StreamModule
             ],

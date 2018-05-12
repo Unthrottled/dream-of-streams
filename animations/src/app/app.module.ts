@@ -5,7 +5,7 @@ import {RouterModule} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 import {AppComponent} from "./app.component";
-import {HttpClient} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {StreamModule} from "./stream/stream.module";
 
 
@@ -13,7 +13,7 @@ import {StreamModule} from "./stream/stream.module";
     imports: [
         BrowserModule,
         FormsModule,
-        HttpClient,
+        HttpClientModule,
         BrowserAnimationsModule,
         StreamModule
     ],
