@@ -8,13 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./source.component.htm");
+var animations_1 = require("@angular/animations");
 var SourceComponent = /** @class */ (function () {
     function SourceComponent() {
+        this.state = 'inactive';
     }
+    SourceComponent.prototype.toggleState = function () {
+        this.state = this.state === 'inactive' ? 'active' : 'inactive';
+    };
     SourceComponent = __decorate([
         core_1.Component({
             selector: 'stream-source',
-            template: require('./source.component.htm')
+            template: require('./source.component.htm'),
+            animations: [
+                animations_1.trigger('streamSourceState', [
+                    animations_1.state('inactive', animations_1.style({
+                        backgroundColor: '#eee',
+                        transform: 'translateX(0%)'
+                    })),
+                    animations_1.state('active', animations_1.style({
+                        backgroundColor: '#cfd8dc',
+                        transform: 'translateX(100%)'
+                    })),
+                    animations_1.transition('inactive => active', animations_1.animate('100ms ease-in')),
+                    animations_1.transition('active => inactive', animations_1.animate('100ms ease-out'))
+                ])
+            ]
         })
     ], SourceComponent);
     return SourceComponent;

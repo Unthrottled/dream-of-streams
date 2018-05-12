@@ -8,12 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var source_component_1 = require("./source.component");
+var platform_browser_1 = require("@angular/platform-browser");
+var animations_1 = require("@angular/platform-browser/animations");
 var StreamModule = /** @class */ (function () {
     function StreamModule() {
     }
     StreamModule = __decorate([
         core_1.NgModule({
-            imports: [],
+            imports: [
+                platform_browser_1.BrowserModule,
+                animations_1.BrowserAnimationsModule
+            ],
             exports: [
                 source_component_1.SourceComponent
             ],
