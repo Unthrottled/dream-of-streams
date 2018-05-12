@@ -30,8 +30,8 @@ var SourceComponent = /** @class */ (function () {
                         backgroundColor: '#cfd8dc',
                         transform: 'translateX(100%)'
                     })),
-                    animations_1.transition('inactive => active', animations_1.animate('100ms ease-in')),
-                    animations_1.transition('active => inactive', animations_1.animate('100ms ease-out'))
+                    animations_1.transition('inactive => active', animations_1.animate('500ms ease-in')),
+                    animations_1.transition('active => inactive', animations_1.animate('500ms ease-out'))
                 ])
             ]
         })

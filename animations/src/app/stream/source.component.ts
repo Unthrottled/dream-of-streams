@@ -15,8 +15,8 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
                 backgroundColor: '#cfd8dc',
                 transform: 'translateX(100%)'
             })),
-            transition('inactive => active', animate('100ms ease-in')),
-            transition('active => inactive', animate('100ms ease-out'))
+            transition('inactive => active', animate('500ms ease-in')),
+            transition('active => inactive', animate('500ms ease-out'))
         ])
     ]
 })
