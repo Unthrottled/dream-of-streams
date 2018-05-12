@@ -1,0 +1,7 @@
+<div
+        [hidden]="complete"
+        [@streamSourceState]="state"
+        (@streamSourceState.done)="completed()"
+>
+{{input}}
+</div>

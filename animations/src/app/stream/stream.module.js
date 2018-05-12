@@ -10,6 +10,7 @@ var core_1 = require("@angular/core");
 var source_component_1 = require("./source.component");
 var platform_browser_1 = require("@angular/platform-browser");
 var animations_1 = require("@angular/platform-browser/animations");
+var transition_component_1 = require("./transition.component");
 var StreamModule = /** @class */ (function () {
     function StreamModule() {
     }
@@ -23,7 +24,8 @@ var StreamModule = /** @class */ (function () {
                 source_component_1.SourceComponent
             ],
             declarations: [
-                source_component_1.SourceComponent
+                source_component_1.SourceComponent,
+                transition_component_1.TransitionComponent
             ],
             providers: []
         })

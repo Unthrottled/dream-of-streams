@@ -2,6 +2,7 @@ import {NgModule} from "@angular/core";
 import {SourceComponent} from "./source.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {TransitionComponent} from "./transition.component";
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         SourceComponent
     ],
     declarations: [
-        SourceComponent
+        SourceComponent,
+        TransitionComponent
     ],
     providers: []
 })
