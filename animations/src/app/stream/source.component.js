@@ -17,7 +17,8 @@ var SourceComponent = /** @class */ (function () {
         this.state = this.state === 'inactive' ? 'active' : 'inactive';
     };
     SourceComponent.prototype.complete = function () {
-        console.log('something something, complete');
+        if (this.state === 'active')
+            console.log('something something, complete');
     };
     SourceComponent = __decorate([
         core_1.Component({
@@ -25,16 +26,11 @@ var SourceComponent = /** @class */ (function () {
             template: require('./source.component.htm'),
             animations: [
                 animations_1.trigger('streamSourceState', [
-                    animations_1.state('inactive', animations_1.style({
-                        backgroundColor: '#eee',
-                        transform: 'translateX(0%)'
-                    })),
                     animations_1.state('active', animations_1.style({
                         backgroundColor: '#cfd8dc',
                         transform: 'translateX(100%)'
                     })),
-                    animations_1.transition('inactive => active', animations_1.animate('1s ease-in')),
-                    animations_1.transition('active => inactive', animations_1.animate('1s ease-out'))
+                    animations_1.transition('* => active', animations_1.animate('1s ease-in'))
                 ])
             ]
         })
