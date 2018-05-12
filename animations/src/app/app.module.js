@@ -12,7 +12,8 @@ var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
 var animations_1 = require("@angular/platform-browser/animations");
 var app_component_1 = require("./app.component");
-var http_1 = require("@angular/http");
+var http_1 = require("@angular/common/http");
+var stream_module_1 = require("./stream/stream.module");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -21,8 +22,9 @@ var AppModule = /** @class */ (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
-                http_1.HttpModule,
-                animations_1.BrowserAnimationsModule
+                http_1.HttpClient,
+                animations_1.BrowserAnimationsModule,
+                stream_module_1.StreamModule
             ],
             exports: [
                 router_1.RouterModule

@@ -5,15 +5,17 @@ import {RouterModule} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 import {AppComponent} from "./app.component";
-import {HttpModule} from "@angular/http";
+import {HttpClient} from "@angular/common/http";
+import {StreamModule} from "./stream/stream.module";
 
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
-        BrowserAnimationsModule
+        HttpClient,
+        BrowserAnimationsModule,
+        StreamModule
     ],
     exports: [
         RouterModule
