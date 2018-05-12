@@ -8,7 +8,6 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     animations: [
         trigger('streamSourceState', [
             state('active', style({
-                backgroundColor: '#cfd8dc',
                 transform: 'translateX(100%)'
             })),
             transition('* => active', animate('1s ease-in'))
@@ -16,7 +15,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ]
 })
 export class SourceComponent {
-
+    //todo: make a parent container that can spawn components.
     state: String = 'inactive';
 
     toggleState() {
