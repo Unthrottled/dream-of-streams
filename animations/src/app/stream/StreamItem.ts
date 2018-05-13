@@ -1,7 +1,13 @@
+import {Element} from "@progress/kendo-drawing";
+
 export class StreamItem {
 
-    constructor() {
+    constructor(private _element: Element) {
         this._identifier = new Date().getTime();
+    }
+
+    get element(): Element {
+        return this._element;
     }
 
     private _identifier: number;

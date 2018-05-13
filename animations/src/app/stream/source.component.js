@@ -11,16 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./source.component.htm");
-var StreamItem_1 = require("./StreamItem");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
+var CircleStreamItemService_1 = require("./CircleStreamItemService");
 var SourceComponent = /** @class */ (function () {
-    function SourceComponent() {
+    function SourceComponent(circleService) {
+        this.circleService = circleService;
         this.outputStream = new core_1.EventEmitter();
         this.streamSource = new BehaviorSubject_1.BehaviorSubject(null);
         this.inputStream = this.streamSource.filter(function (item) { return !!item; });
     }
     SourceComponent.prototype.toggleState = function () {
-        this.streamSource.next(new StreamItem_1.StreamItem());
+        this.streamSource.next(this.circleService.createStreamItem());
     };
     SourceComponent.prototype.complete = function (streamItemAtEnd) {
         this.outputStream.emit(streamItemAtEnd);
@@ -34,7 +35,8 @@ var SourceComponent = /** @class */ (function () {
             selector: 'stream-source',
             template: require('./source.component.htm'),
             animations: []
-        })
+        }),
+        __metadata("design:paramtypes", [CircleStreamItemService_1.CircleStreamItemService])
     ], SourceComponent);
     return SourceComponent;
 }());

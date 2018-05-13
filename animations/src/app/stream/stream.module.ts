@@ -8,6 +8,7 @@ import {MapStreamComponent} from "./map.stream.component";
 import {FilterStreamComponent} from "./filter.stream.component";
 import {FlatMapStreamComponent} from "./flatMap.stream.component";
 import {StreamItemComponent} from "./stream.item.component";
+import {CircleStreamItemService} from "./CircleStreamItemService";
 
 @NgModule({
     imports: [
@@ -27,9 +28,11 @@ import {StreamItemComponent} from "./stream.item.component";
         MapStreamComponent,
         FilterStreamComponent,
         FlatMapStreamComponent,
-        StreamItemComponent
+        StreamItemComponent,
     ],
-    providers: []
+    providers: [
+        CircleStreamItemService
+    ]
 })
 export class StreamModule {
 

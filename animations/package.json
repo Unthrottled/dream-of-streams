@@ -53,7 +53,8 @@
     "systemjs": "0.19.39",
     "webpack": "3.10.0",
     "zone.js": "^0.8.4",
-    "@progress/kendo-drawing": "^1.5.4"
+    "@progress/kendo-drawing": "^1.5.4",
+    "randomcolor": "^0.5.3"
   },
   "devDependencies": {
     "@types/angular": "^1.5.16",
