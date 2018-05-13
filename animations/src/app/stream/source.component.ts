@@ -13,17 +13,23 @@ export class SourceComponent {
     @Output()
     public stream = new EventEmitter<StreamItem>();
 
-    private _streamItems: any[] = [];
+    private itemIndex: Map<number, number> = new Map();
+    private _streamItems: StreamItem[] = [];
 
-    get streamItems(): any[] {
+    get streamItems(): Iterable<StreamItem> {
         return this._streamItems;
     }
 
     toggleState() {
-        this._streamItems.push(new StreamItem())
+        let streamItem = new StreamItem();
+        this.itemIndex.set(streamItem.identifier,
+            this._streamItems.push(streamItem));
     }
 
     complete(streamItemAtEnd: StreamItem) {
+        let index = streamItemAtEnd.identifier;
+        this._streamItems.splice(this.itemIndex.get(index), 1);
+        this.itemIndex.delete(index);
         this.stream.emit((streamItemAtEnd));
     }
 

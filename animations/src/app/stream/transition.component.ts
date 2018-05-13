@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import './transition.component.htm'
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {StreamItem} from "./StreamItem";
 
 @Component({
     selector: 'stream-transition',
@@ -35,12 +36,14 @@ export class TransitionComponent {
     }
 
     @Output()
-    private completedTransiton: EventEmitter<any> = new EventEmitter<any>();
+    private completedTransiton: EventEmitter<StreamItem> = new EventEmitter<any>();
 
 
     completed() {
-        if (this.state === 'active')
+        if (this.state === 'active'){
             this._complete = true;
+            this.completedTransiton.emit(this.input);
+        }
     }
 
 }

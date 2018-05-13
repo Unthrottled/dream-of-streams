@@ -36,8 +36,10 @@ var TransitionComponent = /** @class */ (function () {
         configurable: true
     });
     TransitionComponent.prototype.completed = function () {
-        if (this.state === 'active')
+        if (this.state === 'active') {
             this._complete = true;
+            this.completedTransiton.emit(this.input);
+        }
     };
     __decorate([
         core_1.Input(),

@@ -15,6 +15,7 @@ var StreamItem_1 = require("./StreamItem");
 var SourceComponent = /** @class */ (function () {
     function SourceComponent() {
         this.stream = new core_1.EventEmitter();
+        this.itemIndex = new Map();
         this._streamItems = [];
     }
     Object.defineProperty(SourceComponent.prototype, "streamItems", {
@@ -25,9 +26,13 @@ var SourceComponent = /** @class */ (function () {
         configurable: true
     });
     SourceComponent.prototype.toggleState = function () {
-        this._streamItems.push(new StreamItem_1.StreamItem());
+        var streamItem = new StreamItem_1.StreamItem();
+        this.itemIndex.set(streamItem.identifier, this._streamItems.push(streamItem));
     };
     SourceComponent.prototype.complete = function (streamItemAtEnd) {
+        var index = streamItemAtEnd.identifier;
+        this._streamItems.splice(this.itemIndex.get(index), 1);
+        this.itemIndex.delete(index);
         this.stream.emit((streamItemAtEnd));
     };
     __decorate([
