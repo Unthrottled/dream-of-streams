@@ -7,6 +7,7 @@ import {BaseStreamComponent} from "./base.stream.component";
 import {MapStreamComponent} from "./map.stream.component";
 import {FilterStreamComponent} from "./filter.stream.component";
 import {FlatMapStreamComponent} from "./flatMap.stream.component";
+import {StreamItemComponent} from "./stream.item.component";
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import {FlatMapStreamComponent} from "./flatMap.stream.component";
         BaseStreamComponent,
         MapStreamComponent,
         FilterStreamComponent,
-        FlatMapStreamComponent
+        FlatMapStreamComponent,
+        StreamItemComponent
     ],
     providers: []
 })

@@ -3,5 +3,5 @@
         [@streamSourceState]="state"
         (@streamSourceState.done)="completed()"
 >
-{{input}}
+<stream-item [streamItem]="input"></stream-item>
 </div>
