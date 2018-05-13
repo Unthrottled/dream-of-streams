@@ -12,33 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./source.component.htm");
 var StreamItem_1 = require("./StreamItem");
+var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var SourceComponent = /** @class */ (function () {
     function SourceComponent() {
-        this.stream = new core_1.EventEmitter();
-        this.itemIndex = new Map();
-        this._streamItems = [];
+        this.outputStream = new core_1.EventEmitter();
+        this.streamSource = new BehaviorSubject_1.BehaviorSubject(null);
+        this.inputStream = this.streamSource.filter(function (item) { return !!item; });
     }
-    Object.defineProperty(SourceComponent.prototype, "streamItems", {
-        get: function () {
-            return this._streamItems;
-        },
-        enumerable: true,
-        configurable: true
-    });
     SourceComponent.prototype.toggleState = function () {
-        var streamItem = new StreamItem_1.StreamItem();
-        this.itemIndex.set(streamItem.identifier, this._streamItems.push(streamItem));
+        this.streamSource.next(new StreamItem_1.StreamItem());
     };
     SourceComponent.prototype.complete = function (streamItemAtEnd) {
-        var index = streamItemAtEnd.identifier;
-        this._streamItems.splice(this.itemIndex.get(index), 1);
-        this.itemIndex.delete(index);
-        this.stream.emit((streamItemAtEnd));
+        this.outputStream.emit((streamItemAtEnd));
     };
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
-    ], SourceComponent.prototype, "stream", void 0);
+    ], SourceComponent.prototype, "outputStream", void 0);
     SourceComponent = __decorate([
         core_1.Component({
             selector: 'stream-source',

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from "@angular/core";
 import './source.component.htm'
 import {StreamItem} from "./StreamItem";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 
 @Component({
@@ -11,26 +12,18 @@ import {StreamItem} from "./StreamItem";
 export class SourceComponent {
 
     @Output()
-    public stream = new EventEmitter<StreamItem>();
+    public outputStream = new EventEmitter<StreamItem>();
 
-    private itemIndex: Map<number, number> = new Map();
-    private _streamItems: StreamItem[] = [];
+    private streamSource = new BehaviorSubject<StreamItem>(null);
 
-    get streamItems(): Iterable<StreamItem> {
-        return this._streamItems;
-    }
+    inputStream = this.streamSource.filter(item => !!item);
 
     toggleState() {
-        let streamItem = new StreamItem();
-        this.itemIndex.set(streamItem.identifier,
-            this._streamItems.push(streamItem));
+        this.streamSource.next(new StreamItem());
     }
 
     complete(streamItemAtEnd: StreamItem) {
-        let index = streamItemAtEnd.identifier;
-        this._streamItems.splice(this.itemIndex.get(index), 1);
-        this.itemIndex.delete(index);
-        this.stream.emit((streamItemAtEnd));
+        this.outputStream.emit((streamItemAtEnd));
     }
 
 }
