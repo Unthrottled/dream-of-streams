@@ -1,5 +1,7 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 import './source.component.htm'
+import {StreamItem} from "./StreamItem";
+
 
 @Component({
     selector: 'stream-source',
@@ -8,15 +10,21 @@ import './source.component.htm'
 })
 export class SourceComponent {
 
-    private streamItems: any[] = [];
+    @Output()
+    public stream = new EventEmitter<StreamItem>();
 
-    toggleState() {
-        this.streamItems.push({
-            ayy: 'lmao'
-        })
+    private _streamItems: any[] = [];
+
+    get streamItems(): any[] {
+        return this._streamItems;
     }
 
-    complete() {
+    toggleState() {
+        this._streamItems.push(new StreamItem())
+    }
+
+    complete(streamItemAtEnd: StreamItem) {
+        this.stream.emit((streamItemAtEnd));
     }
 
 }
