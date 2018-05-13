@@ -6,6 +6,7 @@ import {TransitionComponent} from "./transition.component";
 import {BaseStreamComponent} from "./base.stream.component";
 import {MapStreamComponent} from "./map.stream.component";
 import {FilterStreamComponent} from "./filter.stream.component";
+import {FlatMapStreamComponent} from "./flatMap.stream.component";
 
 @NgModule({
     imports: [
@@ -16,13 +17,15 @@ import {FilterStreamComponent} from "./filter.stream.component";
         SourceComponent,
         MapStreamComponent,
         FilterStreamComponent,
+        FlatMapStreamComponent,
     ],
     declarations: [
         SourceComponent,
         TransitionComponent,
         BaseStreamComponent,
         MapStreamComponent,
-        FilterStreamComponent
+        FilterStreamComponent,
+        FlatMapStreamComponent
     ],
     providers: []
 })
