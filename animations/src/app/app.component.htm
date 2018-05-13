@@ -1,9 +1,12 @@
 <div style="display: flex">
     <div style="flex-grow: 1">
-        <stream-source></stream-source>
+        <stream-source (outputStream)="sourceComplete($event)"></stream-source>
     </div>
     <div style="flex-grow: 1">
-        butts
+        <map-stream (outputStream)="mapOneComplete($event)"
+                    [inputStream]="sourceOutput"
+                    [mappingFunction]="mapOne.bind(this)"
+        ></map-stream>
     </div>
 </div>
 

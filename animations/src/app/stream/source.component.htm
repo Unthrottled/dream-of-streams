@@ -1,7 +1,7 @@
 <div (click)="toggleState()" >
     please click
-    <base-stream-component [inputStream]="inputStream">
-
-    </base-stream-component>
+    <base-stream-component [inputStream]="inputStream"
+                           (outputStream)="complete($event)"
+    ></base-stream-component>
 </div>
 

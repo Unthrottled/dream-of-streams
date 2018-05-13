@@ -12,25 +12,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./transition.component.htm");
 var animations_1 = require("@angular/animations");
+var StreamItem_1 = require("./StreamItem");
 var TransitionComponent = /** @class */ (function () {
     function TransitionComponent() {
         this.state = 'active';
-        this._complete = false;
         this.completedTransiton = new core_1.EventEmitter();
+        this._complete = false;
     }
-    Object.defineProperty(TransitionComponent.prototype, "complete", {
-        get: function () {
-            return this._complete;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(TransitionComponent.prototype, "input", {
         get: function () {
             return this._input;
         },
         set: function (value) {
             this._input = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TransitionComponent.prototype, "complete", {
+        get: function () {
+            return this._complete;
         },
         enumerable: true,
         configurable: true
@@ -42,14 +43,14 @@ var TransitionComponent = /** @class */ (function () {
         }
     };
     __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], TransitionComponent.prototype, "input", null);
-    __decorate([
         core_1.Output(),
-        __metadata("design:type", core_1.EventEmitter)
+        __metadata("design:type", Object)
     ], TransitionComponent.prototype, "completedTransiton", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", StreamItem_1.StreamItem),
+        __metadata("design:paramtypes", [StreamItem_1.StreamItem])
+    ], TransitionComponent.prototype, "input", null);
     TransitionComponent = __decorate([
         core_1.Component({
             selector: 'stream-transition',

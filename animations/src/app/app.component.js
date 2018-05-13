@@ -8,9 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./app.component.htm");
+var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
+        this.mapOne = function (item) { return item; };
+        this.sourceSubject = new BehaviorSubject_1.BehaviorSubject(null);
+        this.sourceOutput = this.sourceSubject.filter(function (item) { return !!item; });
     }
+    AppComponent.prototype.sourceComplete = function (item) {
+        this.sourceSubject.next(item);
+    };
+    AppComponent.prototype.mapOneComplete = function (steamItem) {
+        console.log("end o the line for", steamItem);
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'angular-application',

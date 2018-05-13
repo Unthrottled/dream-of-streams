@@ -1,5 +1,8 @@
-
 export class StreamItem {
+
+    constructor() {
+        this._identifier = new Date().getTime();
+    }
 
     private _identifier: number;
 
@@ -7,7 +10,7 @@ export class StreamItem {
         return this._identifier;
     }
 
-    constructor() {
-        this._identifier = new Date().getMilliseconds();
+    toString(): String {
+        return this._identifier.toString();
     }
 }

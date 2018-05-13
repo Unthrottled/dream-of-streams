@@ -23,7 +23,7 @@ var SourceComponent = /** @class */ (function () {
         this.streamSource.next(new StreamItem_1.StreamItem());
     };
     SourceComponent.prototype.complete = function (streamItemAtEnd) {
-        this.outputStream.emit((streamItemAtEnd));
+        this.outputStream.emit(streamItemAtEnd);
     };
     __decorate([
         core_1.Output(),

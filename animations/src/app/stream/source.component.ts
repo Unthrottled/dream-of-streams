@@ -23,7 +23,7 @@ export class SourceComponent {
     }
 
     complete(streamItemAtEnd: StreamItem) {
-        this.outputStream.emit((streamItemAtEnd));
+        this.outputStream.emit(streamItemAtEnd);
     }
 
 }

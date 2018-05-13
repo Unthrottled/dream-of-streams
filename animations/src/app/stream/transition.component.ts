@@ -17,30 +17,28 @@ import {StreamItem} from "./StreamItem";
 })
 export class TransitionComponent {
     state: String = 'active';
+    @Output()
+    private completedTransiton = new EventEmitter<StreamItem>();
 
-    private _input: any;
+    private _input: StreamItem;
+
+    @Input()
+    get input(): StreamItem {
+        return this._input;
+    }
+
+    set input(value: StreamItem) {
+        this._input = value;
+    }
+
     private _complete: boolean = false;
-
 
     get complete(): boolean {
         return this._complete;
     }
 
-    @Input()
-    get input(): any {
-        return this._input;
-    }
-
-    set input(value: any) {
-        this._input = value;
-    }
-
-    @Output()
-    private completedTransiton: EventEmitter<StreamItem> = new EventEmitter<any>();
-
-
     completed() {
-        if (this.state === 'active'){
+        if (this.state === 'active') {
             this._complete = true;
             this.completedTransiton.emit(this.input);
         }
