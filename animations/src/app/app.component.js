@@ -9,10 +9,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./app.component.htm");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
+var Observable_1 = require("rxjs/Observable");
+var Rx_1 = require("rxjs/Rx");
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.mapOne = {
             apply: function (item) { return item; }
+        };
+        this.flatMapOne = {
+            apply: function (item) { return Observable_1.Observable.create(function (observer) {
+                observer.next(item);
+                Observable_1.Observable.interval(350, Rx_1.Scheduler.async)
+                    .take(4)
+                    .subscribe(function (_) { return observer.next(item); }, observer.error, observer.complete);
+            }); }
         };
         this.filterOne = {
             test: function (item) { return item.identifier % 2 === 0; }
@@ -21,12 +31,17 @@ var AppComponent = /** @class */ (function () {
         this.sourceOutput = this.sourceSubject.filter(function (item) { return !!item; });
         this.mapSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.mapOutput = this.mapSubject.filter(function (item) { return !!item; });
+        this.flatMapSubject = new BehaviorSubject_1.BehaviorSubject(null);
+        this.flatMapOutput = this.flatMapSubject.filter(function (item) { return !!item; });
     }
     AppComponent.prototype.sourceComplete = function (item) {
         this.sourceSubject.next(item);
     };
     AppComponent.prototype.mapOneComplete = function (steamItem) {
         this.mapSubject.next(steamItem);
+    };
+    AppComponent.prototype.flatMapOneComplete = function (steamItem) {
+        this.flatMapSubject.next(steamItem);
     };
     AppComponent.prototype.filterOneComplete = function (steamItem) {
     };

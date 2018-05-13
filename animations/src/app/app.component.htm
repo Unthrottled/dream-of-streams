@@ -3,8 +3,14 @@
         <stream-source (outputStream)="sourceComplete($event)"></stream-source>
     </div>
     <div style="flex-grow: 1">
-        <map-stream (outputStream)="mapOneComplete($event)"
+        <flatMap-stream (outputStream)="flatMapOneComplete($event)"
                     [inputStream]="sourceOutput"
+                    [mappingFunction]="flatMapOne"
+        ></flatMap-stream>
+    </div>
+    <div style="flex-grow: 1">
+        <map-stream (outputStream)="mapOneComplete($event)"
+                    [inputStream]="flatMapOutput"
                     [mappingFunction]="mapOne"
         ></map-stream>
     </div>

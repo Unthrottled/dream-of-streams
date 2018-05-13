@@ -4,6 +4,9 @@ import {StreamItem} from "./stream/StreamItem";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Function} from "./stream/Function";
 import {Predicate} from "./stream/Predicate";
+import {Observable} from "rxjs/Observable";
+import {Observer} from "rxjs/Observer";
+import {Scheduler} from "rxjs/Rx";
 
 @Component({
     selector: 'angular-application',
@@ -13,6 +16,17 @@ export class AppComponent {
 
     mapOne: Function<StreamItem, StreamItem> = {
         apply: (item: StreamItem) => item
+    };
+
+    flatMapOne: Function<StreamItem, Observable<StreamItem>> = {
+        apply: (item: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
+            observer.next(item);
+            Observable.interval(350, Scheduler.async)
+                .take(4)
+                .subscribe(_ => observer.next(item),
+                    observer.error,
+                    observer.complete)
+        })
     };
 
     filterOne: Predicate<StreamItem> = {
@@ -25,12 +39,19 @@ export class AppComponent {
     private mapSubject = new BehaviorSubject(null);
     mapOutput = this.mapSubject.filter(item => !!item);
 
+    private flatMapSubject = new BehaviorSubject(null);
+    flatMapOutput = this.flatMapSubject.filter(item => !!item);
+
     sourceComplete(item: StreamItem) {
         this.sourceSubject.next(item);
     }
 
     mapOneComplete(steamItem: StreamItem) {
         this.mapSubject.next(steamItem)
+    }
+
+    flatMapOneComplete(steamItem: StreamItem) {
+        this.flatMapSubject.next(steamItem)
     }
 
     filterOneComplete(steamItem: StreamItem) {

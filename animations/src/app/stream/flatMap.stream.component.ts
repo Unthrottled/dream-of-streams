@@ -33,7 +33,6 @@ export class FlatMapStreamComponent {
     }
 
     set inputStream(value: Observable<StreamItem>) {
-        //todo: need to workout chaining
         this._inputStream = value.flatMap(item => this.mappingFunction.apply(item));
     }
 
