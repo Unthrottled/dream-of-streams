@@ -14,14 +14,21 @@ var AppComponent = /** @class */ (function () {
         this.mapOne = {
             apply: function (item) { return item; }
         };
+        this.filterOne = {
+            test: function (item) { return item.identifier % 2 === 0; }
+        };
         this.sourceSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.sourceOutput = this.sourceSubject.filter(function (item) { return !!item; });
+        this.mapSubject = new BehaviorSubject_1.BehaviorSubject(null);
+        this.mapOutput = this.mapSubject.filter(function (item) { return !!item; });
     }
     AppComponent.prototype.sourceComplete = function (item) {
         this.sourceSubject.next(item);
     };
     AppComponent.prototype.mapOneComplete = function (steamItem) {
-        console.log("end o the line for", steamItem);
+        this.mapSubject.next(steamItem);
+    };
+    AppComponent.prototype.filterOneComplete = function (steamItem) {
     };
     AppComponent = __decorate([
         core_1.Component({

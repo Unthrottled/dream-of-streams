@@ -8,5 +8,11 @@
                     [mappingFunction]="mapOne"
         ></map-stream>
     </div>
+    <div style="flex-grow: 1">
+        <filter-stream (outputStream)="filterOneComplete($event)"
+                    [inputStream]="mapOutput"
+                    [filterFunction]="filterOne"
+        ></filter-stream>
+    </div>
 </div>
 

@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TransitionComponent} from "./transition.component";
 import {BaseStreamComponent} from "./base.stream.component";
 import {MapStreamComponent} from "./map.stream.component";
+import {FilterStreamComponent} from "./filter.stream.component";
 
 @NgModule({
     imports: [
@@ -13,13 +14,15 @@ import {MapStreamComponent} from "./map.stream.component";
     ],
     exports: [
         SourceComponent,
-        MapStreamComponent
+        MapStreamComponent,
+        FilterStreamComponent,
     ],
     declarations: [
         SourceComponent,
         TransitionComponent,
         BaseStreamComponent,
-        MapStreamComponent
+        MapStreamComponent,
+        FilterStreamComponent
     ],
     providers: []
 })
