@@ -22,7 +22,6 @@ export class MapStreamComponent {
     }
 
     set mappingFunction(value: Function<StreamItem, StreamItem>) {
-        console.warn(value.apply(new StreamItem()));
         this._mappingFunction = value;
     }
 
@@ -34,11 +33,7 @@ export class MapStreamComponent {
     }
 
     set inputStream(value: Observable<StreamItem>) {
-        this._inputStream = value.map(item => {
-            let butt = this.mappingFunction.apply(item)
-            console.log(butt);
-            return butt;
-        });
+        this._inputStream = value.map(item => this.mappingFunction.apply(item));
     }
 
     complete(streamItemAtEnd: StreamItem) {
