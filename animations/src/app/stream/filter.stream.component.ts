@@ -33,7 +33,6 @@ export class FilterStreamComponent {
     }
 
     set inputStream(value: Observable<StreamItem>) {
-        console.log(value)
         this._inputStream = value.filter(item => this.filterFunction.test(item));
     }
 

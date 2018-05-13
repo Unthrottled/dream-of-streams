@@ -14,6 +14,7 @@ var transition_component_1 = require("./transition.component");
 var base_stream_component_1 = require("./base.stream.component");
 var map_stream_component_1 = require("./map.stream.component");
 var filter_stream_component_1 = require("./filter.stream.component");
+var flatMap_stream_component_1 = require("./flatMap.stream.component");
 var StreamModule = /** @class */ (function () {
     function StreamModule() {
     }
@@ -27,13 +28,15 @@ var StreamModule = /** @class */ (function () {
                 source_component_1.SourceComponent,
                 map_stream_component_1.MapStreamComponent,
                 filter_stream_component_1.FilterStreamComponent,
+                flatMap_stream_component_1.FlatMapStreamComponent,
             ],
             declarations: [
                 source_component_1.SourceComponent,
                 transition_component_1.TransitionComponent,
                 base_stream_component_1.BaseStreamComponent,
                 map_stream_component_1.MapStreamComponent,
-                filter_stream_component_1.FilterStreamComponent
+                filter_stream_component_1.FilterStreamComponent,
+                flatMap_stream_component_1.FlatMapStreamComponent
             ],
             providers: []
         })

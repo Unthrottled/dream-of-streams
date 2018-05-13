@@ -14,14 +14,14 @@ export class FlatMapStreamComponent {
     @Output()
     public outputStream = new EventEmitter<StreamItem>();
 
-    private _mappingFunction: Function<StreamItem, StreamItem>;
+    private _mappingFunction: Function<StreamItem, Observable<StreamItem>>;
 
     @Input()
-    get mappingFunction(): Function<StreamItem, StreamItem> {
+    get mappingFunction(): Function<StreamItem, Observable<StreamItem>> {
         return this._mappingFunction;
     }
 
-    set mappingFunction(value: Function<StreamItem, StreamItem>) {
+    set mappingFunction(value: Function<StreamItem, Observable<StreamItem>>) {
         this._mappingFunction = value;
     }
 
@@ -33,7 +33,8 @@ export class FlatMapStreamComponent {
     }
 
     set inputStream(value: Observable<StreamItem>) {
-        this._inputStream = value.map(item => this.mappingFunction.apply(item));
+        //todo: need to workout chaining
+        this._inputStream = value.flatMap(item => this.mappingFunction.apply(item));
     }
 
     complete(streamItemAtEnd: StreamItem) {
