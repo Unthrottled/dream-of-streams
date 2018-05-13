@@ -5,7 +5,7 @@
     <div style="flex-grow: 1">
         <map-stream (outputStream)="mapOneComplete($event)"
                     [inputStream]="sourceOutput"
-                    [mappingFunction]="mapOne.bind(this)"
+                    [mappingFunction]="mapOne"
         ></map-stream>
     </div>
 </div>

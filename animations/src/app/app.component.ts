@@ -10,7 +10,9 @@ import {Function} from "./stream/Function";
 })
 export class AppComponent {
 
-    mapOne: Function<StreamItem, StreamItem> = (item: StreamItem) => item;
+    mapOne: Function<StreamItem, StreamItem> = {
+        apply: (item: StreamItem) => item
+    };
 
     private sourceSubject = new BehaviorSubject(null);
     sourceOutput = this.sourceSubject.filter(item => !!item);

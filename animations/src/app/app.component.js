@@ -11,7 +11,9 @@ require("./app.component.htm");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
-        this.mapOne = function (item) { return item; };
+        this.mapOne = {
+            apply: function (item) { return item; }
+        };
         this.sourceSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.sourceOutput = this.sourceSubject.filter(function (item) { return !!item; });
     }
