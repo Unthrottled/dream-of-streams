@@ -10,6 +10,7 @@ import {FlatMapStreamComponent} from "./flatMap.stream.component";
 import {StreamItemComponent} from "./stream.item.component";
 import {CircleStreamItemService} from "./CircleStreamItemService";
 import {TriangleStreamItemService} from "./TriangleStreamItemService";
+import {SquareStreamItemService} from "./SquareStreamItemService";
 
 @NgModule({
     imports: [
@@ -33,7 +34,8 @@ import {TriangleStreamItemService} from "./TriangleStreamItemService";
     ],
     providers: [
         CircleStreamItemService,
-        TriangleStreamItemService
+        TriangleStreamItemService,
+        SquareStreamItemService
     ]
 })
 export class StreamModule {

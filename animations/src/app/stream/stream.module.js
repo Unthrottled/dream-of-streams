@@ -18,6 +18,7 @@ var flatMap_stream_component_1 = require("./flatMap.stream.component");
 var stream_item_component_1 = require("./stream.item.component");
 var CircleStreamItemService_1 = require("./CircleStreamItemService");
 var TriangleStreamItemService_1 = require("./TriangleStreamItemService");
+var SquareStreamItemService_1 = require("./SquareStreamItemService");
 var StreamModule = /** @class */ (function () {
     function StreamModule() {
     }
@@ -44,7 +45,8 @@ var StreamModule = /** @class */ (function () {
             ],
             providers: [
                 CircleStreamItemService_1.CircleStreamItemService,
-                TriangleStreamItemService_1.TriangleStreamItemService
+                TriangleStreamItemService_1.TriangleStreamItemService,
+                SquareStreamItemService_1.SquareStreamItemService
             ]
         })
     ], StreamModule);

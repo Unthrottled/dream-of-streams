@@ -8,6 +8,7 @@ import {Observable} from "rxjs/Observable";
 import {Observer} from "rxjs/Observer";
 import {Scheduler} from "rxjs/Rx";
 import {TriangleStreamItemService} from "./stream/TriangleStreamItemService";
+import {SquareStreamItemService} from "./stream/SquareStreamItemService";
 
 @Component({
     selector: 'angular-application',
@@ -16,11 +17,12 @@ import {TriangleStreamItemService} from "./stream/TriangleStreamItemService";
 export class AppComponent {
 
 
-    constructor(private triangleFactory: TriangleStreamItemService) {
+    constructor(private triangleFactory: TriangleStreamItemService,
+                private hip2B: SquareStreamItemService) {
     }
 
     mapOne: Function<StreamItem, StreamItem> = {
-        apply: (item: StreamItem) => this.triangleFactory.createStreamItem({
+        apply: (item: StreamItem) => this.hip2B.createStreamItem({
             fill: item.element.options.get('fill'),
             stroke: item.element.options.get('stroke'),
         })
@@ -28,10 +30,14 @@ export class AppComponent {
 
     flatMapOne: Function<StreamItem, Observable<StreamItem>> = {
         apply: (item: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
-            observer.next(item);
+            let triangle = this.triangleFactory.createStreamItem({
+                fill: item.element.options.get('fill'),
+                stroke: item.element.options.get('stroke'),
+            });
+            observer.next(triangle);
             Observable.interval(350, Scheduler.async)
                 .take(4)
-                .subscribe(_ => observer.next(item),
+                .subscribe(_ => observer.next(triangle),
                     observer.error,
                     observer.complete)
         })
