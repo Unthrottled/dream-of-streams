@@ -1,22 +1,25 @@
 import {Injectable} from "@angular/core";
 import {StreamItem} from "./StreamItem";
-import {Circle, Element} from "@progress/kendo-drawing";
+import {Circle, Element, ShapeOptions} from "@progress/kendo-drawing";
 import {Circle as GeomCircle} from "@progress/kendo-drawing/geometry";
-let randomColor = require('randomcolor');
+import {RanboShapeOptionsService} from "./RanboShapeOptionsService";
+import {StreamItemFactory} from "./StreamItemFactory";
 
 @Injectable()
-export class CircleStreamItemService {
+export class CircleStreamItemService implements StreamItemFactory{
 
-    createStreamItem(): StreamItem {
-        return new StreamItem(this.createCircle());
+
+    constructor() {
     }
 
-    private createCircle(): Element {
+    createStreamItem(options?: ShapeOptions): StreamItem {
+        return new StreamItem(this.createCircle(options));
+    }
+
+    private createCircle(options: ShapeOptions): Element {
         // Create the circle geometry and shape
-        let color = randomColor(new Date().getSeconds());
-        return new Circle(new GeomCircle([25, 25], 14), {
-            stroke: {color: color, width: 1, opacity: 0.5},
-            fill: {color: color, opacity: 0.5}
-        })
+        return new Circle(new GeomCircle([25, 25], 14),
+            options ||
+            RanboShapeOptionsService.createStreamOption())
     }
 }
