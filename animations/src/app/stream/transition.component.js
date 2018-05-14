@@ -60,7 +60,7 @@ var TransitionComponent = /** @class */ (function () {
                     animations_1.state('active', animations_1.style({
                         transform: 'translateX(100%)'
                     })),
-                    animations_1.transition('* => active', animations_1.animate('2s ease-in'))
+                    animations_1.transition('* => active', animations_1.animate('2s'))
                 ])
             ]
         })

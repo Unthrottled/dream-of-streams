@@ -17,8 +17,8 @@ export class CircleStreamItemService implements StreamItemFactory{
     }
 
     private createCircle(options: ShapeOptions): Element {
-        // Create the circle geometry and shape
-        return new Circle(new GeomCircle([25, 25], 14),
+        // Create the circle geometry and element
+        return new Circle(new GeomCircle([25, 25], 20),
             options ||
             RanboShapeOptionsService.createStreamOption())
     }

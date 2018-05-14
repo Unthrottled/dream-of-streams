@@ -11,7 +11,7 @@ import {StreamItem} from "./StreamItem";
             state('active', style({
                 transform: 'translateX(100%)'
             })),
-            transition('* => active', animate('2s ease-in'))
+            transition('* => active', animate('2s'))
         ])
     ]
 })

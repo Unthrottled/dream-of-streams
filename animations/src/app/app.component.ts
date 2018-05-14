@@ -7,6 +7,7 @@ import {Predicate} from "./stream/Predicate";
 import {Observable} from "rxjs/Observable";
 import {Observer} from "rxjs/Observer";
 import {Scheduler} from "rxjs/Rx";
+import {TriangleStreamItemService} from "./stream/TriangleStreamItemService";
 
 @Component({
     selector: 'angular-application',
@@ -14,8 +15,15 @@ import {Scheduler} from "rxjs/Rx";
 })
 export class AppComponent {
 
+
+    constructor(private triangleFactory: TriangleStreamItemService) {
+    }
+
     mapOne: Function<StreamItem, StreamItem> = {
-        apply: (item: StreamItem) => item
+        apply: (item: StreamItem) => this.triangleFactory.createStreamItem({
+            fill: item.element.options.get('fill'),
+            stroke: item.element.options.get('stroke'),
+        })
     };
 
     flatMapOne: Function<StreamItem, Observable<StreamItem>> = {
