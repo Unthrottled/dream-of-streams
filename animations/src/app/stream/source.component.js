@@ -13,6 +13,8 @@ var core_1 = require("@angular/core");
 require("./source.component.htm");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var CircleStreamItemService_1 = require("./CircleStreamItemService");
+var Observable_1 = require("rxjs/Observable");
+var Rx_1 = require("rxjs/Rx");
 var SourceComponent = /** @class */ (function () {
     function SourceComponent(circleService) {
         this.circleService = circleService;
@@ -25,6 +27,14 @@ var SourceComponent = /** @class */ (function () {
     };
     SourceComponent.prototype.complete = function (streamItemAtEnd) {
         this.outputStream.emit(streamItemAtEnd);
+    };
+    SourceComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
+    SourceComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = Observable_1.Observable.interval(5000, Rx_1.Scheduler.async)
+            .subscribe(function (_) { return _this.toggleState(); });
     };
     __decorate([
         core_1.Output(),

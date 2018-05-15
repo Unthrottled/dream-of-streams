@@ -1,8 +1,11 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from "@angular/core";
 import './source.component.htm'
 import {StreamItem} from "./StreamItem";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {CircleStreamItemService} from "./CircleStreamItemService";
+import {Observable} from "rxjs/Observable";
+import {Scheduler} from "rxjs/Rx";
+import {Subscription} from "rxjs/Subscription";
 
 
 @Component({
@@ -10,7 +13,7 @@ import {CircleStreamItemService} from "./CircleStreamItemService";
     template: require('./source.component.htm'),
     animations: []
 })
-export class SourceComponent {
+export class SourceComponent implements OnInit, OnDestroy {
 
     @Output()
     public outputStream = new EventEmitter<StreamItem>();
@@ -19,8 +22,11 @@ export class SourceComponent {
 
     inputStream = this.streamSource.filter(item => !!item);
 
+    private subscription: Subscription;
+
 
     constructor(private circleService: CircleStreamItemService) {
+
     }
 
     toggleState() {
@@ -29,6 +35,15 @@ export class SourceComponent {
 
     complete(streamItemAtEnd: StreamItem) {
         this.outputStream.emit(streamItemAtEnd);
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
+    ngOnInit(): void {
+        this.subscription = Observable.interval(5000, Scheduler.async)
+            .subscribe(_=>this.toggleState());
     }
 
 }
