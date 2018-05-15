@@ -1,13 +1,11 @@
 import {Element} from "@progress/kendo-drawing";
+import {StreamItem} from "./StreamItem";
+import {Observable} from "rxjs/Observable";
 
 export class StreamItemContainer {
 
-    constructor(private _element: Element) {
+    constructor(private _items: Observable<StreamItem>, private _isCollection: boolean) {
         this._identifier = new Date().getTime();
-    }
-
-    get element(): Element {
-        return this._element;
     }
 
     private _identifier: number;
@@ -16,7 +14,11 @@ export class StreamItemContainer {
         return this._identifier;
     }
 
-    toString(): String {
-        return this._identifier.toString();
+    get items(): Observable<StreamItem> {
+        return this._items;
+    }
+
+    get isCollection(): boolean {
+        return this._isCollection;
     }
 }

@@ -18,24 +18,23 @@ var TriangleStreamItemService_1 = require("./stream/TriangleStreamItemService");
 var SquareStreamItemService_1 = require("./stream/SquareStreamItemService");
 var AppComponent = /** @class */ (function () {
     function AppComponent(triangleFactory, hip2B) {
-        var _this = this;
         this.triangleFactory = triangleFactory;
         this.hip2B = hip2B;
         this.mapOne = {
             apply: function (item) {
-                var streamItem = _this.hip2B.createStreamItem({
-                    fill: item.element.options.get('fill'),
-                    stroke: item.element.options.get('stroke'),
-                });
+                // let streamItem = this.hip2B.createStreamItem({
+                //     fill: item.element.options.get('fill'),
+                //     stroke: item.element.options.get('stroke'),
+                // });
                 return item;
             }
         };
         this.flatMapOne = {
             apply: function (item) { return Observable_1.Observable.create(function (observer) {
-                var triangle = _this.triangleFactory.createStreamItem({
-                    fill: item.element.options.get('fill'),
-                    stroke: item.element.options.get('stroke'),
-                });
+                // let triangle = this.triangleFactory.createStreamItem({
+                //     fill: item.element.options.get('fill'),
+                //     stroke: item.element.options.get('stroke'),
+                // });
                 observer.next(item);
                 Observable_1.Observable.interval(350, Rx_1.Scheduler.async)
                     .take(4)

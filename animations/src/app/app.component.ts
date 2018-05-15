@@ -23,20 +23,20 @@ export class AppComponent {
 
     mapOne: Function<StreamItemContainer, StreamItemContainer> = {
         apply: (item: StreamItemContainer) => {
-            let streamItem = this.hip2B.createStreamItem({
-                fill: item.element.options.get('fill'),
-                stroke: item.element.options.get('stroke'),
-            });
+            // let streamItem = this.hip2B.createStreamItem({
+            //     fill: item.element.options.get('fill'),
+            //     stroke: item.element.options.get('stroke'),
+            // });
             return item;
         }
     };
 
     flatMapOne: Function<StreamItemContainer, Observable<StreamItemContainer>> = {
         apply: (item: StreamItemContainer) => Observable.create((observer: Observer<StreamItemContainer>) => {
-            let triangle = this.triangleFactory.createStreamItem({
-                fill: item.element.options.get('fill'),
-                stroke: item.element.options.get('stroke'),
-            });
+            // let triangle = this.triangleFactory.createStreamItem({
+            //     fill: item.element.options.get('fill'),
+            //     stroke: item.element.options.get('stroke'),
+            // });
             observer.next(item);
             Observable.interval(350, Scheduler.async)
                 .take(4)
