@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import './source.component.htm'
-import {StreamItemContainer} from "./StreamItem";
+import {StreamItemContainer} from "./StreamItemContainer";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
 

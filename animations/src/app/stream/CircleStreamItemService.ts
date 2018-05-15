@@ -1,19 +1,19 @@
 import {Injectable} from "@angular/core";
-import {StreamItemContainer} from "./StreamItem";
 import {Circle, Element, ShapeOptions} from "@progress/kendo-drawing";
 import {Circle as GeomCircle} from "@progress/kendo-drawing/geometry";
 import {RanboShapeOptionsService} from "./RanboShapeOptionsService";
 import {StreamItemFactory} from "./StreamItemFactory";
+import {StreamItem} from "./StreamItem";
 
 @Injectable()
-export class CircleStreamItemService implements StreamItemFactory{
+export class CircleStreamItemService implements StreamItemFactory {
 
 
     constructor() {
     }
 
-    createStreamItem(options?: ShapeOptions): StreamItemContainer {
-        return new StreamItemContainer(this.createCircle(options));
+    createStreamItem(options?: ShapeOptions): StreamItem {
+        return new StreamItem(this.createCircle(options));
     }
 
     private createCircle(options: ShapeOptions): Element {

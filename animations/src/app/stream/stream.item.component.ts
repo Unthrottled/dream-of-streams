@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy} from "@angular/core";
-import {StreamItemContainer} from "./StreamItem";
+import {StreamItemContainer} from "./StreamItemContainer";
 import {Surface} from '@progress/kendo-drawing';
 
 @Component({

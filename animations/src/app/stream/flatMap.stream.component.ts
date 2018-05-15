@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import './flatMap.stream.component.htm'
-import {StreamItemContainer} from "./StreamItem";
+import {StreamItemContainer} from "./StreamItemContainer";
 import {Observable} from "rxjs/Observable";
 import {Function} from "./Function";
 

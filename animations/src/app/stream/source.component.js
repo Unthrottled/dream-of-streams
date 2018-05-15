@@ -21,7 +21,8 @@ var SourceComponent = /** @class */ (function () {
         this.inputStream = this.streamSource.filter(function (item) { return !!item; });
     }
     SourceComponent.prototype.toggleState = function () {
-        this.streamSource.next(this.circleService.createStreamItem());
+        var value = this.circleService.createStreamItem();
+        // this.streamSource.next(value);
     };
     SourceComponent.prototype.complete = function (streamItemAtEnd) {
         this.outputStream.emit(streamItemAtEnd);

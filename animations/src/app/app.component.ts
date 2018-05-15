@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import "./app.component.htm";
-import {StreamItemContainer} from "./stream/StreamItem";
+import {StreamItemContainer} from "./stream/StreamItemContainer";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Function} from "./stream/Function";
 import {Predicate} from "./stream/Predicate";
@@ -22,10 +22,13 @@ export class AppComponent {
     }
 
     mapOne: Function<StreamItemContainer, StreamItemContainer> = {
-        apply: (item: StreamItemContainer) => this.hip2B.createStreamItem({
-            fill: item.element.options.get('fill'),
-            stroke: item.element.options.get('stroke'),
-        })
+        apply: (item: StreamItemContainer) => {
+            let streamItem = this.hip2B.createStreamItem({
+                fill: item.element.options.get('fill'),
+                stroke: item.element.options.get('stroke'),
+            });
+            return item;
+        }
     };
 
     flatMapOne: Function<StreamItemContainer, Observable<StreamItemContainer>> = {
@@ -34,10 +37,10 @@ export class AppComponent {
                 fill: item.element.options.get('fill'),
                 stroke: item.element.options.get('stroke'),
             });
-            observer.next(triangle);
+            observer.next(item);
             Observable.interval(350, Scheduler.async)
                 .take(4)
-                .subscribe(_ => observer.next(triangle),
+                .subscribe(_ => observer.next(item),
                     observer.error,
                     observer.complete)
         })

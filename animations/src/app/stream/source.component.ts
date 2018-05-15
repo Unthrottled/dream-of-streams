@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from "@angular/core";
 import './source.component.htm'
-import {StreamItemContainer} from "./StreamItem";
+import {StreamItemContainer} from "./StreamItemContainer";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {CircleStreamItemService} from "./CircleStreamItemService";
 import {Observable} from "rxjs/Observable";
@@ -30,7 +30,8 @@ export class SourceComponent implements OnInit, OnDestroy {
     }
 
     toggleState() {
-        this.streamSource.next(this.circleService.createStreamItem());
+        let value = this.circleService.createStreamItem();
+        // this.streamSource.next(value);
     }
 
     complete(streamItemAtEnd: StreamItemContainer) {

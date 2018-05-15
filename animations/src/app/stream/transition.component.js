@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./transition.component.htm");
 var animations_1 = require("@angular/animations");
-var StreamItem_1 = require("./StreamItem");
+var StreamItemContainer_1 = require("./StreamItemContainer");
 var TransitionComponent = /** @class */ (function () {
     function TransitionComponent() {
         this.state = 'active';
@@ -48,8 +48,8 @@ var TransitionComponent = /** @class */ (function () {
     ], TransitionComponent.prototype, "completedTransiton", void 0);
     __decorate([
         core_1.Input(),
-        __metadata("design:type", StreamItem_1.StreamItemContainer),
-        __metadata("design:paramtypes", [StreamItem_1.StreamItemContainer])
+        __metadata("design:type", StreamItemContainer_1.StreamItemContainer),
+        __metadata("design:paramtypes", [StreamItemContainer_1.StreamItemContainer])
     ], TransitionComponent.prototype, "input", null);
     TransitionComponent = __decorate([
         core_1.Component({

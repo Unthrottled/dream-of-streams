@@ -1,28 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var StreamItemContainer = /** @class */ (function () {
-    function StreamItemContainer(_element) {
+var StreamItem = /** @class */ (function () {
+    function StreamItem(_element) {
         this._element = _element;
         this._identifier = new Date().getTime();
     }
-    Object.defineProperty(StreamItemContainer.prototype, "element", {
+    Object.defineProperty(StreamItem.prototype, "element", {
         get: function () {
             return this._element;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(StreamItemContainer.prototype, "identifier", {
+    Object.defineProperty(StreamItem.prototype, "identifier", {
         get: function () {
             return this._identifier;
         },
         enumerable: true,
         configurable: true
     });
-    StreamItemContainer.prototype.toString = function () {
+    StreamItem.prototype.toString = function () {
         return this._identifier.toString();
     };
-    return StreamItemContainer;
+    return StreamItem;
 }());
-exports.StreamItemContainer = StreamItemContainer;
+exports.StreamItem = StreamItem;
 //# sourceMappingURL=StreamItem.js.map

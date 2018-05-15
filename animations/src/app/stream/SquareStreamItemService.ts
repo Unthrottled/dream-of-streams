@@ -1,14 +1,14 @@
 import {Injectable} from "@angular/core";
-import {StreamItemContainer} from "./StreamItem";
 import {Element, Path, ShapeOptions} from "@progress/kendo-drawing";
 import {RanboShapeOptionsService} from "./RanboShapeOptionsService";
 import {StreamItemFactory} from "./StreamItemFactory";
+import {StreamItem} from "./StreamItem";
 
 @Injectable()
 export class SquareStreamItemService implements StreamItemFactory {
 
-    createStreamItem(options?: ShapeOptions): StreamItemContainer {
-        return new StreamItemContainer(this.createSquare(options));
+    createStreamItem(options?: ShapeOptions): StreamItem {
+        return new StreamItem(this.createSquare(options));
     }
 
     private createSquare(options: ShapeOptions): Element {
