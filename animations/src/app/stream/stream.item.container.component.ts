@@ -11,7 +11,7 @@ import {StreamItemContainer} from "./StreamItemContainer";
                 </div>
             </div>
             <div *ngIf="!streamItemContainer.isCollection">
-
+                    <stream-item [streamItem]="streamItemContainer.items | async"></stream-item>
             </div>
         </div>
     `

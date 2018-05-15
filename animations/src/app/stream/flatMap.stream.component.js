@@ -32,7 +32,7 @@ var FlatMapStreamComponent = /** @class */ (function () {
         },
         set: function (value) {
             var _this = this;
-            this._inputStream = value.flatMap(function (item) { return _this.mappingFunction.apply(item); });
+            this._inputStream = value.map(function (item) { return _this.mappingFunction.apply(item); });
         },
         enumerable: true,
         configurable: true

@@ -14,14 +14,14 @@ export class FlatMapStreamComponent {
     @Output()
     public outputStream = new EventEmitter<StreamItemContainer>();
 
-    private _mappingFunction: Function<StreamItemContainer, Observable<StreamItemContainer>>;
+    private _mappingFunction: Function<StreamItemContainer, StreamItemContainer>;
 
     @Input()
-    get mappingFunction(): Function<StreamItemContainer, Observable<StreamItemContainer>> {
+    get mappingFunction(): Function<StreamItemContainer, StreamItemContainer> {
         return this._mappingFunction;
     }
 
-    set mappingFunction(value: Function<StreamItemContainer, Observable<StreamItemContainer>>) {
+    set mappingFunction(value: Function<StreamItemContainer, StreamItemContainer>) {
         this._mappingFunction = value;
     }
 
@@ -33,7 +33,7 @@ export class FlatMapStreamComponent {
     }
 
     set inputStream(value: Observable<StreamItemContainer>) {
-        this._inputStream = value.flatMap(item => this.mappingFunction.apply(item));
+        this._inputStream = value.map(item => this.mappingFunction.apply(item));
     }
 
     complete(streamItemAtEnd: StreamItemContainer) {
