@@ -1,7 +1,7 @@
 import {ShapeOptions} from "@progress/kendo-drawing";
-import {StreamItem} from "./StreamItem";
+import {StreamItemContainer} from "./StreamItem";
 
 export interface StreamItemFactory {
 
-    createStreamItem(options?: ShapeOptions): StreamItem;
+    createStreamItem(options?: ShapeOptions): StreamItemContainer;
 }

@@ -48,8 +48,8 @@ var TransitionComponent = /** @class */ (function () {
     ], TransitionComponent.prototype, "completedTransiton", void 0);
     __decorate([
         core_1.Input(),
-        __metadata("design:type", StreamItem_1.StreamItem),
-        __metadata("design:paramtypes", [StreamItem_1.StreamItem])
+        __metadata("design:type", StreamItem_1.StreamItemContainer),
+        __metadata("design:paramtypes", [StreamItem_1.StreamItemContainer])
     ], TransitionComponent.prototype, "input", null);
     TransitionComponent = __decorate([
         core_1.Component({

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import './flatMap.stream.component.htm'
-import {StreamItem} from "./StreamItem";
+import {StreamItemContainer} from "./StreamItem";
 import {Observable} from "rxjs/Observable";
 import {Function} from "./Function";
 
@@ -12,31 +12,31 @@ import {Function} from "./Function";
 export class FlatMapStreamComponent {
 
     @Output()
-    public outputStream = new EventEmitter<StreamItem>();
+    public outputStream = new EventEmitter<StreamItemContainer>();
 
-    private _mappingFunction: Function<StreamItem, Observable<StreamItem>>;
+    private _mappingFunction: Function<StreamItemContainer, Observable<StreamItemContainer>>;
 
     @Input()
-    get mappingFunction(): Function<StreamItem, Observable<StreamItem>> {
+    get mappingFunction(): Function<StreamItemContainer, Observable<StreamItemContainer>> {
         return this._mappingFunction;
     }
 
-    set mappingFunction(value: Function<StreamItem, Observable<StreamItem>>) {
+    set mappingFunction(value: Function<StreamItemContainer, Observable<StreamItemContainer>>) {
         this._mappingFunction = value;
     }
 
-    private _inputStream: Observable<StreamItem>;
+    private _inputStream: Observable<StreamItemContainer>;
 
     @Input()
-    get inputStream(): Observable<StreamItem> {
+    get inputStream(): Observable<StreamItemContainer> {
         return this._inputStream;
     }
 
-    set inputStream(value: Observable<StreamItem>) {
+    set inputStream(value: Observable<StreamItemContainer>) {
         this._inputStream = value.flatMap(item => this.mappingFunction.apply(item));
     }
 
-    complete(streamItemAtEnd: StreamItem) {
+    complete(streamItemAtEnd: StreamItemContainer) {
         this.outputStream.emit(streamItemAtEnd);
     }
 

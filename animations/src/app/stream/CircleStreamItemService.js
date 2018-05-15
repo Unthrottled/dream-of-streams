@@ -18,7 +18,7 @@ var CircleStreamItemService = /** @class */ (function () {
     function CircleStreamItemService() {
     }
     CircleStreamItemService.prototype.createStreamItem = function (options) {
-        return new StreamItem_1.StreamItem(this.createCircle(options));
+        return new StreamItem_1.StreamItemContainer(this.createCircle(options));
     };
     CircleStreamItemService.prototype.createCircle = function (options) {
         // Create the circle geometry and element

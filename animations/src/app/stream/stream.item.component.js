@@ -12,11 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var StreamItem_1 = require("./StreamItem");
 var kendo_drawing_1 = require("@progress/kendo-drawing");
-var StreamItemComponent = /** @class */ (function () {
-    function StreamItemComponent(myElement) {
+var StreamItemContainerComponent = /** @class */ (function () {
+    function StreamItemContainerComponent(myElement) {
         this.myElement = myElement;
     }
-    Object.defineProperty(StreamItemComponent.prototype, "streamItem", {
+    Object.defineProperty(StreamItemContainerComponent.prototype, "streamItem", {
         get: function () {
             return this._streamItem;
         },
@@ -26,14 +26,14 @@ var StreamItemComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    StreamItemComponent.prototype.ngAfterViewInit = function () {
+    StreamItemContainerComponent.prototype.ngAfterViewInit = function () {
         this.createSurface()
             .draw(this.streamItem.element);
     };
-    StreamItemComponent.prototype.ngOnDestroy = function () {
+    StreamItemContainerComponent.prototype.ngOnDestroy = function () {
         this.surface.destroy();
     };
-    StreamItemComponent.prototype.createSurface = function () {
+    StreamItemContainerComponent.prototype.createSurface = function () {
         return this.surface = kendo_drawing_1.Surface.create(this.myElement.nativeElement, {
             height: "50px",
             width: "50px"
@@ -41,17 +41,17 @@ var StreamItemComponent = /** @class */ (function () {
     };
     __decorate([
         core_1.Input(),
-        __metadata("design:type", StreamItem_1.StreamItem),
-        __metadata("design:paramtypes", [StreamItem_1.StreamItem])
-    ], StreamItemComponent.prototype, "streamItem", null);
-    StreamItemComponent = __decorate([
+        __metadata("design:type", StreamItem_1.StreamItemContainer),
+        __metadata("design:paramtypes", [StreamItem_1.StreamItemContainer])
+    ], StreamItemContainerComponent.prototype, "streamItem", null);
+    StreamItemContainerComponent = __decorate([
         core_1.Component({
-            selector: 'stream-item',
+            selector: 'stream-item-container',
             template: "\n        <div></div>\n    "
         }),
         __metadata("design:paramtypes", [core_1.ElementRef])
-    ], StreamItemComponent);
-    return StreamItemComponent;
+    ], StreamItemContainerComponent);
+    return StreamItemContainerComponent;
 }());
-exports.StreamItemComponent = StreamItemComponent;
+exports.StreamItemContainerComponent = StreamItemContainerComponent;
 //# sourceMappingURL=stream.item.component.js.map

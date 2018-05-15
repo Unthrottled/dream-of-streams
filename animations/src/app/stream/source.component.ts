@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from "@angular/core";
 import './source.component.htm'
-import {StreamItem} from "./StreamItem";
+import {StreamItemContainer} from "./StreamItem";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {CircleStreamItemService} from "./CircleStreamItemService";
 import {Observable} from "rxjs/Observable";
@@ -16,9 +16,9 @@ import {Subscription} from "rxjs/Subscription";
 export class SourceComponent implements OnInit, OnDestroy {
 
     @Output()
-    public outputStream = new EventEmitter<StreamItem>();
+    public outputStream = new EventEmitter<StreamItemContainer>();
 
-    private streamSource = new BehaviorSubject<StreamItem>(null);
+    private streamSource = new BehaviorSubject<StreamItemContainer>(null);
 
     inputStream = this.streamSource.filter(item => !!item);
 
@@ -33,7 +33,7 @@ export class SourceComponent implements OnInit, OnDestroy {
         this.streamSource.next(this.circleService.createStreamItem());
     }
 
-    complete(streamItemAtEnd: StreamItem) {
+    complete(streamItemAtEnd: StreamItemContainer) {
         this.outputStream.emit(streamItemAtEnd);
     }
 

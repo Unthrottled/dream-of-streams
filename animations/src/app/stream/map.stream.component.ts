@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import './map.stream.component.htm'
-import {StreamItem} from "./StreamItem";
+import {StreamItemContainer} from "./StreamItem";
 import {Observable} from "rxjs/Observable";
 import {Function} from "./Function";
 
@@ -12,31 +12,31 @@ import {Function} from "./Function";
 export class MapStreamComponent {
 
     @Output()
-    public outputStream = new EventEmitter<StreamItem>();
+    public outputStream = new EventEmitter<StreamItemContainer>();
 
-    private _mappingFunction: Function<StreamItem, StreamItem>;
+    private _mappingFunction: Function<StreamItemContainer, StreamItemContainer>;
 
     @Input()
-    get mappingFunction(): Function<StreamItem, StreamItem> {
+    get mappingFunction(): Function<StreamItemContainer, StreamItemContainer> {
         return this._mappingFunction;
     }
 
-    set mappingFunction(value: Function<StreamItem, StreamItem>) {
+    set mappingFunction(value: Function<StreamItemContainer, StreamItemContainer>) {
         this._mappingFunction = value;
     }
 
-    private _inputStream: Observable<StreamItem>;
+    private _inputStream: Observable<StreamItemContainer>;
 
     @Input()
-    get inputStream(): Observable<StreamItem> {
+    get inputStream(): Observable<StreamItemContainer> {
         return this._inputStream;
     }
 
-    set inputStream(value: Observable<StreamItem>) {
+    set inputStream(value: Observable<StreamItemContainer>) {
         this._inputStream = value.map(item => this.mappingFunction.apply(item));
     }
 
-    complete(streamItemAtEnd: StreamItem) {
+    complete(streamItemAtEnd: StreamItemContainer) {
         this.outputStream.emit(streamItemAtEnd);
     }
 
