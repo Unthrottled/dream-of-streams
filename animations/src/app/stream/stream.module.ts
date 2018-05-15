@@ -11,6 +11,7 @@ import {StreamItemComponent} from "./stream.item.component";
 import {CircleStreamItemService} from "./CircleStreamItemService";
 import {TriangleStreamItemService} from "./TriangleStreamItemService";
 import {SquareStreamItemService} from "./SquareStreamItemService";
+import {StreamItemContainerComponent} from "./stream.item.container.component";
 
 @NgModule({
     imports: [
@@ -31,6 +32,7 @@ import {SquareStreamItemService} from "./SquareStreamItemService";
         FilterStreamComponent,
         FlatMapStreamComponent,
         StreamItemComponent,
+        StreamItemContainerComponent
     ],
     providers: [
         CircleStreamItemService,
