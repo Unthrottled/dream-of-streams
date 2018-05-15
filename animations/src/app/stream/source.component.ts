@@ -38,12 +38,12 @@ export class SourceComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        // this.subscription.unsubscribe();
     }
 
     ngOnInit(): void {
-        this.subscription = Observable.interval(5000, Scheduler.async)
-            .subscribe(_=>this.toggleState());
+        // this.subscription = Observable.interval(5000, Scheduler.async)
+        //     .subscribe(_=>this.toggleState());
     }
 
 }
