@@ -18,38 +18,31 @@ var TriangleStreamItemService_1 = require("./stream/TriangleStreamItemService");
 var SquareStreamItemService_1 = require("./stream/SquareStreamItemService");
 var AppComponent = /** @class */ (function () {
     function AppComponent(triangleFactory, hip2B) {
-        var _this = this;
         this.triangleFactory = triangleFactory;
         this.hip2B = hip2B;
         this.mapOne = {
             apply: function (item) {
-                item.items.map(function (streamItem) { return _this.hip2B.createStreamItem({
-                    fill: streamItem.element.options.get('fill'),
-                    stroke: streamItem.element.options.get('stroke'),
-                }); });
+                // let streamItem = this.hip2B.createStreamItem({
+                //     fill: item.element.options.get('fill'),
+                //     stroke: item.element.options.get('stroke'),
+                // });
                 return item;
             }
         };
         this.flatMapOne = {
-            apply: function (streamItemContainer) {
-                streamItemContainer.items.flatMap(function (item) { return Observable_1.Observable.create(function (observer) {
-                    var triangle = _this.triangleFactory.createStreamItem({
-                        fill: item.element.options.get('fill'),
-                        stroke: item.element.options.get('stroke'),
-                    });
-                    observer.next(streamItemContainer);
-                    Observable_1.Observable.interval(350, Rx_1.Scheduler.async)
-                        .take(4)
-                        .subscribe(function (_) { return observer.next(streamItemContainer); }, observer.error, observer.complete);
-                }); });
-                return streamItemContainer;
-            }
+            apply: function (item) { return Observable_1.Observable.create(function (observer) {
+                // let triangle = this.triangleFactory.createStreamItem({
+                //     fill: item.element.options.get('fill'),
+                //     stroke: item.element.options.get('stroke'),
+                // });
+                observer.next(item);
+                Observable_1.Observable.interval(350, Rx_1.Scheduler.async)
+                    .take(4)
+                    .subscribe(function (_) { return observer.next(item); }, observer.error, observer.complete);
+            }); }
         };
         this.filterOne = {
-            apply: function (container) {
-                container.items.filter(function (item) { return item.identifier % 2 === 0; });
-                return container;
-            }
+            test: function (item) { return item.identifier % 2 === 0; }
         };
         this.sourceSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.sourceOutput = this.sourceSubject.filter(function (item) { return !!item; });

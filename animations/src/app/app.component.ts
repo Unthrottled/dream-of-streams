@@ -3,6 +3,7 @@ import "./app.component.htm";
 import {StreamItemContainer} from "./stream/StreamItemContainer";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Function} from "./stream/Function";
+import {Predicate} from "./stream/Predicate";
 import {Observable} from "rxjs/Observable";
 import {Observer} from "rxjs/Observer";
 import {Scheduler} from "rxjs/Rx";
@@ -16,48 +17,47 @@ import {SquareStreamItemService} from "./stream/SquareStreamItemService";
 export class AppComponent {
 
 
-    mapOne: Function<StreamItemContainer, StreamItemContainer> = {
-        apply: (item: StreamItemContainer) => {
-            item.items.map(streamItem => this.hip2B.createStreamItem({
-                fill: streamItem.element.options.get('fill'),
-                stroke: streamItem.element.options.get('stroke'),
-            }));
-            return item;
-        }
-    };
-    flatMapOne: Function<StreamItemContainer, StreamItemContainer> = {
-        apply: (streamItemContainer: StreamItemContainer) => {
-            streamItemContainer.items.flatMap(item => Observable.create((observer: Observer<StreamItemContainer>) => {
-                let triangle = this.triangleFactory.createStreamItem({
-                    fill: item.element.options.get('fill'),
-                    stroke: item.element.options.get('stroke'),
-                });
-                observer.next(streamItemContainer);
-                Observable.interval(350, Scheduler.async)
-                    .take(4)
-                    .subscribe(_ => observer.next(streamItemContainer),
-                        observer.error,
-                        observer.complete)
-            }));
-            return streamItemContainer;
-        }
-    };
-    filterOne: Function<StreamItemContainer, StreamItemContainer> = {
-        apply: (container: StreamItemContainer) => {
-            container.items.filter(item => item.identifier % 2 === 0);
-            return container;
-        }
-    };
-    private sourceSubject = new BehaviorSubject(null);
-    sourceOutput = this.sourceSubject.filter(item => !!item);
-    private mapSubject = new BehaviorSubject(null);
-    mapOutput = this.mapSubject.filter(item => !!item);
-    private flatMapSubject = new BehaviorSubject(null);
-    flatMapOutput = this.flatMapSubject.filter(item => !!item);
-
     constructor(private triangleFactory: TriangleStreamItemService,
                 private hip2B: SquareStreamItemService) {
     }
+
+    mapOne: Function<StreamItemContainer, StreamItemContainer> = {
+        apply: (item: StreamItemContainer) => {
+            // let streamItem = this.hip2B.createStreamItem({
+            //     fill: item.element.options.get('fill'),
+            //     stroke: item.element.options.get('stroke'),
+            // });
+            return item;
+        }
+    };
+
+    flatMapOne: Function<StreamItemContainer, Observable<StreamItemContainer>> = {
+        apply: (item: StreamItemContainer) => Observable.create((observer: Observer<StreamItemContainer>) => {
+            // let triangle = this.triangleFactory.createStreamItem({
+            //     fill: item.element.options.get('fill'),
+            //     stroke: item.element.options.get('stroke'),
+            // });
+            observer.next(item);
+            Observable.interval(350, Scheduler.async)
+                .take(4)
+                .subscribe(_ => observer.next(item),
+                    observer.error,
+                    observer.complete)
+        })
+    };
+
+    filterOne: Predicate<StreamItemContainer> = {
+        test: (item: StreamItemContainer) => item.identifier % 2 === 0
+    };
+
+    private sourceSubject = new BehaviorSubject(null);
+    sourceOutput = this.sourceSubject.filter(item => !!item);
+
+    private mapSubject = new BehaviorSubject(null);
+    mapOutput = this.mapSubject.filter(item => !!item);
+
+    private flatMapSubject = new BehaviorSubject(null);
+    flatMapOutput = this.flatMapSubject.filter(item => !!item);
 
     sourceComplete(item: StreamItemContainer) {
         this.sourceSubject.next(item);

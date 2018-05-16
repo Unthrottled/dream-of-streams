@@ -32,7 +32,7 @@ var FilterStreamComponent = /** @class */ (function () {
         },
         set: function (value) {
             var _this = this;
-            this._inputStream = value.map(function (item) { return _this.filterFunction.apply(item); });
+            this._inputStream = value.filter(function (item) { return _this.filterFunction.test(item); });
         },
         enumerable: true,
         configurable: true
