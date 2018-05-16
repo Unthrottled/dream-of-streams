@@ -7,14 +7,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var StreamItem_1 = require("./StreamItem");
 var kendo_drawing_1 = require("@progress/kendo-drawing");
 var RanboShapeOptionsService_1 = require("./RanboShapeOptionsService");
+var SingleStreamItem_1 = require("./SingleStreamItem");
 var TriangleStreamItemService = /** @class */ (function () {
     function TriangleStreamItemService() {
     }
     TriangleStreamItemService.prototype.createStreamItem = function (options) {
-        return new StreamItem_1.StreamItem(this.createTriangle(options));
+        return new SingleStreamItem_1.SingleStreamItem(this.createTriangle(options));
     };
     TriangleStreamItemService.prototype.createTriangle = function (options) {
         // Create the circle geometry and element

@@ -4,6 +4,7 @@ import {Circle, Element, ShapeOptions} from "@progress/kendo-drawing";
 import {Circle as GeomCircle} from "@progress/kendo-drawing/geometry";
 import {RanboShapeOptionsService} from "./RanboShapeOptionsService";
 import {StreamItemFactory} from "./StreamItemFactory";
+import {SingleStreamItem} from "./SingleStreamItem";
 
 @Injectable()
 export class CircleStreamItemService implements StreamItemFactory{
@@ -12,8 +13,8 @@ export class CircleStreamItemService implements StreamItemFactory{
     constructor() {
     }
 
-    createStreamItem(options?: ShapeOptions): StreamItem {
-        return new StreamItem(this.createCircle(options));
+    createStreamItem(options?: ShapeOptions): SingleStreamItem {
+        return new SingleStreamItem(this.createCircle(options));
     }
 
     private createCircle(options: ShapeOptions): Element {

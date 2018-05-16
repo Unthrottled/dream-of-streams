@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var StreamItem_1 = require("./StreamItem");
 var kendo_drawing_1 = require("@progress/kendo-drawing");
 var StreamItemComponent = /** @class */ (function () {
     function StreamItemComponent(myElement) {
@@ -41,8 +40,8 @@ var StreamItemComponent = /** @class */ (function () {
     };
     __decorate([
         core_1.Input(),
-        __metadata("design:type", StreamItem_1.StreamItem),
-        __metadata("design:paramtypes", [StreamItem_1.StreamItem])
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
     ], StreamItemComponent.prototype, "streamItem", null);
     StreamItemComponent = __decorate([
         core_1.Component({

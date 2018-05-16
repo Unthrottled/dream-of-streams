@@ -10,15 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var StreamItem_1 = require("./StreamItem");
 var kendo_drawing_1 = require("@progress/kendo-drawing");
 var geometry_1 = require("@progress/kendo-drawing/geometry");
 var RanboShapeOptionsService_1 = require("./RanboShapeOptionsService");
+var SingleStreamItem_1 = require("./SingleStreamItem");
 var CircleStreamItemService = /** @class */ (function () {
     function CircleStreamItemService() {
     }
     CircleStreamItemService.prototype.createStreamItem = function (options) {
-        return new StreamItem_1.StreamItem(this.createCircle(options));
+        return new SingleStreamItem_1.SingleStreamItem(this.createCircle(options));
     };
     CircleStreamItemService.prototype.createCircle = function (options) {
         // Create the circle geometry and element
