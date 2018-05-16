@@ -27,10 +27,11 @@ export class BaseStreamComponent {
 
     set inputStream(value: Observable<StreamItemContainer>) {
         this.currentSubscription.unsubscribe();
-        this.currentSubscription = value.subscribe(streamItem => {
-            this.itemIndex.set(streamItem.identifier,
-                this._streamItems.push(streamItem));
-        });
+        this.currentSubscription = value.subscribe(streamItemContainer =>
+            streamItemContainer.items.subscribe(streamItem =>
+                this.itemIndex.set(streamItemContainer.identifier,
+                    this._streamItems.push(streamItemContainer)))
+        );
     }
 
     private _streamItems: StreamItemContainer[] = [];
