@@ -14,6 +14,7 @@ var kendo_drawing_1 = require("@progress/kendo-drawing");
 var StreamItemComponent = /** @class */ (function () {
     function StreamItemComponent(myElement) {
         this.myElement = myElement;
+        this.drawn = new core_1.EventEmitter();
     }
     Object.defineProperty(StreamItemComponent.prototype, "streamItem", {
         get: function () {
@@ -26,8 +27,10 @@ var StreamItemComponent = /** @class */ (function () {
         configurable: true
     });
     StreamItemComponent.prototype.ngAfterViewInit = function () {
-        this.createSurface()
-            .draw(this.streamItem.element);
+        var _this = this;
+        this.streamItem.element.subscribe(function (element) {
+            return _this.createSurface().draw(element);
+        }, function (err) { return console.warn(err); }, function () { return _this.drawn.emit(); });
     };
     StreamItemComponent.prototype.ngOnDestroy = function () {
         this.surface.destroy();
@@ -38,6 +41,10 @@ var StreamItemComponent = /** @class */ (function () {
             width: "50px"
         });
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], StreamItemComponent.prototype, "drawn", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object),

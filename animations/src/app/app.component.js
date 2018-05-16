@@ -16,27 +16,30 @@ var Observable_1 = require("rxjs/Observable");
 var Rx_1 = require("rxjs/Rx");
 var TriangleStreamItemService_1 = require("./stream/TriangleStreamItemService");
 var SquareStreamItemService_1 = require("./stream/SquareStreamItemService");
+var SingleStreamItem_1 = require("./stream/SingleStreamItem");
 var AppComponent = /** @class */ (function () {
     function AppComponent(triangleFactory, hip2B) {
         var _this = this;
         this.triangleFactory = triangleFactory;
         this.hip2B = hip2B;
         this.mapOne = {
-            apply: function (item) { return _this.hip2B.createStreamItem({
-                fill: item.element.options.get('fill'),
-                stroke: item.element.options.get('stroke'),
-            }); }
+            apply: function (streamItem) { return new SingleStreamItem_1.SingleStreamItem(streamItem.element.flatMap(function (element) { return _this.hip2B.createStreamItem({
+                fill: element.options.get('fill'),
+                stroke: element.options.get('stroke'),
+            }).element; })); }
         };
         this.flatMapOne = {
-            apply: function (item) { return Observable_1.Observable.create(function (observer) {
-                var triangle = _this.triangleFactory.createStreamItem({
-                    fill: item.element.options.get('fill'),
-                    stroke: item.element.options.get('stroke'),
+            apply: function (streamItem) { return Observable_1.Observable.create(function (observer) {
+                streamItem.element.subscribe(function (element) {
+                    var triangle = _this.triangleFactory.createStreamItem({
+                        fill: element.options.get('fill'),
+                        stroke: element.options.get('stroke'),
+                    });
+                    observer.next(triangle);
+                    Observable_1.Observable.interval(350, Rx_1.Scheduler.async)
+                        .take(4)
+                        .subscribe(function (_) { return observer.next(triangle); }, observer.error, observer.complete);
                 });
-                observer.next(triangle);
-                Observable_1.Observable.interval(350, Rx_1.Scheduler.async)
-                    .take(4)
-                    .subscribe(function (_) { return observer.next(triangle); }, observer.error, observer.complete);
             }); }
         };
         this.filterOne = {

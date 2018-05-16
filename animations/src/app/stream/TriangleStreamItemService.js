@@ -10,11 +10,12 @@ var core_1 = require("@angular/core");
 var kendo_drawing_1 = require("@progress/kendo-drawing");
 var RanboShapeOptionsService_1 = require("./RanboShapeOptionsService");
 var SingleStreamItem_1 = require("./SingleStreamItem");
+var Observable_1 = require("rxjs/Observable");
 var TriangleStreamItemService = /** @class */ (function () {
     function TriangleStreamItemService() {
     }
     TriangleStreamItemService.prototype.createStreamItem = function (options) {
-        return new SingleStreamItem_1.SingleStreamItem(this.createTriangle(options));
+        return new SingleStreamItem_1.SingleStreamItem(Observable_1.Observable.of(this.createTriangle(options)));
     };
     TriangleStreamItemService.prototype.createTriangle = function (options) {
         // Create the circle geometry and element

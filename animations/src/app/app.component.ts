@@ -9,6 +9,8 @@ import {Observer} from "rxjs/Observer";
 import {Scheduler} from "rxjs/Rx";
 import {TriangleStreamItemService} from "./stream/TriangleStreamItemService";
 import {SquareStreamItemService} from "./stream/SquareStreamItemService";
+import {SingleStreamItem} from "./stream/SingleStreamItem";
+import {Element} from "@progress/kendo-drawing";
 
 @Component({
     selector: 'angular-application',
@@ -17,44 +19,44 @@ import {SquareStreamItemService} from "./stream/SquareStreamItemService";
 export class AppComponent {
 
 
-    constructor(private triangleFactory: TriangleStreamItemService,
-                private hip2B: SquareStreamItemService) {
-    }
-
     mapOne: Function<StreamItem, StreamItem> = {
-        apply: (item: StreamItem) => this.hip2B.createStreamItem({
-            fill: item.element.options.get('fill'),
-            stroke: item.element.options.get('stroke'),
-        })
+        apply: (streamItem: StreamItem) => new SingleStreamItem(
+            streamItem.element.flatMap((element: Element) => this.hip2B.createStreamItem({
+                    fill: element.options.get('fill'),
+                    stroke: element.options.get('stroke'),
+                }).element
+            ))
     };
-
     flatMapOne: Function<StreamItem, Observable<StreamItem>> = {
-        apply: (item: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
-            let triangle = this.triangleFactory.createStreamItem({
-                fill: item.element.options.get('fill'),
-                stroke: item.element.options.get('stroke'),
+        apply: (streamItem: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
+            streamItem.element.subscribe((element: Element) => {
+                let triangle: StreamItem =
+                    this.triangleFactory.createStreamItem({
+                        fill: element.options.get('fill'),
+                        stroke: element.options.get('stroke'),
+                    });
+                observer.next(triangle);
+                Observable.interval(350, Scheduler.async)
+                    .take(4)
+                    .subscribe(_ => observer.next(triangle),
+                        observer.error,
+                        observer.complete);
             });
-            observer.next(triangle);
-            Observable.interval(350, Scheduler.async)
-                .take(4)
-                .subscribe(_ => observer.next(triangle),
-                    observer.error,
-                    observer.complete)
         })
     };
-
     filterOne: Predicate<StreamItem> = {
         test: (item: StreamItem) => item.identifier % 2 === 0
     };
-
     private sourceSubject = new BehaviorSubject(null);
     sourceOutput = this.sourceSubject.filter(item => !!item);
-
     private mapSubject = new BehaviorSubject(null);
     mapOutput = this.mapSubject.filter(item => !!item);
-
     private flatMapSubject = new BehaviorSubject(null);
     flatMapOutput = this.flatMapSubject.filter(item => !!item);
+
+    constructor(private triangleFactory: TriangleStreamItemService,
+                private hip2B: SquareStreamItemService) {
+    }
 
     sourceComplete(item: StreamItem) {
         this.sourceSubject.next(item);

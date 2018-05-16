@@ -5,6 +5,7 @@ import {Circle as GeomCircle} from "@progress/kendo-drawing/geometry";
 import {RanboShapeOptionsService} from "./RanboShapeOptionsService";
 import {StreamItemFactory} from "./StreamItemFactory";
 import {SingleStreamItem} from "./SingleStreamItem";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class CircleStreamItemService implements StreamItemFactory{
@@ -14,7 +15,7 @@ export class CircleStreamItemService implements StreamItemFactory{
     }
 
     createStreamItem(options?: ShapeOptions): SingleStreamItem {
-        return new SingleStreamItem(this.createCircle(options));
+        return new SingleStreamItem(Observable.of(this.createCircle(options)));
     }
 
     private createCircle(options: ShapeOptions): Element {

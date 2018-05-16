@@ -4,12 +4,13 @@ import {Element, Path, ShapeOptions} from "@progress/kendo-drawing";
 import {RanboShapeOptionsService} from "./RanboShapeOptionsService";
 import {StreamItemFactory} from "./StreamItemFactory";
 import {SingleStreamItem} from "./SingleStreamItem";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class TriangleStreamItemService implements StreamItemFactory {
 
     createStreamItem(options?: ShapeOptions): SingleStreamItem {
-        return new SingleStreamItem(this.createTriangle(options));
+        return new SingleStreamItem(Observable.of(this.createTriangle(options)));
     }
 
     private createTriangle(options: ShapeOptions): Element {

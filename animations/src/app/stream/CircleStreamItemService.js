@@ -14,11 +14,12 @@ var kendo_drawing_1 = require("@progress/kendo-drawing");
 var geometry_1 = require("@progress/kendo-drawing/geometry");
 var RanboShapeOptionsService_1 = require("./RanboShapeOptionsService");
 var SingleStreamItem_1 = require("./SingleStreamItem");
+var Observable_1 = require("rxjs/Observable");
 var CircleStreamItemService = /** @class */ (function () {
     function CircleStreamItemService() {
     }
     CircleStreamItemService.prototype.createStreamItem = function (options) {
-        return new SingleStreamItem_1.SingleStreamItem(this.createCircle(options));
+        return new SingleStreamItem_1.SingleStreamItem(Observable_1.Observable.of(this.createCircle(options)));
     };
     CircleStreamItemService.prototype.createCircle = function (options) {
         // Create the circle geometry and element
