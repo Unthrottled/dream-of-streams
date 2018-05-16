@@ -1,29 +1,28 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy} from "@angular/core";
 import {StreamItemContainer} from "./StreamItemContainer";
 import {Surface} from '@progress/kendo-drawing';
-import {StreamItem} from "./StreamItem";
 
 @Component({
-    selector: 'stream-item',
+    selector: 'stream-item-container',
     template: `
         <div></div>
     `
 })
-export class StreamItemComponent implements AfterViewInit, OnDestroy {
+export class StreamItemContainerComponent implements AfterViewInit, OnDestroy {
 
     private surface: Surface;
 
     constructor(private myElement: ElementRef) {
     }
 
-    private _streamItem: StreamItem;
+    private _streamItem: StreamItemContainer;
 
     @Input()
-    get streamItem(): StreamItem {
+    get streamItem(): StreamItemContainer {
         return this._streamItem;
     }
 
-    set streamItem(value: StreamItem) {
+    set streamItem(value: StreamItemContainer) {
         this._streamItem = value;
     }
 
