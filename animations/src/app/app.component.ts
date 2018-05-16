@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import "./app.component.htm";
-import {StreamItemContainer} from "./stream/StreamItem";
+import {StreamItem} from "./stream/StreamItem";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Function} from "./stream/Function";
 import {Predicate} from "./stream/Predicate";
@@ -21,15 +21,15 @@ export class AppComponent {
                 private hip2B: SquareStreamItemService) {
     }
 
-    mapOne: Function<StreamItemContainer, StreamItemContainer> = {
-        apply: (item: StreamItemContainer) => this.hip2B.createStreamItem({
+    mapOne: Function<StreamItem, StreamItem> = {
+        apply: (item: StreamItem) => this.hip2B.createStreamItem({
             fill: item.element.options.get('fill'),
             stroke: item.element.options.get('stroke'),
         })
     };
 
-    flatMapOne: Function<StreamItemContainer, Observable<StreamItemContainer>> = {
-        apply: (item: StreamItemContainer) => Observable.create((observer: Observer<StreamItemContainer>) => {
+    flatMapOne: Function<StreamItem, Observable<StreamItem>> = {
+        apply: (item: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
             let triangle = this.triangleFactory.createStreamItem({
                 fill: item.element.options.get('fill'),
                 stroke: item.element.options.get('stroke'),
@@ -43,8 +43,8 @@ export class AppComponent {
         })
     };
 
-    filterOne: Predicate<StreamItemContainer> = {
-        test: (item: StreamItemContainer) => item.identifier % 2 === 0
+    filterOne: Predicate<StreamItem> = {
+        test: (item: StreamItem) => item.identifier % 2 === 0
     };
 
     private sourceSubject = new BehaviorSubject(null);
@@ -56,19 +56,19 @@ export class AppComponent {
     private flatMapSubject = new BehaviorSubject(null);
     flatMapOutput = this.flatMapSubject.filter(item => !!item);
 
-    sourceComplete(item: StreamItemContainer) {
+    sourceComplete(item: StreamItem) {
         this.sourceSubject.next(item);
     }
 
-    mapOneComplete(steamItem: StreamItemContainer) {
+    mapOneComplete(steamItem: StreamItem) {
         this.mapSubject.next(steamItem)
     }
 
-    flatMapOneComplete(steamItem: StreamItemContainer) {
+    flatMapOneComplete(steamItem: StreamItem) {
         this.flatMapSubject.next(steamItem)
     }
 
-    filterOneComplete(steamItem: StreamItemContainer) {
+    filterOneComplete(steamItem: StreamItem) {
 
     }
 }

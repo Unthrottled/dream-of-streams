@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import './source.component.htm'
-import {StreamItemContainer} from "./StreamItem";
+import {StreamItem} from "./StreamItem";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
 
@@ -16,16 +16,16 @@ export class BaseStreamComponent {
     private currentSubscription: Subscription = new Subscription();
     private itemIndex: Map<number, number> = new Map();
     @Output()
-    private outputStream = new EventEmitter<StreamItemContainer>();
+    private outputStream = new EventEmitter<StreamItem>();
 
-    private _inputStream: Observable<StreamItemContainer>;
+    private _inputStream: Observable<StreamItem>;
 
     @Input()
-    get inputStream(): Observable<StreamItemContainer> {
+    get inputStream(): Observable<StreamItem> {
         return this._inputStream;
     }
 
-    set inputStream(value: Observable<StreamItemContainer>) {
+    set inputStream(value: Observable<StreamItem>) {
         this.currentSubscription.unsubscribe();
         this.currentSubscription = value.subscribe(streamItem => {
             this.itemIndex.set(streamItem.identifier,
@@ -33,13 +33,13 @@ export class BaseStreamComponent {
         });
     }
 
-    private _streamItems: StreamItemContainer[] = [];
+    private _streamItems: StreamItem[] = [];
 
-    get streamItems(): Iterable<StreamItemContainer> {
+    get streamItems(): Iterable<StreamItem> {
         return this._streamItems;
     }
 
-    complete(streamItemAtEnd: StreamItemContainer) {
+    complete(streamItemAtEnd: StreamItem) {
         let index = streamItemAtEnd.identifier;
         this._streamItems.splice(this.itemIndex.get(index), 1);
         this.itemIndex.delete(index);

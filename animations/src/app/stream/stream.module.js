@@ -41,7 +41,7 @@ var StreamModule = /** @class */ (function () {
                 map_stream_component_1.MapStreamComponent,
                 filter_stream_component_1.FilterStreamComponent,
                 flatMap_stream_component_1.FlatMapStreamComponent,
-                stream_item_component_1.StreamItemContainerComponent,
+                stream_item_component_1.StreamItemComponent,
             ],
             providers: [
                 CircleStreamItemService_1.CircleStreamItemService,

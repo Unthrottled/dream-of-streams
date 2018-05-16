@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import './transition.component.htm'
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {StreamItemContainer} from "./StreamItem";
+import {StreamItem} from "./StreamItem";
 
 @Component({
     selector: 'stream-transition',
@@ -18,16 +18,16 @@ import {StreamItemContainer} from "./StreamItem";
 export class TransitionComponent {
     state: String = 'active';
     @Output()
-    private completedTransiton = new EventEmitter<StreamItemContainer>();
+    private completedTransiton = new EventEmitter<StreamItem>();
 
-    private _input: StreamItemContainer;
+    private _input: StreamItem;
 
     @Input()
-    get input(): StreamItemContainer {
+    get input(): StreamItem {
         return this._input;
     }
 
-    set input(value: StreamItemContainer) {
+    set input(value: StreamItem) {
         this._input = value;
     }
 

@@ -7,7 +7,7 @@ import {BaseStreamComponent} from "./base.stream.component";
 import {MapStreamComponent} from "./map.stream.component";
 import {FilterStreamComponent} from "./filter.stream.component";
 import {FlatMapStreamComponent} from "./flatMap.stream.component";
-import {StreamItemContainerComponent} from "./stream.item.component";
+import {StreamItemComponent} from "./stream.item.component";
 import {CircleStreamItemService} from "./CircleStreamItemService";
 import {TriangleStreamItemService} from "./TriangleStreamItemService";
 import {SquareStreamItemService} from "./SquareStreamItemService";
@@ -30,7 +30,7 @@ import {SquareStreamItemService} from "./SquareStreamItemService";
         MapStreamComponent,
         FilterStreamComponent,
         FlatMapStreamComponent,
-        StreamItemContainerComponent,
+        StreamItemComponent,
     ],
     providers: [
         CircleStreamItemService,

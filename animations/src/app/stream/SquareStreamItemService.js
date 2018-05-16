@@ -14,7 +14,7 @@ var SquareStreamItemService = /** @class */ (function () {
     function SquareStreamItemService() {
     }
     SquareStreamItemService.prototype.createStreamItem = function (options) {
-        return new StreamItem_1.StreamItemContainer(this.createSquare(options));
+        return new StreamItem_1.StreamItem(this.createSquare(options));
     };
     SquareStreamItemService.prototype.createSquare = function (options) {
         // Create the circle geometry and element

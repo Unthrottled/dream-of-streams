@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import './filter.stream.component.htm'
-import {StreamItemContainer} from "./StreamItem";
+import {StreamItem} from "./StreamItem";
 import {Observable} from "rxjs/Observable";
 import {Predicate} from "./Predicate";
 
@@ -12,31 +12,31 @@ import {Predicate} from "./Predicate";
 export class FilterStreamComponent {
 
     @Output()
-    public outputStream = new EventEmitter<StreamItemContainer>();
+    public outputStream = new EventEmitter<StreamItem>();
 
-    private _filterFunction: Predicate<StreamItemContainer>;
+    private _filterFunction: Predicate<StreamItem>;
 
     @Input()
-    get filterFunction(): Predicate<StreamItemContainer> {
+    get filterFunction(): Predicate<StreamItem> {
         return this._filterFunction;
     }
 
-    set filterFunction(value: Predicate<StreamItemContainer>) {
+    set filterFunction(value: Predicate<StreamItem>) {
         this._filterFunction = value;
     }
 
-    private _inputStream: Observable<StreamItemContainer>;
+    private _inputStream: Observable<StreamItem>;
 
     @Input()
-    get inputStream(): Observable<StreamItemContainer> {
+    get inputStream(): Observable<StreamItem> {
         return this._inputStream;
     }
 
-    set inputStream(value: Observable<StreamItemContainer>) {
+    set inputStream(value: Observable<StreamItem>) {
         this._inputStream = value.filter(item => this.filterFunction.test(item));
     }
 
-    complete(streamItemAtEnd: StreamItemContainer) {
+    complete(streamItemAtEnd: StreamItem) {
         this.outputStream.emit(streamItemAtEnd);
     }
 

@@ -1,6 +1,6 @@
 import {Element} from "@progress/kendo-drawing";
 
-export class StreamItemContainer {
+export class StreamItem {
 
     constructor(private _element: Element) {
         this._identifier = new Date().getTime();

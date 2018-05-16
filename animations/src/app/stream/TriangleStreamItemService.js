@@ -14,7 +14,7 @@ var TriangleStreamItemService = /** @class */ (function () {
     function TriangleStreamItemService() {
     }
     TriangleStreamItemService.prototype.createStreamItem = function (options) {
-        return new StreamItem_1.StreamItemContainer(this.createTriangle(options));
+        return new StreamItem_1.StreamItem(this.createTriangle(options));
     };
     TriangleStreamItemService.prototype.createTriangle = function (options) {
         // Create the circle geometry and element
