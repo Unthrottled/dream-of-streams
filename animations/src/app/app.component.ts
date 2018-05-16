@@ -8,7 +8,6 @@ import {Observer} from "rxjs/Observer";
 import {Scheduler} from "rxjs/Rx";
 import {TriangleStreamItemService} from "./stream/TriangleStreamItemService";
 import {SquareStreamItemService} from "./stream/SquareStreamItemService";
-import {StreamItem} from "./stream/StreamItem";
 
 @Component({
     selector: 'angular-application',
@@ -28,28 +27,25 @@ export class AppComponent {
     };
     flatMapOne: Function<StreamItemContainer, StreamItemContainer> = {
         apply: (streamItemContainer: StreamItemContainer) => {
-            return new StreamItemContainer(streamItemContainer.items.flatMap(item =>
-                Observable.create((observer: Observer<StreamItem>) => {
-                    let triangle = this.triangleFactory.createStreamItem({
-                        fill: item.element.options.get('fill'),
-                        stroke: item.element.options.get('stroke'),
-                    });
-                    observer.next(triangle);
-                    Observable.interval(350, Scheduler.async)
-                        .take(4)
-                        .subscribe(_ => {
-                            console.warn("ayy lemon")
-                                return observer.next(triangle);
-                            },
-                            observer.error,
-                            observer.complete)
-                })), false);
+            streamItemContainer.items.flatMap(item => Observable.create((observer: Observer<StreamItemContainer>) => {
+                let triangle = this.triangleFactory.createStreamItem({
+                    fill: item.element.options.get('fill'),
+                    stroke: item.element.options.get('stroke'),
+                });
+                observer.next(streamItemContainer);
+                Observable.interval(350, Scheduler.async)
+                    .take(4)
+                    .subscribe(_ => observer.next(streamItemContainer),
+                        observer.error,
+                        observer.complete)
+            }));
+            return streamItemContainer;
         }
     };
     filterOne: Function<StreamItemContainer, StreamItemContainer> = {
         apply: (container: StreamItemContainer) => {
-            return new StreamItemContainer(container.items.filter(item => item.identifier % 2 === 0),
-                false);
+            container.items.filter(item => item.identifier % 2 === 0);
+            return container;
         }
     };
     private sourceSubject = new BehaviorSubject(null);

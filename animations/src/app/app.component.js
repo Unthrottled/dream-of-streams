@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./app.component.htm");
-var StreamItemContainer_1 = require("./stream/StreamItemContainer");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var Observable_1 = require("rxjs/Observable");
 var Rx_1 = require("rxjs/Rx");
@@ -33,26 +32,23 @@ var AppComponent = /** @class */ (function () {
         };
         this.flatMapOne = {
             apply: function (streamItemContainer) {
-                return new StreamItemContainer_1.StreamItemContainer(streamItemContainer.items.flatMap(function (item) {
-                    return Observable_1.Observable.create(function (observer) {
-                        var triangle = _this.triangleFactory.createStreamItem({
-                            fill: item.element.options.get('fill'),
-                            stroke: item.element.options.get('stroke'),
-                        });
-                        observer.next(triangle);
-                        Observable_1.Observable.interval(350, Rx_1.Scheduler.async)
-                            .take(4)
-                            .subscribe(function (_) {
-                            console.warn("ayy lemon");
-                            return observer.next(triangle);
-                        }, observer.error, observer.complete);
+                streamItemContainer.items.flatMap(function (item) { return Observable_1.Observable.create(function (observer) {
+                    var triangle = _this.triangleFactory.createStreamItem({
+                        fill: item.element.options.get('fill'),
+                        stroke: item.element.options.get('stroke'),
                     });
-                }), false);
+                    observer.next(streamItemContainer);
+                    Observable_1.Observable.interval(350, Rx_1.Scheduler.async)
+                        .take(4)
+                        .subscribe(function (_) { return observer.next(streamItemContainer); }, observer.error, observer.complete);
+                }); });
+                return streamItemContainer;
             }
         };
         this.filterOne = {
             apply: function (container) {
-                return new StreamItemContainer_1.StreamItemContainer(container.items.filter(function (item) { return item.identifier % 2 === 0; }), false);
+                container.items.filter(function (item) { return item.identifier % 2 === 0; });
+                return container;
             }
         };
         this.sourceSubject = new BehaviorSubject_1.BehaviorSubject(null);

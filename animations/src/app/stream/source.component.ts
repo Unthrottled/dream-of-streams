@@ -4,6 +4,7 @@ import {StreamItemContainer} from "./StreamItemContainer";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {CircleStreamItemService} from "./CircleStreamItemService";
 import {Observable} from "rxjs/Observable";
+import {Scheduler} from "rxjs/Rx";
 import {Subscription} from "rxjs/Subscription";
 
 
@@ -29,9 +30,8 @@ export class SourceComponent implements OnInit, OnDestroy {
     }
 
     toggleState() {
-        this.streamSource.next(new StreamItemContainer(
-            Observable.of(this.circleService.createStreamItem()),
-            false));
+        let value = this.circleService.createStreamItem();
+        // this.streamSource.next(value);
     }
 
     complete(streamItemAtEnd: StreamItemContainer) {

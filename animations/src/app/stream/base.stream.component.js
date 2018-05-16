@@ -27,10 +27,8 @@ var BaseStreamComponent = /** @class */ (function () {
         set: function (value) {
             var _this = this;
             this.currentSubscription.unsubscribe();
-            this.currentSubscription = value.subscribe(function (streamItemContainer) {
-                return streamItemContainer.items.subscribe(function (streamItem) {
-                    return _this.itemIndex.set(streamItemContainer.identifier, _this._streamItems.push(streamItemContainer));
-                });
+            this.currentSubscription = value.subscribe(function (streamItem) {
+                _this.itemIndex.set(streamItem.identifier, _this._streamItems.push(streamItem));
             });
         },
         enumerable: true,
