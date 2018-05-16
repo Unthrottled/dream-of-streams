@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import './transition.component.htm'
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {StreamItemContainer} from "./StreamItemContainer";
+import {StreamItemContainer} from "./StreamItem";
 
 @Component({
     selector: 'stream-transition',

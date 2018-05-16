@@ -22,13 +22,10 @@ var AppComponent = /** @class */ (function () {
         this.triangleFactory = triangleFactory;
         this.hip2B = hip2B;
         this.mapOne = {
-            apply: function (item) {
-                var streamItem = _this.hip2B.createStreamItem({
-                    fill: item.element.options.get('fill'),
-                    stroke: item.element.options.get('stroke'),
-                });
-                return item;
-            }
+            apply: function (item) { return _this.hip2B.createStreamItem({
+                fill: item.element.options.get('fill'),
+                stroke: item.element.options.get('stroke'),
+            }); }
         };
         this.flatMapOne = {
             apply: function (item) { return Observable_1.Observable.create(function (observer) {
@@ -36,10 +33,10 @@ var AppComponent = /** @class */ (function () {
                     fill: item.element.options.get('fill'),
                     stroke: item.element.options.get('stroke'),
                 });
-                observer.next(item);
+                observer.next(triangle);
                 Observable_1.Observable.interval(350, Rx_1.Scheduler.async)
                     .take(4)
-                    .subscribe(function (_) { return observer.next(item); }, observer.error, observer.complete);
+                    .subscribe(function (_) { return observer.next(triangle); }, observer.error, observer.complete);
             }); }
         };
         this.filterOne = {
