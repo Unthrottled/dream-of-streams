@@ -10,13 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var kendo_drawing_1 = require("@progress/kendo-drawing");
 var SingleStreamItem_1 = require("./SingleStreamItem");
 var MultiStreamItem_1 = require("./MultiStreamItem");
 var StreamItemComponent = /** @class */ (function () {
     function StreamItemComponent(myElement) {
         this.myElement = myElement;
         this.drawn = new core_1.EventEmitter();
+        this.elements = [];
+        this.allElementsAdded = false;
+        this.numDrawn = 0;
     }
     Object.defineProperty(StreamItemComponent.prototype, "streamItem", {
         get: function () {
@@ -44,18 +46,25 @@ var StreamItemComponent = /** @class */ (function () {
     });
     StreamItemComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
-        this.streamItem.element.subscribe(function (element) {
-            return _this.createSurface().draw(element);
-        }, function (err) { return console.warn(err); }, function () { return _this.drawn.emit(); });
+        this.streamItem.element
+            .subscribe(function (element) { return _this.elements.push(element); }, console.warn, function () { return _this.allElementsReceived(); });
     };
-    StreamItemComponent.prototype.ngOnDestroy = function () {
-        this.surface.destroy();
+    StreamItemComponent.prototype.itemDrawn = function () {
+        this.numDrawn++;
+        this.tryToComplete();
     };
-    StreamItemComponent.prototype.createSurface = function () {
-        return this.surface = kendo_drawing_1.Surface.create(this.myElement.nativeElement, {
-            height: "50px",
-            width: "50px"
-        });
+    StreamItemComponent.prototype.allElementsReceived = function () {
+        this.allElementsAdded = true;
+        this.tryToComplete();
+    };
+    StreamItemComponent.prototype.tryToComplete = function () {
+        if (this.isComplete()) {
+            this.drawn.emit();
+        }
+    };
+    StreamItemComponent.prototype.isComplete = function () {
+        return this.allElementsAdded &&
+            this.numDrawn === this.elements.length;
     };
     __decorate([
         core_1.Output(),
@@ -69,7 +78,7 @@ var StreamItemComponent = /** @class */ (function () {
     StreamItemComponent = __decorate([
         core_1.Component({
             selector: 'stream-item',
-            template: "\n        <div></div>\n    "
+            template: "\n        <div>\n            \n            <div *ngIf=\"heyGurlYouAFreak\">\n                <div *ngFor=\"let element of elements\">\n                    <draw-stream-item [element]=\"element\"\n                                      (drawn)=\"itemDrawn\"></draw-stream-item>\n                </div>\n            </div>\n        </div>\n    "
         }),
         __metadata("design:paramtypes", [core_1.ElementRef])
     ], StreamItemComponent);
