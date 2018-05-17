@@ -17,11 +17,34 @@ var Rx_1 = require("rxjs/Rx");
 var TriangleStreamItemService_1 = require("./stream/TriangleStreamItemService");
 var SquareStreamItemService_1 = require("./stream/SquareStreamItemService");
 var SingleStreamItem_1 = require("./stream/SingleStreamItem");
+var MultiStreamItem_1 = require("./stream/MultiStreamItem");
 var AppComponent = /** @class */ (function () {
     function AppComponent(triangleFactory, hip2B) {
         var _this = this;
         this.triangleFactory = triangleFactory;
         this.hip2B = hip2B;
+        /**
+         * I am sorry you do not deserve this,
+         * beware many uses of observable below
+         * @type {{apply: (streamItem: StreamItem) => MultiStreamItem}}
+         */
+        this.mapTwo = {
+            apply: function (streamItem) {
+                return new MultiStreamItem_1.MultiStreamItem(Observable_1.Observable.create(function (observer) {
+                    return streamItem.element.subscribe(function (element) {
+                        return _this.triangleFactory.createStreamItem({
+                            fill: element.options.get('fill'),
+                            stroke: element.options.get('stroke'),
+                        }).element.subscribe(function (triangleElement) {
+                            for (var i = 0; i < 4; ++i) {
+                                observer.next(triangleElement);
+                            }
+                            observer.complete();
+                        }, observer.error, observer.complete);
+                    });
+                }));
+            }
+        };
         this.mapOne = {
             apply: function (streamItem) { return new SingleStreamItem_1.SingleStreamItem(streamItem.element.flatMap(function (element) { return _this.hip2B.createStreamItem({
                 fill: element.options.get('fill'),
@@ -47,6 +70,8 @@ var AppComponent = /** @class */ (function () {
         };
         this.sourceSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.sourceOutput = this.sourceSubject.filter(function (item) { return !!item; });
+        this.sourceSubjectTwo = new BehaviorSubject_1.BehaviorSubject(null);
+        this.sourceOutputTwo = this.sourceSubjectTwo.filter(function (item) { return !!item; });
         this.mapSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.mapOutput = this.mapSubject.filter(function (item) { return !!item; });
         this.flatMapSubject = new BehaviorSubject_1.BehaviorSubject(null);
@@ -54,6 +79,9 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent.prototype.sourceComplete = function (item) {
         this.sourceSubject.next(item);
+    };
+    AppComponent.prototype.sourceCompleteTwo = function (item) {
+        this.sourceSubjectTwo.next(item);
     };
     AppComponent.prototype.mapOneComplete = function (steamItem) {
         this.mapSubject.next(steamItem);

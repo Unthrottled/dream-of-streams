@@ -21,4 +21,15 @@
         ></filter-stream>
     </div>
 </div>
+<div style="display: flex">
+    <div style="flex-grow: 1">
+        <stream-source (outputStream)="sourceCompleteTwo($event)"></stream-source>
+    </div>
+    <div style="flex-grow: 1">
+        <map-stream [inputStream]="sourceOutputTwo"
+                    [mappingFunction]="mapTwo"
+        ></map-stream>
+    </div>
+</div>
+
 

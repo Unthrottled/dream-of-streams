@@ -11,6 +11,7 @@ import {TriangleStreamItemService} from "./stream/TriangleStreamItemService";
 import {SquareStreamItemService} from "./stream/SquareStreamItemService";
 import {SingleStreamItem} from "./stream/SingleStreamItem";
 import {Element} from "@progress/kendo-drawing";
+import {MultiStreamItem} from "./stream/MultiStreamItem";
 
 @Component({
     selector: 'angular-application',
@@ -18,6 +19,28 @@ import {Element} from "@progress/kendo-drawing";
 })
 export class AppComponent {
 
+    /**
+     * I am sorry you do not deserve this,
+     * beware many uses of observable below
+     * @type {{apply: (streamItem: StreamItem) => MultiStreamItem}}
+     */
+    mapTwo: Function<StreamItem, StreamItem> = {
+        apply: (streamItem: StreamItem) =>
+            new MultiStreamItem(Observable.create((observer: Observer<Element>) =>
+                streamItem.element.subscribe((element: Element) =>
+                    this.triangleFactory.createStreamItem({
+                        fill: element.options.get('fill'),
+                        stroke: element.options.get('stroke'),
+                    }).element
+                        .subscribe(triangleElement => {
+                                for (let i = 0; i < 4; ++i) {
+                                    observer.next(triangleElement);
+                                }
+                                observer.complete()
+                            }, observer.error,
+                            observer.complete)
+                )))
+    };
 
     mapOne: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) => new SingleStreamItem(
@@ -47,8 +70,13 @@ export class AppComponent {
     filterOne: Predicate<StreamItem> = {
         test: (item: StreamItem) => item.identifier % 2 === 0
     };
+
     private sourceSubject = new BehaviorSubject(null);
     sourceOutput = this.sourceSubject.filter(item => !!item);
+
+    private sourceSubjectTwo = new BehaviorSubject(null);
+    sourceOutputTwo = this.sourceSubjectTwo.filter(item => !!item);
+
     private mapSubject = new BehaviorSubject(null);
     mapOutput = this.mapSubject.filter(item => !!item);
     private flatMapSubject = new BehaviorSubject(null);
@@ -60,6 +88,10 @@ export class AppComponent {
 
     sourceComplete(item: StreamItem) {
         this.sourceSubject.next(item);
+    }
+
+    sourceCompleteTwo(item: StreamItem) {
+        this.sourceSubjectTwo.next(item);
     }
 
     mapOneComplete(steamItem: StreamItem) {
