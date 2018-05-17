@@ -78,7 +78,7 @@ var StreamItemComponent = /** @class */ (function () {
     StreamItemComponent = __decorate([
         core_1.Component({
             selector: 'stream-item',
-            template: "\n        <div>\n            \n            <div *ngIf=\"heyGurlYouAFreak\">\n                <div *ngFor=\"let element of elements\">\n                    <draw-stream-item [element]=\"element\"\n                                      (drawn)=\"itemDrawn\"></draw-stream-item>\n                </div>\n            </div>\n        </div>\n    "
+            template: "\n        <div>\n            <div *ngIf=\"heyGurlYouSingle\">\n                <draw-stream-item [element]=\"streamItem.element | async\"\n                                  (drawn)=\"itemDrawn()\"></draw-stream-item>\n            </div>\n            <div *ngIf=\"heyGurlYouAFreak\">\n                <div *ngFor=\"let element of elements\">\n                    <draw-stream-item [element]=\"element\"\n                                      (drawn)=\"itemDrawn\"></draw-stream-item>\n                </div>\n            </div>\n        </div>\n    "
         }),
         __metadata("design:paramtypes", [core_1.ElementRef])
     ], StreamItemComponent);
