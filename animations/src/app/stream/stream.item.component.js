@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var kendo_drawing_1 = require("@progress/kendo-drawing");
+var SingleStreamItem_1 = require("./SingleStreamItem");
+var MultiStreamItem_1 = require("./MultiStreamItem");
 var StreamItemComponent = /** @class */ (function () {
     function StreamItemComponent(myElement) {
         this.myElement = myElement;
@@ -22,6 +24,20 @@ var StreamItemComponent = /** @class */ (function () {
         },
         set: function (value) {
             this._streamItem = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StreamItemComponent.prototype, "heyGurlYouSingle", {
+        get: function () {
+            return this.streamItem instanceof SingleStreamItem_1.SingleStreamItem;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StreamItemComponent.prototype, "heyGurlYouAFreak", {
+        get: function () {
+            return this.streamItem instanceof MultiStreamItem_1.MultiStreamItem;
         },
         enumerable: true,
         configurable: true
