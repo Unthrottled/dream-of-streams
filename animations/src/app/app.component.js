@@ -30,20 +30,11 @@ var AppComponent = /** @class */ (function () {
          */
         this.mapTwo = {
             apply: function (streamItem) {
-                return new MultiStreamItem_1.MultiStreamItem(Observable_1.Observable.create(function (observer) {
-                    return streamItem.element.subscribe(function (element) {
-                        return _this.triangleFactory.createStreamItem({
-                            fill: element.options.get('fill'),
-                            stroke: element.options.get('stroke'),
-                        }).element
-                            .subscribe(function (triangleElement) {
-                            for (var i = 0; i < 4; ++i) {
-                                observer.next(triangleElement);
-                                console.warn('triangle!!');
-                            }
-                            observer.complete();
-                        }, observer.error, observer.complete);
-                    });
+                return new MultiStreamItem_1.MultiStreamItem(streamItem.element.flatMap(function (element) {
+                    return _this.triangleFactory.createStreamItems(4, {
+                        fill: element.options.get('fill'),
+                        stroke: element.options.get('stroke'),
+                    }).element;
                 }));
             }
         };

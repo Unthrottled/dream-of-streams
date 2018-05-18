@@ -19,28 +19,13 @@ import {MultiStreamItem} from "./stream/MultiStreamItem";
 })
 export class AppComponent {
 
-    /**
-     * I am sorry you do not deserve this,
-     * beware many uses of observable below
-     * @type {{apply: (streamItem: StreamItem) => MultiStreamItem}}
-     */
     mapTwo: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) =>
-            new MultiStreamItem(Observable.create((observer: Observer<Element>) =>
-                streamItem.element.subscribe((element: Element) =>
-                    this.triangleFactory.createStreamItem({
-                        fill: element.options.get('fill'),
-                        stroke: element.options.get('stroke'),
-                    }).element
-                        .subscribe(triangleElement => {
-                                for (let i = 0; i < 4; ++i) {
-                                    observer.next(triangleElement);
-                                    console.warn('triangle!!')
-                                }
-                                observer.complete()
-                            }, observer.error,
-                            observer.complete)
-                )))
+            new MultiStreamItem(streamItem.element.flatMap(element =>
+                this.triangleFactory.createStreamItems(4, {
+                    fill: element.options.get('fill'),
+                    stroke: element.options.get('stroke'),
+                }).element))
     };
 
     mapOne: Function<StreamItem, StreamItem> = {

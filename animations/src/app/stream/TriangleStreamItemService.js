@@ -21,6 +21,7 @@ var TriangleStreamItemService = /** @class */ (function () {
             var itemToEmit = _this.createTriangle(options);
             for (var i = 0; i < 4; ++i) {
                 observer.next(itemToEmit);
+                console.log("triangles!");
             }
             observer.complete();
         }));
