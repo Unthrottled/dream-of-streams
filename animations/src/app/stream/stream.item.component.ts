@@ -15,7 +15,7 @@ import {Element} from "@progress/kendo-drawing";
             <div *ngIf="heyGurlYouAFreak">
                 <div *ngFor="let element of elements">
                     <draw-stream-item [element]="element"
-                                      (drawn)="itemDrawn"></draw-stream-item>
+                                      (drawn)="itemDrawn()"></draw-stream-item>
                 </div>
             </div>
         </div>

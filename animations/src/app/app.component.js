@@ -23,18 +23,10 @@ var AppComponent = /** @class */ (function () {
         var _this = this;
         this.triangleFactory = triangleFactory;
         this.hip2B = hip2B;
-        /**
-         * I am sorry you do not deserve this,
-         * beware many uses of observable below
-         * @type {{apply: (streamItem: StreamItem) => MultiStreamItem}}
-         */
         this.mapTwo = {
             apply: function (streamItem) {
                 return new MultiStreamItem_1.MultiStreamItem(streamItem.element.flatMap(function (element) {
-                    return _this.triangleFactory.createStreamItems(4, {
-                        fill: element.options.get('fill'),
-                        stroke: element.options.get('stroke'),
-                    }).element;
+                    return _this.triangleFactory.createStreamItems(4).element;
                 }));
             }
         };
