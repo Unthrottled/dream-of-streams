@@ -12,7 +12,7 @@ import {Element} from "@progress/kendo-drawing";
                 <draw-stream-item [element]="streamItem.element | async"
                                   (drawn)="itemDrawn()"></draw-stream-item>
             </div>
-            <div *ngIf="heyGurlYouAFreak">
+            <div *ngIf="heyGurlYouAFreak" class="multi-item-stream">
                 <div *ngFor="let element of elements">
                     <draw-stream-item [element]="element"
                                       (drawn)="itemDrawn()"></draw-stream-item>

@@ -45,7 +45,7 @@ export class AppComponent {
                         stroke: element.options.get('stroke'),
                     });
                 observer.next(triangle);
-                Observable.interval(350, Scheduler.async)
+                Observable.interval(750, Scheduler.async)
                     .take(4)
                     .subscribe(_ => observer.next(triangle),
                         observer.error,

@@ -9,3 +9,12 @@
 .stream-container div {
   flex-grow: 1;
 }
+
+.multi-item-stream {
+  border: orange solid;
+  display: flex;
+}
+
+.multi-item-stream > div {
+  flex-grow: 1;
+}

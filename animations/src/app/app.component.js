@@ -47,7 +47,7 @@ var AppComponent = /** @class */ (function () {
                         stroke: element.options.get('stroke'),
                     });
                     observer.next(triangle);
-                    Observable_1.Observable.interval(350, Rx_1.Scheduler.async)
+                    Observable_1.Observable.interval(750, Rx_1.Scheduler.async)
                         .take(4)
                         .subscribe(function (_) { return observer.next(triangle); }, observer.error, observer.complete);
                 });
