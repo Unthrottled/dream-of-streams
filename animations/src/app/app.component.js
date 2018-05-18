@@ -26,7 +26,10 @@ var AppComponent = /** @class */ (function () {
         this.mapTwo = {
             apply: function (streamItem) {
                 return new MultiStreamItem_1.MultiStreamItem(streamItem.element.flatMap(function (element) {
-                    return _this.triangleFactory.createStreamItems(4).element;
+                    return _this.triangleFactory.createStreamItems(4, {
+                        fill: element.options.get('fill'),
+                        stroke: element.options.get('stroke'),
+                    }).element;
                 }));
             }
         };

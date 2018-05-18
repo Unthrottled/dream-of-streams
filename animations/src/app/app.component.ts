@@ -22,7 +22,10 @@ export class AppComponent {
     mapTwo: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) =>
             new MultiStreamItem(streamItem.element.flatMap(element =>
-                this.triangleFactory.createStreamItems(4).element))
+                this.triangleFactory.createStreamItems(4,{
+                    fill: element.options.get('fill'),
+                    stroke: element.options.get('stroke'),
+                }).element))
     };
 
     mapOne: Function<StreamItem, StreamItem> = {

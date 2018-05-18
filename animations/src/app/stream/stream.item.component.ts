@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {StreamItem} from "./StreamItem";
 import {SingleStreamItem} from "./SingleStreamItem";
 import {MultiStreamItem} from "./MultiStreamItem";
@@ -21,7 +21,13 @@ import {Element} from "@progress/kendo-drawing";
         </div>
     `
 })
-export class StreamItemComponent implements AfterViewInit {
+export class StreamItemComponent implements OnInit {
+    ngOnInit(): void {
+        this.streamItem.element
+            .subscribe(element => this.elements.push(element),
+                console.warn,
+                () => this.allElementsReceived())
+    }
     @Output()
     private drawn = new EventEmitter<void>();
     private elements: Element[] = [];
@@ -48,13 +54,6 @@ export class StreamItemComponent implements AfterViewInit {
 
     get heyGurlYouAFreak(): boolean {
         return this.streamItem instanceof MultiStreamItem;
-    }
-
-    ngAfterViewInit(): void {
-        this.streamItem.element
-            .subscribe(element => this.elements.push(element),
-                console.warn,
-                () => this.allElementsReceived())
     }
 
     itemDrawn() {
