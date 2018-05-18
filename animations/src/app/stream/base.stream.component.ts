@@ -29,7 +29,7 @@ export class BaseStreamComponent {
         this.currentSubscription.unsubscribe();
         this.currentSubscription = value.subscribe(streamItem => {
             this.itemIndex.set(streamItem.identifier,
-                this._streamItems.push(streamItem));
+                this._streamItems.unshift(streamItem));
         });
     }
 

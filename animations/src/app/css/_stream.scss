@@ -1,3 +1,11 @@
-.streamComponent {
+.base-stream-component > div{
+  position: absolute;
+}
 
+.stream-container {
+  display: flex;
+}
+
+.stream-container div {
+  flex-grow: 1;
 }
