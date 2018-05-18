@@ -35,9 +35,11 @@ var AppComponent = /** @class */ (function () {
                         return _this.triangleFactory.createStreamItem({
                             fill: element.options.get('fill'),
                             stroke: element.options.get('stroke'),
-                        }).element.subscribe(function (triangleElement) {
+                        }).element
+                            .subscribe(function (triangleElement) {
                             for (var i = 0; i < 4; ++i) {
                                 observer.next(triangleElement);
+                                console.warn('triangle!!');
                             }
                             observer.complete();
                         }, observer.error, observer.complete);

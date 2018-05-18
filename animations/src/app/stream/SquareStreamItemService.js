@@ -11,9 +11,20 @@ var kendo_drawing_1 = require("@progress/kendo-drawing");
 var RanboShapeOptionsService_1 = require("./RanboShapeOptionsService");
 var SingleStreamItem_1 = require("./SingleStreamItem");
 var Observable_1 = require("rxjs/Observable");
+var MultiStreamItem_1 = require("./MultiStreamItem");
 var SquareStreamItemService = /** @class */ (function () {
     function SquareStreamItemService() {
     }
+    SquareStreamItemService.prototype.createStreamItems = function (thisMany, options) {
+        var _this = this;
+        return new MultiStreamItem_1.MultiStreamItem(Observable_1.Observable.create(function (observer) {
+            var itemToEmit = _this.createSquare(options);
+            for (var i = 0; i < 4; ++i) {
+                observer.next(itemToEmit);
+            }
+            observer.complete();
+        }));
+    };
     SquareStreamItemService.prototype.createStreamItem = function (options) {
         return new SingleStreamItem_1.SingleStreamItem(Observable_1.Observable.of(this.createSquare(options)));
     };

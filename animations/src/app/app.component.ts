@@ -35,6 +35,7 @@ export class AppComponent {
                         .subscribe(triangleElement => {
                                 for (let i = 0; i < 4; ++i) {
                                     observer.next(triangleElement);
+                                    console.warn('triangle!!')
                                 }
                                 observer.complete()
                             }, observer.error,

@@ -15,9 +15,21 @@ var geometry_1 = require("@progress/kendo-drawing/geometry");
 var RanboShapeOptionsService_1 = require("./RanboShapeOptionsService");
 var SingleStreamItem_1 = require("./SingleStreamItem");
 var Observable_1 = require("rxjs/Observable");
+var MultiStreamItem_1 = require("./MultiStreamItem");
 var CircleStreamItemService = /** @class */ (function () {
     function CircleStreamItemService() {
     }
+    //todo: probably should have a base stream item factory :\
+    CircleStreamItemService.prototype.createStreamItems = function (thisMany, options) {
+        var _this = this;
+        return new MultiStreamItem_1.MultiStreamItem(Observable_1.Observable.create(function (observer) {
+            var itemToEmit = _this.createCircle(options);
+            for (var i = 0; i < 4; ++i) {
+                observer.next(itemToEmit);
+            }
+            observer.complete();
+        }));
+    };
     CircleStreamItemService.prototype.createStreamItem = function (options) {
         return new SingleStreamItem_1.SingleStreamItem(Observable_1.Observable.of(this.createCircle(options)));
     };
