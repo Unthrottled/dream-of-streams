@@ -32,15 +32,15 @@ export class BaseComponent {
     flatMapOne: Function<StreamItem, Observable<StreamItem>> = {
         apply: (streamItem: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
             streamItem.element.subscribe((element: Element) => {
-                let triangle: StreamItem =
+                let triangle = ()=>
                     this.triangleFactory.createStreamItem({
                         fill: element.options.get('fill'),
                         stroke: element.options.get('stroke'),
                     });
-                observer.next(triangle);
+                observer.next(triangle());
                 Observable.interval(750, Scheduler.async)
                     .take(4)
-                    .subscribe(_ => observer.next(triangle),
+                    .subscribe(_ => observer.next(triangle()),
                         observer.error,
                         observer.complete);
             });
