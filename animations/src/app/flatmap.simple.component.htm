@@ -1,0 +1,18 @@
+<div>
+    <div class="btn btn-lg btn-info" (click)="startStreamTwo()" >
+        please click
+    </div>
+    <div class="stream-container">
+        <div >
+            <stream-source
+                    [inputStream]="inputStreamTwo"
+                    (outputStream)="sourceCompleteTwo($event)"></stream-source>
+        </div>
+        <div >
+            <map-stream [inputStream]="sourceOutputTwo"
+                        [mappingFunction]="mapTwo"
+            ></map-stream>
+        </div>
+    </div>
+</div>
+
