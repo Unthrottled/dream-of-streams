@@ -16,19 +16,27 @@
   height: 100%;
   border: blue solid;
   flex-grow: 1;
+  position: relative;
 }
 
 .stream-transition {
   height: 100%;
+  width: 100%;
   flex-grow: 1;
   border: rebeccapurple solid;
 }
 
+.stream-transition > div {
+  flex-grow: 1;
+}
+
 .multi-item-stream {
+  position: relative;
   border: orange solid;
   display: flex;
 }
 
 .multi-item-stream > div {
+  position: relative;
   flex-grow: 1;
 }
