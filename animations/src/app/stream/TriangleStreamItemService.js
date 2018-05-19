@@ -19,7 +19,7 @@ var TriangleStreamItemService = /** @class */ (function () {
         var _this = this;
         return new MultiStreamItem_1.MultiStreamItem(Observable_1.Observable.create(function (observer) {
             var itemToEmit = function () { return _this.createTriangle(options); };
-            for (var i = 0; i < 4; ++i) {
+            for (var i = 0; i < thisMany; ++i) {
                 observer.next(itemToEmit());
             }
             observer.complete();

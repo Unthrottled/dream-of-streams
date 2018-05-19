@@ -22,7 +22,7 @@ export class ListComponent implements OnInit {
 
     list: StreamItem;
     ngOnInit(): void {
-        this.list = this.circleService.createStreamItems(4,()=>
+        this.list = this.circleService.createStreamItems(6,()=>
             RanboShapeOptionsService.createStreamOption())
     }
 
