@@ -12,6 +12,7 @@ import {MultiStreamItem} from "./MultiStreamItem";
 @Injectable()
 export class CircleStreamItemService implements StreamItemFactory{
 
+    //todo: need to make a random cold observable return the same thing
     //todo: probably should have a base stream item factory :\
     createStreamItems(thisMany: number, options?: ()=> ShapeOptions): StreamItem {
         return new MultiStreamItem(Observable.create((observer: Observer<Element>)=>{

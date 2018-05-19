@@ -20,10 +20,17 @@ import {RanboShapeOptionsService} from "./stream/RanboShapeOptionsService";
 })
 export class ListComponent implements OnInit {
 
+
+    private static numItems = 6;
+
     list: StreamItem;
+    private itemsToMoveAlong: StreamItem[] =[];
     ngOnInit(): void {
-        this.list = this.circleService.createStreamItems(6,()=>
-            RanboShapeOptionsService.createStreamOption())
+        this.list = this.circleService.createStreamItems(ListComponent.numItems,RanboShapeOptionsService.createStreamOption)
+        this.list.element
+            .map(el=>Observable.of(el))
+            .map(element=>new SingleStreamItem(element))
+            .subscribe(item=> this.itemsToMoveAlong.push(item))
     }
 
 
@@ -94,8 +101,10 @@ export class ListComponent implements OnInit {
 
     }
 
+    private listIndex = -1;
     startStreamOne(): void {
-        this.streamSourceInputSubject.next(this.circleService.createStreamItem());
+        let itemIndex = this.listIndex = ++this.listIndex % ListComponent.numItems;
+        this.streamSourceInputSubject.next(this.itemsToMoveAlong[itemIndex]);
     }
 
 }

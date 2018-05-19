@@ -35,7 +35,9 @@ var CircleStreamItemService = /** @class */ (function () {
     };
     CircleStreamItemService.prototype.createCircle = function (options) {
         // Create the circle geometry and element
-        return new kendo_drawing_1.Circle(new geometry_1.Circle([25, 25], 20), (options && options()) ||
+        var newVar = options && options();
+        console.warn(newVar.fill.color);
+        return new kendo_drawing_1.Circle(new geometry_1.Circle([25, 25], 20), (newVar) ||
             RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption());
     };
     CircleStreamItemService = __decorate([
