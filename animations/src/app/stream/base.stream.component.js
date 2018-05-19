@@ -16,7 +16,6 @@ var Subscription_1 = require("rxjs/Subscription");
 var BaseStreamComponent = /** @class */ (function () {
     function BaseStreamComponent() {
         this.currentSubscription = new Subscription_1.Subscription();
-        this.itemIndex = new Map();
         this.outputStream = new core_1.EventEmitter();
         this._streamItems = [];
     }
@@ -28,7 +27,7 @@ var BaseStreamComponent = /** @class */ (function () {
             var _this = this;
             this.currentSubscription.unsubscribe();
             this.currentSubscription = value.subscribe(function (streamItem) {
-                _this.itemIndex.set(streamItem.identifier, _this._streamItems.unshift(streamItem));
+                _this._streamItems.unshift(streamItem);
             });
         },
         enumerable: true,
@@ -42,9 +41,7 @@ var BaseStreamComponent = /** @class */ (function () {
         configurable: true
     });
     BaseStreamComponent.prototype.complete = function (streamItemAtEnd) {
-        var index = streamItemAtEnd.identifier;
-        this._streamItems.splice(this.itemIndex.get(index), 1);
-        this.itemIndex.delete(index);
+        this._streamItems.splice(this._streamItems.indexOf(streamItemAtEnd), 1);
         this.outputStream.emit(streamItemAtEnd);
     };
     __decorate([

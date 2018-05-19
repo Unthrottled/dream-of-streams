@@ -14,7 +14,6 @@ export class BaseStreamComponent {
 
 
     private currentSubscription: Subscription = new Subscription();
-    private itemIndex: Map<number, number> = new Map();
     @Output()
     private outputStream = new EventEmitter<StreamItem>();
 
@@ -28,8 +27,7 @@ export class BaseStreamComponent {
     set inputStream(value: Observable<StreamItem>) {
         this.currentSubscription.unsubscribe();
         this.currentSubscription = value.subscribe(streamItem => {
-            this.itemIndex.set(streamItem.identifier,
-                this._streamItems.unshift(streamItem));
+            this._streamItems.unshift(streamItem)
         });
     }
 
@@ -40,9 +38,8 @@ export class BaseStreamComponent {
     }
 
     complete(streamItemAtEnd: StreamItem) {
-        let index = streamItemAtEnd.identifier;
-        this._streamItems.splice(this.itemIndex.get(index), 1);
-        this.itemIndex.delete(index);
+        this._streamItems.splice(this._streamItems.indexOf(streamItemAtEnd),
+            1);
         this.outputStream.emit(streamItemAtEnd);
     }
 

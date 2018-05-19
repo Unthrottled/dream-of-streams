@@ -6,8 +6,22 @@
   display: flex;
 }
 
-.stream-container div {
+.stream-container > div {
+  outline: aquamarine solid;
+  height: 100px;
   flex-grow: 1;
+}
+
+.base-stream-component {
+  height: 100%;
+  border: blue solid;
+  flex-grow: 1;
+}
+
+.stream-transition {
+  height: 100%;
+  flex-grow: 1;
+  border: rebeccapurple solid;
 }
 
 .multi-item-stream {
