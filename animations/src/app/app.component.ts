@@ -29,82 +29,23 @@ export class AppComponent {
                 }).element))
     };
 
-    mapOne: Function<StreamItem, StreamItem> = {
-        apply: (streamItem: StreamItem) => new SingleStreamItem(
-            streamItem.element.flatMap((element: Element) => this.hip2B.createStreamItem({
-                    fill: element.options.get('fill'),
-                    stroke: element.options.get('stroke'),
-                }).element
-            ))
-    };
-    flatMapOne: Function<StreamItem, Observable<StreamItem>> = {
-        apply: (streamItem: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
-            streamItem.element.subscribe((element: Element) => {
-                let triangle: StreamItem =
-                    this.triangleFactory.createStreamItem({
-                        fill: element.options.get('fill'),
-                        stroke: element.options.get('stroke'),
-                    });
-                observer.next(triangle);
-                Observable.interval(750, Scheduler.async)
-                    .take(4)
-                    .subscribe(_ => observer.next(triangle),
-                        observer.error,
-                        observer.complete);
-            });
-        })
-    };
-    filterOne: Predicate<StreamItem> = {
-        test: (item: StreamItem) => item.identifier % 2 === 0
-    };
-
-    private sourceSubject = new BehaviorSubject(null);
-    sourceOutput = this.sourceSubject.filter(item => !!item);
-
-    private sourceSubjectTwo = new BehaviorSubject(null);
-    sourceOutputTwo = this.sourceSubjectTwo.filter(item => !!item);
-
-    private mapSubject = new BehaviorSubject(null);
-    mapOutput = this.mapSubject.filter(item => !!item);
-    private flatMapSubject = new BehaviorSubject(null);
-    flatMapOutput = this.flatMapSubject.filter(item => !!item);
-
     constructor(private triangleFactory: TriangleStreamItemService,
                 private hip2B: SquareStreamItemService,
                 private circleService: CircleStreamItemService) {
     }
 
-    sourceComplete(item: StreamItem) {
-        this.sourceSubject.next(item);
+    private streamSourceTwo = new BehaviorSubject<StreamItem>(null);
+    inputStreamTwo = this.streamSourceTwo.filter(item => !!item);
+
+
+    private sourceSubjectTwo = new BehaviorSubject(null);
+    sourceOutputTwo = this.sourceSubjectTwo.filter(item => !!item);
+
+    startStreamTwo(): void {
+        this.streamSourceTwo.next(this.triangleFactory.createStreamItem());
     }
 
     sourceCompleteTwo(item: StreamItem) {
         this.sourceSubjectTwo.next(item);
-    }
-
-    mapOneComplete(steamItem: StreamItem) {
-        this.mapSubject.next(steamItem)
-    }
-
-    flatMapOneComplete(steamItem: StreamItem) {
-        this.flatMapSubject.next(steamItem)
-    }
-
-    filterOneComplete(steamItem: StreamItem) {
-
-    }
-
-    private streamSource = new BehaviorSubject<StreamItem>(null);
-    private streamSourceTwo = new BehaviorSubject<StreamItem>(null);
-
-    inputStreamOne = this.streamSource.filter(item => !!item);
-    inputStreamTwo = this.streamSourceTwo.filter(item => !!item);
-
-    startStreamOne(): void {
-        this.streamSource.next(this.circleService.createStreamItem());
-    }
-
-    startStreamTwo(): void {
-        this.streamSourceTwo.next(this.triangleFactory.createStreamItem());
     }
 }

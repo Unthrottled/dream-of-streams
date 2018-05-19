@@ -14,6 +14,15 @@ var animations_1 = require("@angular/platform-browser/animations");
 var app_component_1 = require("./app.component");
 var http_1 = require("@angular/common/http");
 var stream_module_1 = require("./stream/stream.module");
+var base_component_1 = require("./base.component");
+var appRoutes = [
+    { path: 'basics', component: base_component_1.BaseComponent },
+    { path: '',
+        redirectTo: '/basics',
+        pathMatch: 'full'
+    },
+    { path: '**', component: base_component_1.BaseComponent }
+];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -24,13 +33,15 @@ var AppModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 http_1.HttpClientModule,
                 animations_1.BrowserAnimationsModule,
-                stream_module_1.StreamModule
+                stream_module_1.StreamModule,
+                router_1.RouterModule.forRoot(appRoutes)
             ],
             exports: [
                 router_1.RouterModule
             ],
             declarations: [
-                app_component_1.AppComponent
+                app_component_1.AppComponent,
+                base_component_1.BaseComponent
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: []

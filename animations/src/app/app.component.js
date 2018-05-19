@@ -12,11 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./app.component.htm");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
-var Observable_1 = require("rxjs/Observable");
-var Rx_1 = require("rxjs/Rx");
 var TriangleStreamItemService_1 = require("./stream/TriangleStreamItemService");
 var SquareStreamItemService_1 = require("./stream/SquareStreamItemService");
-var SingleStreamItem_1 = require("./stream/SingleStreamItem");
 var MultiStreamItem_1 = require("./stream/MultiStreamItem");
 var CircleStreamItemService_1 = require("./stream/CircleStreamItemService");
 var AppComponent = /** @class */ (function () {
@@ -35,61 +32,16 @@ var AppComponent = /** @class */ (function () {
                 }));
             }
         };
-        this.mapOne = {
-            apply: function (streamItem) { return new SingleStreamItem_1.SingleStreamItem(streamItem.element.flatMap(function (element) { return _this.hip2B.createStreamItem({
-                fill: element.options.get('fill'),
-                stroke: element.options.get('stroke'),
-            }).element; })); }
-        };
-        this.flatMapOne = {
-            apply: function (streamItem) { return Observable_1.Observable.create(function (observer) {
-                streamItem.element.subscribe(function (element) {
-                    var triangle = _this.triangleFactory.createStreamItem({
-                        fill: element.options.get('fill'),
-                        stroke: element.options.get('stroke'),
-                    });
-                    observer.next(triangle);
-                    Observable_1.Observable.interval(750, Rx_1.Scheduler.async)
-                        .take(4)
-                        .subscribe(function (_) { return observer.next(triangle); }, observer.error, observer.complete);
-                });
-            }); }
-        };
-        this.filterOne = {
-            test: function (item) { return item.identifier % 2 === 0; }
-        };
-        this.sourceSubject = new BehaviorSubject_1.BehaviorSubject(null);
-        this.sourceOutput = this.sourceSubject.filter(function (item) { return !!item; });
+        this.streamSourceTwo = new BehaviorSubject_1.BehaviorSubject(null);
+        this.inputStreamTwo = this.streamSourceTwo.filter(function (item) { return !!item; });
         this.sourceSubjectTwo = new BehaviorSubject_1.BehaviorSubject(null);
         this.sourceOutputTwo = this.sourceSubjectTwo.filter(function (item) { return !!item; });
-        this.mapSubject = new BehaviorSubject_1.BehaviorSubject(null);
-        this.mapOutput = this.mapSubject.filter(function (item) { return !!item; });
-        this.flatMapSubject = new BehaviorSubject_1.BehaviorSubject(null);
-        this.flatMapOutput = this.flatMapSubject.filter(function (item) { return !!item; });
-        this.streamSource = new BehaviorSubject_1.BehaviorSubject(null);
-        this.streamSourceTwo = new BehaviorSubject_1.BehaviorSubject(null);
-        this.inputStreamOne = this.streamSource.filter(function (item) { return !!item; });
-        this.inputStreamTwo = this.streamSourceTwo.filter(function (item) { return !!item; });
     }
-    AppComponent.prototype.sourceComplete = function (item) {
-        this.sourceSubject.next(item);
+    AppComponent.prototype.startStreamTwo = function () {
+        this.streamSourceTwo.next(this.triangleFactory.createStreamItem());
     };
     AppComponent.prototype.sourceCompleteTwo = function (item) {
         this.sourceSubjectTwo.next(item);
-    };
-    AppComponent.prototype.mapOneComplete = function (steamItem) {
-        this.mapSubject.next(steamItem);
-    };
-    AppComponent.prototype.flatMapOneComplete = function (steamItem) {
-        this.flatMapSubject.next(steamItem);
-    };
-    AppComponent.prototype.filterOneComplete = function (steamItem) {
-    };
-    AppComponent.prototype.startStreamOne = function () {
-        this.streamSource.next(this.circleService.createStreamItem());
-    };
-    AppComponent.prototype.startStreamTwo = function () {
-        this.streamSourceTwo.next(this.triangleFactory.createStreamItem());
     };
     AppComponent = __decorate([
         core_1.Component({

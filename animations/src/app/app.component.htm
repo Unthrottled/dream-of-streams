@@ -1,31 +1,4 @@
-<div class="stream-container">
-    <div class="btn btn-lg btn-primary" (click)="startStreamOne()" >
-        please click
-    </div>
-    <div >
-        <stream-source
-                [inputStream]="inputStreamOne"
-                (outputStream)="sourceComplete($event)"></stream-source>
-    </div>
-    <div >
-        <flatMap-stream (outputStream)="flatMapOneComplete($event)"
-                    [inputStream]="sourceOutput"
-                    [mappingFunction]="flatMapOne"
-        ></flatMap-stream>
-    </div>
-    <div >
-        <map-stream (outputStream)="mapOneComplete($event)"
-                    [inputStream]="flatMapOutput"
-                    [mappingFunction]="mapOne"
-        ></map-stream>
-    </div>
-    <div >
-        <filter-stream (outputStream)="filterOneComplete($event)"
-                    [inputStream]="mapOutput"
-                    [filterFunction]="filterOne"
-        ></filter-stream>
-    </div>
-</div>
+<router-outlet></router-outlet>
 <div class="stream-container">
     <div class="btn btn-lg btn-info" (click)="startStreamTwo()" >
         please click
