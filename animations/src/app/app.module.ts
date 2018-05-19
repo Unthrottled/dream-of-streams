@@ -10,10 +10,12 @@ import {StreamModule} from "./stream/stream.module";
 import {BaseComponent} from "./base.component";
 import {FlatmapSimpleComponent} from "./flatmap.simple.component";
 import {LandingComponent} from "./landing.component";
+import {ListComponent} from "./list.component";
 
 
 const appRoutes: Routes = [
     {path: 'basics', component: BaseComponent},
+    {path: 'basics/list', component: ListComponent},
     {path: 'basics/flatmap', component: FlatmapSimpleComponent},
     {
         path: '',
@@ -41,6 +43,7 @@ const appRoutes: Routes = [
         BaseComponent,
         FlatmapSimpleComponent,
         LandingComponent,
+        ListComponent
     ],
     bootstrap: [AppComponent],
     providers: []

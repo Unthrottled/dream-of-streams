@@ -17,8 +17,10 @@ var stream_module_1 = require("./stream/stream.module");
 var base_component_1 = require("./base.component");
 var flatmap_simple_component_1 = require("./flatmap.simple.component");
 var landing_component_1 = require("./landing.component");
+var list_component_1 = require("./list.component");
 var appRoutes = [
     { path: 'basics', component: base_component_1.BaseComponent },
+    { path: 'basics/list', component: list_component_1.ListComponent },
     { path: 'basics/flatmap', component: flatmap_simple_component_1.FlatmapSimpleComponent },
     {
         path: '',
@@ -48,6 +50,7 @@ var AppModule = /** @class */ (function () {
                 base_component_1.BaseComponent,
                 flatmap_simple_component_1.FlatmapSimpleComponent,
                 landing_component_1.LandingComponent,
+                list_component_1.ListComponent
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: []
