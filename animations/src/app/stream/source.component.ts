@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from "@angular/core";
 import './source.component.htm'
 import {StreamItem} from "./StreamItem";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
@@ -17,20 +17,21 @@ export class SourceComponent implements OnInit, OnDestroy {
 
     @Output()
     public outputStream = new EventEmitter<StreamItem>();
-
-    private streamSource = new BehaviorSubject<StreamItem>(null);
-
-    inputStream = this.streamSource.filter(item => !!item);
-
     private subscription: Subscription;
 
+    private _inputStream: Observable<StreamItem>;
 
-    constructor(private circleService: CircleStreamItemService) {
+    @Input()
+    get inputStream(): Observable<StreamItem> {
+        return this._inputStream;
+    }
 
+    set inputStream(value: Observable<StreamItem>) {
+        this._inputStream = value;
     }
 
     toggleState() {
-        this.streamSource.next(this.circleService.createStreamItem());
+
     }
 
     complete(streamItemAtEnd: StreamItem) {

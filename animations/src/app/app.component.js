@@ -18,15 +18,17 @@ var TriangleStreamItemService_1 = require("./stream/TriangleStreamItemService");
 var SquareStreamItemService_1 = require("./stream/SquareStreamItemService");
 var SingleStreamItem_1 = require("./stream/SingleStreamItem");
 var MultiStreamItem_1 = require("./stream/MultiStreamItem");
+var CircleStreamItemService_1 = require("./stream/CircleStreamItemService");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(triangleFactory, hip2B) {
+    function AppComponent(triangleFactory, hip2B, circleService) {
         var _this = this;
         this.triangleFactory = triangleFactory;
         this.hip2B = hip2B;
+        this.circleService = circleService;
         this.mapTwo = {
             apply: function (streamItem) {
                 return new MultiStreamItem_1.MultiStreamItem(streamItem.element.flatMap(function (element) {
-                    return _this.triangleFactory.createStreamItems(4, {
+                    return _this.circleService.createStreamItems(4, {
                         fill: element.options.get('fill'),
                         stroke: element.options.get('stroke'),
                     }).element;
@@ -64,6 +66,10 @@ var AppComponent = /** @class */ (function () {
         this.mapOutput = this.mapSubject.filter(function (item) { return !!item; });
         this.flatMapSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.flatMapOutput = this.flatMapSubject.filter(function (item) { return !!item; });
+        this.streamSource = new BehaviorSubject_1.BehaviorSubject(null);
+        this.streamSourceTwo = new BehaviorSubject_1.BehaviorSubject(null);
+        this.inputStreamOne = this.streamSource.filter(function (item) { return !!item; });
+        this.inputStreamTwo = this.streamSourceTwo.filter(function (item) { return !!item; });
     }
     AppComponent.prototype.sourceComplete = function (item) {
         this.sourceSubject.next(item);
@@ -79,13 +85,20 @@ var AppComponent = /** @class */ (function () {
     };
     AppComponent.prototype.filterOneComplete = function (steamItem) {
     };
+    AppComponent.prototype.startStreamOne = function () {
+        this.streamSource.next(this.circleService.createStreamItem());
+    };
+    AppComponent.prototype.startStreamTwo = function () {
+        this.streamSourceTwo.next(this.triangleFactory.createStreamItem());
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'angular-application',
             template: require('./app.component.htm')
         }),
         __metadata("design:paramtypes", [TriangleStreamItemService_1.TriangleStreamItemService,
-            SquareStreamItemService_1.SquareStreamItemService])
+            SquareStreamItemService_1.SquareStreamItemService,
+            CircleStreamItemService_1.CircleStreamItemService])
     ], AppComponent);
     return AppComponent;
 }());

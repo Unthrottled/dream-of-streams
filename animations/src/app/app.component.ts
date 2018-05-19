@@ -12,6 +12,7 @@ import {SquareStreamItemService} from "./stream/SquareStreamItemService";
 import {SingleStreamItem} from "./stream/SingleStreamItem";
 import {Element} from "@progress/kendo-drawing";
 import {MultiStreamItem} from "./stream/MultiStreamItem";
+import {CircleStreamItemService} from "./stream/CircleStreamItemService";
 
 @Component({
     selector: 'angular-application',
@@ -22,7 +23,7 @@ export class AppComponent {
     mapTwo: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) =>
             new MultiStreamItem(streamItem.element.flatMap(element =>
-                this.triangleFactory.createStreamItems(4,{
+                this.circleService.createStreamItems(4,{
                     fill: element.options.get('fill'),
                     stroke: element.options.get('stroke'),
                 }).element))
@@ -69,7 +70,8 @@ export class AppComponent {
     flatMapOutput = this.flatMapSubject.filter(item => !!item);
 
     constructor(private triangleFactory: TriangleStreamItemService,
-                private hip2B: SquareStreamItemService) {
+                private hip2B: SquareStreamItemService,
+                private circleService: CircleStreamItemService) {
     }
 
     sourceComplete(item: StreamItem) {
@@ -90,5 +92,19 @@ export class AppComponent {
 
     filterOneComplete(steamItem: StreamItem) {
 
+    }
+
+    private streamSource = new BehaviorSubject<StreamItem>(null);
+    private streamSourceTwo = new BehaviorSubject<StreamItem>(null);
+
+    inputStreamOne = this.streamSource.filter(item => !!item);
+    inputStreamTwo = this.streamSourceTwo.filter(item => !!item);
+
+    startStreamOne(): void {
+        this.streamSource.next(this.circleService.createStreamItem());
+    }
+
+    startStreamTwo(): void {
+        this.streamSourceTwo.next(this.triangleFactory.createStreamItem());
     }
 }

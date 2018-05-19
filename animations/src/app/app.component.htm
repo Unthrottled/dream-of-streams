@@ -1,6 +1,11 @@
 <div class="stream-container">
+    <div class="btn btn-lg btn-primary" (click)="startStreamOne()" >
+        please click
+    </div>
     <div >
-        <stream-source (outputStream)="sourceComplete($event)"></stream-source>
+        <stream-source
+                [inputStream]="inputStreamOne"
+                (outputStream)="sourceComplete($event)"></stream-source>
     </div>
     <div >
         <flatMap-stream (outputStream)="flatMapOneComplete($event)"
@@ -22,8 +27,13 @@
     </div>
 </div>
 <div class="stream-container">
+    <div class="btn btn-lg btn-info" (click)="startStreamTwo()" >
+        please click
+    </div>
     <div >
-        <stream-source (outputStream)="sourceCompleteTwo($event)"></stream-source>
+        <stream-source
+                [inputStream]="inputStreamTwo"
+                (outputStream)="sourceCompleteTwo($event)"></stream-source>
     </div>
     <div >
         <map-stream [inputStream]="sourceOutputTwo"

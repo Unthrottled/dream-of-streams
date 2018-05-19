@@ -11,17 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./source.component.htm");
-var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
-var CircleStreamItemService_1 = require("./CircleStreamItemService");
+var Observable_1 = require("rxjs/Observable");
 var SourceComponent = /** @class */ (function () {
-    function SourceComponent(circleService) {
-        this.circleService = circleService;
+    function SourceComponent() {
         this.outputStream = new core_1.EventEmitter();
-        this.streamSource = new BehaviorSubject_1.BehaviorSubject(null);
-        this.inputStream = this.streamSource.filter(function (item) { return !!item; });
     }
+    Object.defineProperty(SourceComponent.prototype, "inputStream", {
+        get: function () {
+            return this._inputStream;
+        },
+        set: function (value) {
+            this._inputStream = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     SourceComponent.prototype.toggleState = function () {
-        this.streamSource.next(this.circleService.createStreamItem());
     };
     SourceComponent.prototype.complete = function (streamItemAtEnd) {
         this.outputStream.emit(streamItemAtEnd);
@@ -37,13 +42,17 @@ var SourceComponent = /** @class */ (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], SourceComponent.prototype, "outputStream", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Observable_1.Observable),
+        __metadata("design:paramtypes", [Observable_1.Observable])
+    ], SourceComponent.prototype, "inputStream", null);
     SourceComponent = __decorate([
         core_1.Component({
             selector: 'stream-source',
             template: require('./source.component.htm'),
             animations: []
-        }),
-        __metadata("design:paramtypes", [CircleStreamItemService_1.CircleStreamItemService])
+        })
     ], SourceComponent);
     return SourceComponent;
 }());
