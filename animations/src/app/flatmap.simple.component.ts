@@ -17,9 +17,11 @@ export class FlatmapSimpleComponent {
     mapTwo: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) =>
             new MultiStreamItem(streamItem.element.flatMap(element =>
-                this.circleService.createStreamItems(4, {
-                    fill: element.options.get('fill'),
-                    stroke: element.options.get('stroke'),
+                this.circleService.createStreamItems(4, () => {
+                    return {
+                        fill: element.options.get('fill'),
+                        stroke: element.options.get('stroke'),
+                    }
                 }).element))
     };
     private streamSourceTwo = new BehaviorSubject<StreamItem>(null);

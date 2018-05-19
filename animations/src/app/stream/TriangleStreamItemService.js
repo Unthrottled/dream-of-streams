@@ -30,7 +30,7 @@ var TriangleStreamItemService = /** @class */ (function () {
     };
     TriangleStreamItemService.prototype.createTriangle = function (options) {
         // Create the circle geometry and element
-        var path = new kendo_drawing_1.Path(options || RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption());
+        var path = new kendo_drawing_1.Path((options && options()) || RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption());
         path.moveTo(25, 0)
             .lineTo(50, 50)
             .lineTo(0, 50)

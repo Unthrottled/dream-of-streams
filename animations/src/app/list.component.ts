@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import './list.component.htm';
 import {SingleStreamItem} from "./stream/SingleStreamItem";
 import {StreamItem} from "./stream/StreamItem";
@@ -12,19 +12,28 @@ import {SquareStreamItemService} from "./stream/SquareStreamItemService";
 import {CircleStreamItemService} from "./stream/CircleStreamItemService";
 import {TriangleStreamItemService} from "./stream/TriangleStreamItemService";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {RanboShapeOptionsService} from "./stream/RanboShapeOptionsService";
 
 @Component({
     selector: 'list-view',
     template: require('./list.component.htm')
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
+
+    list: StreamItem;
+    ngOnInit(): void {
+        this.list = this.circleService.createStreamItems(4,()=>
+            RanboShapeOptionsService.createStreamOption())
+    }
 
 
     mapOne: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) => new SingleStreamItem(
-            streamItem.element.flatMap((element: Element) => this.hip2B.createStreamItem({
-                    fill: element.options.get('fill'),
-                    stroke: element.options.get('stroke'),
+            streamItem.element.flatMap((element: Element) => this.hip2B.createStreamItem(()=>{
+                return {
+                        fill: element.options.get('fill'),
+                            stroke: element.options.get('stroke'),
+                    }
                 }).element
             ))
     };
@@ -33,9 +42,11 @@ export class ListComponent {
         apply: (streamItem: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
             streamItem.element.subscribe((element: Element) => {
                 let triangle = ()=>
-                    this.triangleFactory.createStreamItem({
-                        fill: element.options.get('fill'),
-                        stroke: element.options.get('stroke'),
+                    this.triangleFactory.createStreamItem(()=>{
+                        return {
+                            fill: element.options.get('fill'),
+                                stroke: element.options.get('stroke'),
+                        }
                     });
                 observer.next(triangle());
                 Observable.interval(750, Scheduler.async)

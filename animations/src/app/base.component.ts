@@ -22,10 +22,10 @@ export class BaseComponent {
 
     mapOne: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) => new SingleStreamItem(
-            streamItem.element.flatMap((element: Element) => this.hip2B.createStreamItem({
+            streamItem.element.flatMap((element: Element) => this.hip2B.createStreamItem(()=>{return{
                     fill: element.options.get('fill'),
                     stroke: element.options.get('stroke'),
-                }).element
+                }}).element
             ))
     };
 
@@ -33,9 +33,11 @@ export class BaseComponent {
         apply: (streamItem: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
             streamItem.element.subscribe((element: Element) => {
                 let triangle = ()=>
-                    this.triangleFactory.createStreamItem({
-                        fill: element.options.get('fill'),
-                        stroke: element.options.get('stroke'),
+                    this.triangleFactory.createStreamItem(()=>{
+                        return {
+                            fill: element.options.get('fill'),
+                                stroke: element.options.get('stroke'),
+                        }
                     });
                 observer.next(triangle());
                 Observable.interval(750, Scheduler.async)

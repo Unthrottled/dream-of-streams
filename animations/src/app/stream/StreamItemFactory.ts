@@ -3,7 +3,7 @@ import {StreamItem} from "./StreamItem";
 
 export interface StreamItemFactory {
 
-    createStreamItem(options?: ShapeOptions): StreamItem;
+    createStreamItem(options?: ()=>ShapeOptions): StreamItem;
 
-    createStreamItems(thisMany: number, options?: ShapeOptions): StreamItem;
+    createStreamItems(thisMany: number, options?: ()=>ShapeOptions): StreamItem;
 }

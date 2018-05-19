@@ -30,7 +30,7 @@ var SquareStreamItemService = /** @class */ (function () {
     };
     SquareStreamItemService.prototype.createSquare = function (options) {
         // Create the circle geometry and element
-        var path = new kendo_drawing_1.Path(options || RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption());
+        var path = new kendo_drawing_1.Path((options && options()) || RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption());
         path.moveTo(0, 0)
             .lineTo(0, 50)
             .lineTo(50, 50)
