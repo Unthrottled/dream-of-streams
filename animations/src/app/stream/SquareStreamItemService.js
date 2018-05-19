@@ -18,9 +18,9 @@ var SquareStreamItemService = /** @class */ (function () {
     SquareStreamItemService.prototype.createStreamItems = function (thisMany, options) {
         var _this = this;
         return new MultiStreamItem_1.MultiStreamItem(Observable_1.Observable.create(function (observer) {
-            var itemToEmit = _this.createSquare(options);
+            var itemToEmit = function () { return _this.createSquare(options); };
             for (var i = 0; i < 4; ++i) {
-                observer.next(itemToEmit);
+                observer.next(itemToEmit());
             }
             observer.complete();
         }));

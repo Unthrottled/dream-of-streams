@@ -13,9 +13,9 @@ export class SquareStreamItemService implements StreamItemFactory {
 
     createStreamItems(thisMany: number, options?: ()=> ShapeOptions): StreamItem {
         return new MultiStreamItem(Observable.create((observer: Observer<Element>)=>{
-            const itemToEmit = this.createSquare(options);
+            const itemToEmit = ()=>this.createSquare(options);
             for (let i = 0; i < 4; ++i) {
-                observer.next(itemToEmit);
+                observer.next(itemToEmit());
             }
             observer.complete()
         }));

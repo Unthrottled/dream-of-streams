@@ -13,9 +13,9 @@ export class TriangleStreamItemService implements StreamItemFactory {
 
     createStreamItems(thisMany: number, options?: ()=> ShapeOptions): StreamItem {
         return new MultiStreamItem(Observable.create((observer: Observer<Element>)=>{
-            const itemToEmit = this.createTriangle(options);
+            const itemToEmit = ()=>this.createTriangle(options);
             for (let i = 0; i < 4; ++i) {
-                observer.next(itemToEmit);
+                observer.next(itemToEmit());
             }
             observer.complete()
         }));

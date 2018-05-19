@@ -23,6 +23,7 @@ import {DrawStreamItemComponent} from "./draw.stream.item.component";
         MapStreamComponent,
         FilterStreamComponent,
         FlatMapStreamComponent,
+        StreamItemComponent
     ],
     declarations: [
         SourceComponent,
