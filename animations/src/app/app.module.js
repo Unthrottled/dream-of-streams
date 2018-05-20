@@ -19,6 +19,7 @@ var flatmap_simple_component_1 = require("./views/basic/flatmap.simple.component
 var landing_component_1 = require("./landing.component");
 var list_component_1 = require("./views/basic/list.component");
 var basics_view_component_1 = require("./views/basic/basics.view.component");
+var view_module_1 = require("./views/view.module");
 var appRoutes = [
     { path: 'basics', component: basics_view_component_1.BasicsViewComponent },
     { path: 'basics/list', component: list_component_1.ListComponent },
@@ -41,6 +42,7 @@ var AppModule = /** @class */ (function () {
                 http_1.HttpClientModule,
                 animations_1.BrowserAnimationsModule,
                 stream_module_1.StreamModule,
+                view_module_1.ViewModule,
                 router_1.RouterModule.forRoot(appRoutes)
             ],
             exports: [
@@ -51,8 +53,6 @@ var AppModule = /** @class */ (function () {
                 base_component_1.BaseComponent,
                 flatmap_simple_component_1.FlatmapSimpleComponent,
                 landing_component_1.LandingComponent,
-                list_component_1.ListComponent,
-                basics_view_component_1.BasicsViewComponent
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: []

@@ -12,6 +12,7 @@ import {FlatmapSimpleComponent} from "./views/basic/flatmap.simple.component";
 import {LandingComponent} from "./landing.component";
 import {ListComponent} from "./views/basic/list.component";
 import {BasicsViewComponent} from "./views/basic/basics.view.component";
+import {ViewModule} from "./views/view.module";
 
 
 const appRoutes: Routes = [
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
         HttpClientModule,
         BrowserAnimationsModule,
         StreamModule,
+        ViewModule,
         RouterModule.forRoot(appRoutes)
     ],
     exports: [
@@ -44,8 +46,6 @@ const appRoutes: Routes = [
         BaseComponent,
         FlatmapSimpleComponent,
         LandingComponent,
-        ListComponent,
-        BasicsViewComponent
     ],
     bootstrap: [AppComponent],
     providers: []
