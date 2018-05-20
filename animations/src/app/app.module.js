@@ -18,8 +18,9 @@ var base_component_1 = require("./views/base.component");
 var flatmap_simple_component_1 = require("./views/flatmap.simple.component");
 var landing_component_1 = require("./landing.component");
 var list_component_1 = require("./views/list.component");
+var basics_view_component_1 = require("./views/basics.view.component");
 var appRoutes = [
-    { path: 'basics', component: base_component_1.BaseComponent },
+    { path: 'basics', component: basics_view_component_1.BasicsViewComponent },
     { path: 'basics/list', component: list_component_1.ListComponent },
     { path: 'basics/flatmap', component: flatmap_simple_component_1.FlatmapSimpleComponent },
     {
@@ -50,7 +51,8 @@ var AppModule = /** @class */ (function () {
                 base_component_1.BaseComponent,
                 flatmap_simple_component_1.FlatmapSimpleComponent,
                 landing_component_1.LandingComponent,
-                list_component_1.ListComponent
+                list_component_1.ListComponent,
+                basics_view_component_1.BasicsViewComponent
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: []

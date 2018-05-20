@@ -11,10 +11,11 @@ import {BaseComponent} from "./views/base.component";
 import {FlatmapSimpleComponent} from "./views/flatmap.simple.component";
 import {LandingComponent} from "./landing.component";
 import {ListComponent} from "./views/list.component";
+import {BasicsViewComponent} from "./views/basics.view.component";
 
 
 const appRoutes: Routes = [
-    {path: 'basics', component: BaseComponent},
+    {path: 'basics', component: BasicsViewComponent},
     {path: 'basics/list', component: ListComponent},
     {path: 'basics/flatmap', component: FlatmapSimpleComponent},
     {
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
         BaseComponent,
         FlatmapSimpleComponent,
         LandingComponent,
-        ListComponent
+        ListComponent,
+        BasicsViewComponent
     ],
     bootstrap: [AppComponent],
     providers: []
