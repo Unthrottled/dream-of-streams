@@ -2,15 +2,10 @@ version: "3"
 services:
   web-content:
     build:
-      dockerfile: Dockerfile-install
+      dockerfile: Dockerfile-dev
       context: .
-    image: alexsimons/nodeinstall:9.2.0
+    image: alexsimons/web-content:0.1.0
     volumes:
       - "./:/app"
-    entrypoint:
-      - /bin/bash
-    command:
-      - "-c"
-      - "cd web-content; npm run watch"
     ports:
       - "3000:3000"
