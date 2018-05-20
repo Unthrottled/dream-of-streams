@@ -7,11 +7,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AppComponent} from "./app.component";
 import {HttpClientModule} from "@angular/common/http";
 import {StreamModule} from "./stream/stream.module";
-import {BaseComponent} from "./views/base.component";
-import {FlatmapSimpleComponent} from "./views/flatmap.simple.component";
+import {BaseComponent} from "./views/basic/base.component";
+import {FlatmapSimpleComponent} from "./views/basic/flatmap.simple.component";
 import {LandingComponent} from "./landing.component";
-import {ListComponent} from "./views/list.component";
-import {BasicsViewComponent} from "./views/basics.view.component";
+import {ListComponent} from "./views/basic/list.component";
+import {BasicsViewComponent} from "./views/basic/basics.view.component";
 
 
 const appRoutes: Routes = [

@@ -14,11 +14,11 @@ var animations_1 = require("@angular/platform-browser/animations");
 var app_component_1 = require("./app.component");
 var http_1 = require("@angular/common/http");
 var stream_module_1 = require("./stream/stream.module");
-var base_component_1 = require("./views/base.component");
-var flatmap_simple_component_1 = require("./views/flatmap.simple.component");
+var base_component_1 = require("./views/basic/base.component");
+var flatmap_simple_component_1 = require("./views/basic/flatmap.simple.component");
 var landing_component_1 = require("./landing.component");
-var list_component_1 = require("./views/list.component");
-var basics_view_component_1 = require("./views/basics.view.component");
+var list_component_1 = require("./views/basic/list.component");
+var basics_view_component_1 = require("./views/basic/basics.view.component");
 var appRoutes = [
     { path: 'basics', component: basics_view_component_1.BasicsViewComponent },
     { path: 'basics/list', component: list_component_1.ListComponent },
