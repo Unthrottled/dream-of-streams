@@ -5,22 +5,24 @@ import {SingleStreamItem} from "./SingleStreamItem";
 import {Observable} from "rxjs/Observable";
 import {Observer} from "rxjs/Observer";
 import {MultiStreamItem} from "./MultiStreamItem";
+import {ReplaySubject} from "rxjs/ReplaySubject";
 
 export abstract class BaseStreamItemService implements StreamItemFactory {
 
-    //todo: need to make a random cold observable return the same thing
-    constructor() {
-    }
-
-    //todo: probably should have a base stream item factory :\
     createStreamItems(thisMany: number, options?: () => ShapeOptions): StreamItem {
-        return new MultiStreamItem(Observable.create((observer: Observer<Element>) => {
-            const itemToEmit = () => this.createShape(options);
-            for (let i = 0; i < thisMany; ++i) {
-                observer.next(itemToEmit());
-            }
-            observer.complete()
-        }));
+        const replaySubject = new ReplaySubject<Element>();
+        const elements: Observable<Element> =
+            Observable.create((observer: Observer<Element>) => {
+                const itemToEmit = () => this.createShape(options);
+                for (let i = 0; i < thisMany; ++i) {
+                    observer.next(itemToEmit());
+                }
+                observer.complete()
+            });
+        elements.subscribe(e=>replaySubject.next(e),
+                err=>replaySubject.error(err),
+            ()=>replaySubject.complete());
+        return new MultiStreamItem(replaySubject);
     }
 
     createStreamItem(options?: () => ShapeOptions): SingleStreamItem {
