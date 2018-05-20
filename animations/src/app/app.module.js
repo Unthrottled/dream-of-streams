@@ -17,12 +17,14 @@ var stream_module_1 = require("./stream/stream.module");
 var base_component_1 = require("./views/basic/base.component");
 var flatmap_simple_component_1 = require("./views/basic/flatmap.simple.component");
 var landing_component_1 = require("./landing.component");
-var list_component_1 = require("./views/basic/list.component");
 var basics_view_component_1 = require("./views/basic/basics.view.component");
 var view_module_1 = require("./views/view.module");
+var generative_source_component_1 = require("./views/basic/source/generative.source.component");
+var list_source_component_1 = require("./views/basic/source/list.source.component");
 var appRoutes = [
     { path: 'basics', component: basics_view_component_1.BasicsViewComponent },
-    { path: 'basics/list', component: list_component_1.ListComponent },
+    { path: 'basics/source/generate', component: generative_source_component_1.GenerativeSourceComponent },
+    { path: 'basics/source/list', component: list_source_component_1.ListSourceComponent },
     { path: 'basics/flatmap', component: flatmap_simple_component_1.FlatmapSimpleComponent },
     {
         path: '',

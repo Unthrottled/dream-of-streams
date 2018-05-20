@@ -13,11 +13,14 @@ import {LandingComponent} from "./landing.component";
 import {ListComponent} from "./views/basic/list.component";
 import {BasicsViewComponent} from "./views/basic/basics.view.component";
 import {ViewModule} from "./views/view.module";
+import {GenerativeSourceComponent} from "./views/basic/source/generative.source.component";
+import {ListSourceComponent} from "./views/basic/source/list.source.component";
 
 
 const appRoutes: Routes = [
     {path: 'basics', component: BasicsViewComponent},
-    {path: 'basics/list', component: ListComponent},
+    {path: 'basics/source/generate', component: GenerativeSourceComponent},
+    {path: 'basics/source/list', component: ListSourceComponent},
     {path: 'basics/flatmap', component: FlatmapSimpleComponent},
     {
         path: '',
