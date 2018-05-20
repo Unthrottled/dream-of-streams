@@ -1,4 +1,14 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,26 +19,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var kendo_drawing_1 = require("@progress/kendo-drawing");
 var RanboShapeOptionsService_1 = require("./RanboShapeOptionsService");
-var SingleStreamItem_1 = require("./SingleStreamItem");
-var Observable_1 = require("rxjs/Observable");
-var MultiStreamItem_1 = require("./MultiStreamItem");
-var TriangleStreamItemService = /** @class */ (function () {
+var BaseStreamItemService_1 = require("./BaseStreamItemService");
+var TriangleStreamItemService = /** @class */ (function (_super) {
+    __extends(TriangleStreamItemService, _super);
     function TriangleStreamItemService() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    TriangleStreamItemService.prototype.createStreamItems = function (thisMany, options) {
-        var _this = this;
-        return new MultiStreamItem_1.MultiStreamItem(Observable_1.Observable.create(function (observer) {
-            var itemToEmit = function () { return _this.createTriangle(options); };
-            for (var i = 0; i < thisMany; ++i) {
-                observer.next(itemToEmit());
-            }
-            observer.complete();
-        }));
-    };
-    TriangleStreamItemService.prototype.createStreamItem = function (options) {
-        return new SingleStreamItem_1.SingleStreamItem(Observable_1.Observable.of(this.createTriangle(options)));
-    };
-    TriangleStreamItemService.prototype.createTriangle = function (options) {
+    TriangleStreamItemService.prototype.createShape = function (options) {
         // Create the circle geometry and element
         var path = new kendo_drawing_1.Path((options && options()) || RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption());
         path.moveTo(25, 0)
@@ -41,6 +38,6 @@ var TriangleStreamItemService = /** @class */ (function () {
         core_1.Injectable()
     ], TriangleStreamItemService);
     return TriangleStreamItemService;
-}());
+}(BaseStreamItemService_1.BaseStreamItemService));
 exports.TriangleStreamItemService = TriangleStreamItemService;
 //# sourceMappingURL=TriangleStreamItemService.js.map

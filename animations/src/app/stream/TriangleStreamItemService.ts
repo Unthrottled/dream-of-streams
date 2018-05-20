@@ -1,31 +1,12 @@
 import {Injectable} from "@angular/core";
-import {StreamItem} from "./StreamItem";
 import {Element, Path, ShapeOptions} from "@progress/kendo-drawing";
 import {RanboShapeOptionsService} from "./RanboShapeOptionsService";
-import {StreamItemFactory} from "./StreamItemFactory";
-import {SingleStreamItem} from "./SingleStreamItem";
-import {Observable} from "rxjs/Observable";
-import {MultiStreamItem} from "./MultiStreamItem";
-import {Observer} from "rxjs/Observer";
+import {BaseStreamItemService} from "./BaseStreamItemService";
 
 @Injectable()
-export class TriangleStreamItemService implements StreamItemFactory {
+export class TriangleStreamItemService extends BaseStreamItemService {
 
-    createStreamItems(thisMany: number, options?: ()=> ShapeOptions): StreamItem {
-        return new MultiStreamItem(Observable.create((observer: Observer<Element>)=>{
-            const itemToEmit = ()=>this.createTriangle(options);
-            for (let i = 0; i < thisMany; ++i) {
-                observer.next(itemToEmit());
-            }
-            observer.complete()
-        }));
-    }
-
-    createStreamItem(options?: ()=> ShapeOptions): SingleStreamItem {
-        return new SingleStreamItem(Observable.of(this.createTriangle(options)));
-    }
-
-    private createTriangle(options: ()=> ShapeOptions): Element {
+    protected createShape(options: () => ShapeOptions): Element {
         // Create the circle geometry and element
         const path = new Path((options && options()) || RanboShapeOptionsService.createStreamOption());
         path.moveTo(25, 0)
