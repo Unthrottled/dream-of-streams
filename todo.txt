@@ -1,10 +1,8 @@
 basics
- - source
-   - list
-   - generate
- - map
- - filter
- - flat map
+ - Intermediate options
+     - map
+     - filter
+     - flat map
 
 Tie it all together
  - filter

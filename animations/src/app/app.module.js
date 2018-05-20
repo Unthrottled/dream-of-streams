@@ -21,10 +21,12 @@ var basics_view_component_1 = require("./views/basic/basics.view.component");
 var view_module_1 = require("./views/view.module");
 var generative_source_component_1 = require("./views/basic/source/generative.source.component");
 var list_source_component_1 = require("./views/basic/source/list.source.component");
+var map_view_component_1 = require("./views/basic/intermediates/map.view.component");
 var appRoutes = [
     { path: 'basics', component: basics_view_component_1.BasicsViewComponent },
     { path: 'basics/source/generate', component: generative_source_component_1.GenerativeSourceComponent },
     { path: 'basics/source/list', component: list_source_component_1.ListSourceComponent },
+    { path: 'basics/intermediate/map', component: map_view_component_1.MapViewComponent },
     { path: 'basics/flatmap', component: flatmap_simple_component_1.FlatmapSimpleComponent },
     {
         path: '',

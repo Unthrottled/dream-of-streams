@@ -1,0 +1,21 @@
+<div>
+    <div>
+        <stream-item [streamItem]="list"></stream-item>
+        <div class="stream-container">
+            <div>
+                <stream-source
+                        [inputStream]="streamSourceInput"
+                        (outputStream)="sourceComplete($event)"></stream-source>
+            </div>
+            <div>
+                <map-stream (outputStream)="mapOneComplete($event)"
+                            [inputStream]="sourceOutput"
+                            [mappingFunction]="mapOne"
+                ></map-stream>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-sm btn-warning"
+       routerLink="/basics">back</a>
+</div>
+

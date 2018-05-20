@@ -15,12 +15,14 @@ import {BasicsViewComponent} from "./views/basic/basics.view.component";
 import {ViewModule} from "./views/view.module";
 import {GenerativeSourceComponent} from "./views/basic/source/generative.source.component";
 import {ListSourceComponent} from "./views/basic/source/list.source.component";
+import {MapViewComponent} from "./views/basic/intermediates/map.view.component";
 
 
 const appRoutes: Routes = [
     {path: 'basics', component: BasicsViewComponent},
     {path: 'basics/source/generate', component: GenerativeSourceComponent},
     {path: 'basics/source/list', component: ListSourceComponent},
+    {path: 'basics/intermediate/map', component: MapViewComponent},
     {path: 'basics/flatmap', component: FlatmapSimpleComponent},
     {
         path: '',
