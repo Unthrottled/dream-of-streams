@@ -1,1 +1,12 @@
-need to visual an array of things :) (multi item no worky)
+basics
+ - source
+   - list
+   - generate
+ - map
+ - filter
+ - flat map
+
+Tie it all together
+ - filter
+ - flatmap
+ - map
