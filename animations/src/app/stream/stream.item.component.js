@@ -23,7 +23,8 @@ var StreamItemComponent = /** @class */ (function () {
     StreamItemComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.streamItem.element
-            .subscribe(function (element) { return _this.elements.push(element); }, console.warn, function () { return _this.allElementsReceived(); });
+            .forEach(function (element) { return _this.elements.push(element); });
+        this.allElementsReceived();
     };
     Object.defineProperty(StreamItemComponent.prototype, "streamItem", {
         get: function () {

@@ -28,26 +28,26 @@ export class ListComponent implements OnInit {
     ngOnInit(): void {
         this.list = this.circleService.createStreamItems(ListComponent.numItems,RanboShapeOptionsService.createStreamOption)
         this.list.element
-            .map(el=>Observable.of(el))
+            .map(el=>[el])
             .map(element=>new SingleStreamItem(element))
-            .subscribe(item=> this.itemsToMoveAlong.push(item))
+            .forEach(item=> this.itemsToMoveAlong.push(item))
     }
 
 
     mapOne: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) => new SingleStreamItem(
-            streamItem.element.flatMap((element: Element) => this.hip2B.createStreamItem(()=>{
+            streamItem.element.map((element: Element) => this.hip2B.createShape(()=>{
                 return {
                         fill: element.options.get('fill'),
                             stroke: element.options.get('stroke'),
                     }
-                }).element
+                })
             ))
     };
 
     flatMapOne: Function<StreamItem, Observable<StreamItem>> = {
         apply: (streamItem: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
-            streamItem.element.subscribe((element: Element) => {
+            streamItem.element.forEach((element: Element) => {
                 let triangle = ()=>
                     this.triangleFactory.createStreamItem(()=>{
                         return {

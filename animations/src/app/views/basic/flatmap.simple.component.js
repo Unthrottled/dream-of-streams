@@ -24,14 +24,14 @@ var FlatmapSimpleComponent = /** @class */ (function () {
         this.circleService = circleService;
         this.mapTwo = {
             apply: function (streamItem) {
-                return new MultiStreamItem_1.MultiStreamItem(streamItem.element.flatMap(function (element) {
-                    return _this.circleService.createStreamItems(4, function () {
-                        return {
-                            fill: element.options.get('fill'),
-                            stroke: element.options.get('stroke'),
-                        };
-                    }).element;
-                }));
+                var element = streamItem.element[0];
+                var elements = _this.circleService.createStreamItems(4, function () {
+                    return {
+                        fill: element.options.get('fill'),
+                        stroke: element.options.get('stroke'),
+                    };
+                }).element;
+                return new MultiStreamItem_1.MultiStreamItem(elements);
             }
         };
         this.streamSourceTwo = new BehaviorSubject_1.BehaviorSubject(null);

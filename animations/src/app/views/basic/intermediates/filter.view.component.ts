@@ -22,7 +22,7 @@ export class FilterViewComponent implements OnInit {
     list: StreamItem;
     filterOne: Predicate<StreamItem> = {
         test: (item: StreamItem) => {
-            item.element.to
+            item.element;
             return false;
         }
     };
@@ -40,12 +40,13 @@ export class FilterViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.list = this.circleService.createStreamItems(FilterViewComponent.numItems, RanboShapeOptionsService.createStreamOption);
-        this.list.element
-            .map(el => Observable.of(el))
-            .map(element => new SingleStreamItem(element))
-            .subscribe(item => this.itemsToMoveAlong.push(item), er => {
-                },
-                () => this.startStreamOne());
+        //todo: figure this out
+        // this.list.element
+        //     .map(el => Observable.of(el))
+        //     .map(element => new SingleStreamItem(element))
+        //     .subscribe(item => this.itemsToMoveAlong.push(item), er => {
+        //         },
+        //         () => this.startStreamOne());
     }
 
     sourceComplete(item: StreamItem) {

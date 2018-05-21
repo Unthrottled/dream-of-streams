@@ -22,16 +22,16 @@ export class BaseComponent {
 
     mapOne: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) => new SingleStreamItem(
-            streamItem.element.flatMap((element: Element) => this.hip2B.createStreamItem(()=>{return{
+            streamItem.element.map((element: Element) => this.hip2B.createShape(()=>{return{
                     fill: element.options.get('fill'),
                     stroke: element.options.get('stroke'),
-                }}).element
+                }})
             ))
     };
 
     flatMapOne: Function<StreamItem, Observable<StreamItem>> = {
         apply: (streamItem: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
-            streamItem.element.subscribe((element: Element) => {
+            streamItem.element.forEach((element: Element) => {
                 let triangle = ()=>
                     this.triangleFactory.createStreamItem(()=>{
                         return {

@@ -26,9 +26,8 @@ import {Element} from "@progress/kendo-drawing";
 export class StreamItemComponent implements OnInit {
     ngOnInit(): void {
         this.streamItem.element
-            .subscribe(element => this.elements.push(element),
-                console.warn,
-                () => this.allElementsReceived())
+            .forEach(element => this.elements.push(element));
+        this.allElementsReceived()
     }
     @Output()
     private drawn = new EventEmitter<void>();

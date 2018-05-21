@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./map.view.component.htm");
 var SingleStreamItem_1 = require("../../../stream/SingleStreamItem");
-var Observable_1 = require("rxjs/Observable");
 var SquareStreamItemService_1 = require("../../../stream/SquareStreamItemService");
 var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService");
 var TriangleStreamItemService_1 = require("../../../stream/TriangleStreamItemService");
@@ -25,12 +24,12 @@ var MapViewComponent = /** @class */ (function () {
         this.hip2B = hip2B;
         this.circleService = circleService;
         this.mapOne = {
-            apply: function (streamItem) { return new SingleStreamItem_1.SingleStreamItem(streamItem.element.flatMap(function (element) { return _this.hip2B.createStreamItem(function () {
+            apply: function (streamItem) { return new SingleStreamItem_1.SingleStreamItem(streamItem.element.map(function (element) { return _this.hip2B.createShape(function () {
                 return {
                     fill: element.options.get('fill'),
                     stroke: element.options.get('stroke'),
                 };
-            }).element; })); }
+            }); })); }
         };
         this.itemsToMoveAlong = [];
         this.sourceOutputSubject = new BehaviorSubject_1.BehaviorSubject(null);
@@ -41,13 +40,14 @@ var MapViewComponent = /** @class */ (function () {
     }
     MapViewComponent_1 = MapViewComponent;
     MapViewComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.list = this.circleService.createStreamItems(MapViewComponent_1.numItems, RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption);
-        this.list.element
-            .map(function (el) { return Observable_1.Observable.of(el); })
-            .map(function (element) { return new SingleStreamItem_1.SingleStreamItem(element); })
-            .subscribe(function (item) { return _this.itemsToMoveAlong.push(item); }, function (er) {
-        }, function () { return _this.startStreamOne(); });
+        // todo: come back to this
+        // this.list.element
+        //     .map(el => Observable.of(el))
+        //     .map(element => new SingleStreamItem(element))
+        //     .subscribe(item => this.itemsToMoveAlong.push(item), er => {
+        //         },
+        //         () => this.startStreamOne());
     };
     MapViewComponent.prototype.sourceComplete = function (item) {
         this.sourceOutputSubject.next(item);

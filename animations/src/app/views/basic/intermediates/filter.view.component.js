@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./filter.view.component.htm");
-var SingleStreamItem_1 = require("../../../stream/SingleStreamItem");
-var Observable_1 = require("rxjs/Observable");
 var SquareStreamItemService_1 = require("../../../stream/SquareStreamItemService");
 var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService");
 var TriangleStreamItemService_1 = require("../../../stream/TriangleStreamItemService");
@@ -24,7 +22,10 @@ var FilterViewComponent = /** @class */ (function () {
         this.hip2B = hip2B;
         this.circleService = circleService;
         this.filterOne = {
-            test: function (item) { return item.identifier % 2 === 0; }
+            test: function (item) {
+                item.element;
+                return false;
+            }
         };
         this.itemsToMoveAlong = [];
         this.sourceOutputSubject = new BehaviorSubject_1.BehaviorSubject(null);
@@ -35,13 +36,14 @@ var FilterViewComponent = /** @class */ (function () {
     }
     FilterViewComponent_1 = FilterViewComponent;
     FilterViewComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.list = this.circleService.createStreamItems(FilterViewComponent_1.numItems, RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption);
-        this.list.element
-            .map(function (el) { return Observable_1.Observable.of(el); })
-            .map(function (element) { return new SingleStreamItem_1.SingleStreamItem(element); })
-            .subscribe(function (item) { return _this.itemsToMoveAlong.push(item); }, function (er) {
-        }, function () { return _this.startStreamOne(); });
+        //todo: figure this out
+        // this.list.element
+        //     .map(el => Observable.of(el))
+        //     .map(element => new SingleStreamItem(element))
+        //     .subscribe(item => this.itemsToMoveAlong.push(item), er => {
+        //         },
+        //         () => this.startStreamOne());
     };
     FilterViewComponent.prototype.sourceComplete = function (item) {
         this.sourceOutputSubject.next(item);
