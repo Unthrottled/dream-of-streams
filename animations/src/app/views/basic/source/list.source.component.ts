@@ -27,12 +27,11 @@ export class ListSourceComponent implements OnInit {
     private itemsToMoveAlong: StreamItem[] =[];
     ngOnInit(): void {
         this.list = this.circleService.createStreamItems(ListSourceComponent.numItems,RanboShapeOptionsService.createStreamOption)
-        //todo: figure this out
-        // this.list.element
-        //     .map(el=>Observable.of(el))
-        //     .map(element=>new SingleStreamItem(element))
-        //     .subscribe(item=> this.itemsToMoveAlong.push(item), er=>{},
-        //         ()=> this.startStreamOne());
+        this.list.element
+            .map(el=>[el])
+            .map(element=>new SingleStreamItem(element))
+            .forEach(item=> this.itemsToMoveAlong.push(item));
+        this.startStreamOne();
     }
 
     private streamSourceInputSubject = new BehaviorSubject<StreamItem>(null);

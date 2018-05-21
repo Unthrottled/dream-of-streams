@@ -40,14 +40,13 @@ var MapViewComponent = /** @class */ (function () {
     }
     MapViewComponent_1 = MapViewComponent;
     MapViewComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.list = this.circleService.createStreamItems(MapViewComponent_1.numItems, RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption);
-        // todo: come back to this
-        // this.list.element
-        //     .map(el => Observable.of(el))
-        //     .map(element => new SingleStreamItem(element))
-        //     .subscribe(item => this.itemsToMoveAlong.push(item), er => {
-        //         },
-        //         () => this.startStreamOne());
+        this.list.element
+            .map(function (el) { return [el]; })
+            .map(function (element) { return new SingleStreamItem_1.SingleStreamItem(element); })
+            .forEach(function (item) { return _this.itemsToMoveAlong.push(item); });
+        this.startStreamOne();
     };
     MapViewComponent.prototype.sourceComplete = function (item) {
         this.sourceOutputSubject.next(item);

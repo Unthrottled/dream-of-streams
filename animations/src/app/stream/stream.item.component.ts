@@ -9,8 +9,8 @@ import {Element} from "@progress/kendo-drawing";
     template: `
         <div>
             <div *ngIf="heyGurlYouSingle" class="single-item-stream">
-                <div>
-                    <draw-stream-item [element]="streamItem.element | async"
+                <div *ngFor="let element of elements">
+                    <draw-stream-item [element]="element"
                                       (drawn)="itemDrawn()"></draw-stream-item>
                 </div>
             </div>

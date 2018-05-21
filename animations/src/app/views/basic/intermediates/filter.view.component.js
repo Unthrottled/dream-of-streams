@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./filter.view.component.htm");
+var SingleStreamItem_1 = require("../../../stream/SingleStreamItem");
 var SquareStreamItemService_1 = require("../../../stream/SquareStreamItemService");
 var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService");
 var TriangleStreamItemService_1 = require("../../../stream/TriangleStreamItemService");
@@ -36,14 +37,13 @@ var FilterViewComponent = /** @class */ (function () {
     }
     FilterViewComponent_1 = FilterViewComponent;
     FilterViewComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.list = this.circleService.createStreamItems(FilterViewComponent_1.numItems, RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption);
-        //todo: figure this out
-        // this.list.element
-        //     .map(el => Observable.of(el))
-        //     .map(element => new SingleStreamItem(element))
-        //     .subscribe(item => this.itemsToMoveAlong.push(item), er => {
-        //         },
-        //         () => this.startStreamOne());
+        this.list.element
+            .map(function (el) { return [el]; })
+            .map(function (element) { return new SingleStreamItem_1.SingleStreamItem(element); })
+            .forEach(function (item) { return _this.itemsToMoveAlong.push(item); });
+        this.startStreamOne();
     };
     FilterViewComponent.prototype.sourceComplete = function (item) {
         this.sourceOutputSubject.next(item);

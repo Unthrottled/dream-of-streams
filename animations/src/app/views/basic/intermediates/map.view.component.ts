@@ -44,13 +44,11 @@ export class MapViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.list = this.circleService.createStreamItems(MapViewComponent.numItems, RanboShapeOptionsService.createStreamOption)
-        // todo: come back to this
-        // this.list.element
-        //     .map(el => Observable.of(el))
-        //     .map(element => new SingleStreamItem(element))
-        //     .subscribe(item => this.itemsToMoveAlong.push(item), er => {
-        //         },
-        //         () => this.startStreamOne());
+        this.list.element
+            .map(el=>[el])
+            .map(element=>new SingleStreamItem(element))
+            .forEach(item=> this.itemsToMoveAlong.push(item));
+        this.startStreamOne();
     }
 
     sourceComplete(item: StreamItem) {
