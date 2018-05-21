@@ -22,12 +22,12 @@ export class MapViewComponent implements OnInit {
     list: StreamItem;
     mapOne: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) => new SingleStreamItem(
-            streamItem.element.flatMap((element: Element) => this.hip2B.createStreamItem(() => {
+            streamItem.element.map((element: Element) => this.hip2B.createShape(() => {
                     return {
                         fill: element.options.get('fill'),
                         stroke: element.options.get('stroke'),
                     }
-                }).element
+                })
             ))
     };
     private itemsToMoveAlong: StreamItem[] = [];
@@ -44,12 +44,13 @@ export class MapViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.list = this.circleService.createStreamItems(MapViewComponent.numItems, RanboShapeOptionsService.createStreamOption)
-        this.list.element
-            .map(el => Observable.of(el))
-            .map(element => new SingleStreamItem(element))
-            .subscribe(item => this.itemsToMoveAlong.push(item), er => {
-                },
-                () => this.startStreamOne());
+        // todo: come back to this
+        // this.list.element
+        //     .map(el => Observable.of(el))
+        //     .map(element => new SingleStreamItem(element))
+        //     .subscribe(item => this.itemsToMoveAlong.push(item), er => {
+        //         },
+        //         () => this.startStreamOne());
     }
 
     sourceComplete(item: StreamItem) {

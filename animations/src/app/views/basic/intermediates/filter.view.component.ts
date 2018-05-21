@@ -21,7 +21,10 @@ export class FilterViewComponent implements OnInit {
 
     list: StreamItem;
     filterOne: Predicate<StreamItem> = {
-        test: (item: StreamItem) => item.identifier % 2 === 0
+        test: (item: StreamItem) => {
+            item.element.to
+            return false;
+        }
     };
     private itemsToMoveAlong: StreamItem[] = [];
     private sourceOutputSubject = new BehaviorSubject(null);

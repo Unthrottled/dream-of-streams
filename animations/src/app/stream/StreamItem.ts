@@ -3,7 +3,7 @@ import {Observable} from "rxjs/Observable";
 
 export interface StreamItem {
 
-    element: Observable<Element>;
+    element: Element[];
 
     identifier: number;
 }

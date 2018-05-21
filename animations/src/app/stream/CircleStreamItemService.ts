@@ -7,7 +7,7 @@ import {BaseStreamItemService} from "./BaseStreamItemService";
 @Injectable()
 export class CircleStreamItemService extends BaseStreamItemService {
 
-    protected createShape(options: () => ShapeOptions): Element {
+    createShape(options: () => ShapeOptions): Element {
         // Create the circle geometry and element
         return new Circle(new GeomCircle([25, 25], 20),
             (options && options()) ||
