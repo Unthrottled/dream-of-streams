@@ -36,7 +36,7 @@ export class FilterViewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.list = this.circleService.createStreamItems(FilterViewComponent.numItems, RanboShapeOptionsService.createStreamOption)
+        this.list = this.circleService.createStreamItems(FilterViewComponent.numItems, RanboShapeOptionsService.createStreamOption);
         this.list.element
             .map(el => Observable.of(el))
             .map(element => new SingleStreamItem(element))

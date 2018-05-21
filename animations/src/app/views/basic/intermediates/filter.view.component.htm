@@ -11,6 +11,7 @@
             </div>
             <div>
                 <filter-stream (outputStream)="filterOneComplete($event)"
+                               (filteredOutputStream)="filterOneComplete($event)"
                                [inputStream]="sourceOutput"
                                [filterFunction]="filterOne"
                 ></filter-stream>

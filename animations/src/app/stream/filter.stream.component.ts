@@ -14,6 +14,9 @@ export class FilterStreamComponent {
     @Output()
     public outputStream = new EventEmitter<StreamItem>();
 
+    @Output()
+    public filteredOutputStream = new EventEmitter<StreamItem>();
+
     private _filterFunction: Predicate<StreamItem>;
 
     @Input()
@@ -33,7 +36,13 @@ export class FilterStreamComponent {
     }
 
     set inputStream(value: Observable<StreamItem>) {
-        this._inputStream = value.filter(item => this.filterFunction.test(item));
+        this._inputStream = value.filter(item => {
+            let willPass = this.filterFunction.test(item);
+            if (!willPass) {
+                this.filteredOutputStream.emit(item);
+            }
+            return willPass;
+        });
     }
 
     complete(streamItemAtEnd: StreamItem) {
