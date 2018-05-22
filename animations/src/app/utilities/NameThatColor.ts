@@ -15,23 +15,6 @@ specified.
 This script is released under the: Creative Commons License:
 Attribution 2.5 http://creativecommons.org/licenses/by/2.5/
 
-Sample Usage:
-
-  <script type="text/javascript" src="ntc.js"></script>
-
-  <script type="text/javascript">
-
-    var n_match  = ntc.name("#6195ED");
-    n_rgb = n_match[0]; // This is the RGB value of the closest matching color
-    n_name = n_match[1]; // This is the text string for the name of the match
-    n_shade_rgb = n_match[2]; // This is the RGB value for the name of colors shade
-    n_shade_name = n_match[3]; // This is the text string for the name of colors shade
-    n_exactmatch = n_match[4]; // True if exact color match, False if close-match
-
-    alert(n_match);
-
-  </script>
-
 */
 @Injectable()
 export class NameThatColor {
@@ -43,20 +26,18 @@ export class NameThatColor {
 
     init() {
         let color, rgb, hsl;
-        for(let i = 0; i < this.names.length; i++)
-        {
+        for(let i = 0; i < this.names.length; i++) {
             color = "#" + this.names[i][0];
             rgb = this.rgb(color);
             hsl = this.hsl(color);
             this.names[i].push(rgb[0], rgb[1], rgb[2], hsl[0], hsl[1], hsl[2]);
         }
-    };
+    }
 
     name(color: string) {
-
         color = color.toUpperCase();
         if(color.length < 3 || color.length > 7)
-            return ["#000000", "Invalid Color: " + color, false];
+            return ["#000000", "Invalid Color: " + color, "#000000", "", false];
         if(color.length % 3 == 0)
             color = "#" + color;
         if(color.length == 4)
@@ -71,23 +52,21 @@ export class NameThatColor {
         let ndf = 0;
         let cl = -1, df = -1;
 
-        for(let i = 0; i < this.names.length; i++)
-        {
+        for(let i = 0; i < this.names.length; i++) {
             if(color == "#" + this.names[i][0])
-                return ["#" + this.names[i][0], this.names[i][1], true];
+                return ["#" + this.names[i][0], this.names[i][1], this.shadergb(this.names[i][2]), this.names[i][2], true];
 
-            ndf1 = Math.pow(r - this.names[i][2], 2) + Math.pow(g - this.names[i][3], 2) + Math.pow(b - this.names[i][4], 2);
-            ndf2 = Math.pow(h - this.names[i][5], 2) + Math.pow(s - this.names[i][6], 2) + Math.pow(l - this.names[i][7], 2);
+            ndf1 = Math.pow(r - this.names[i][3], 2) + Math.pow(g - this.names[i][4], 2) + Math.pow(b - this.names[i][5], 2);
+            ndf2 = Math.abs(Math.pow(h - this.names[i][6], 2)) + Math.pow(s - this.names[i][7], 2) + Math.abs(Math.pow(l - this.names[i][8], 2));
             ndf = ndf1 + ndf2 * 2;
-            if(df < 0 || df > ndf)
-            {
+            if(df < 0 || df > ndf) {
                 df = ndf;
                 cl = i;
             }
         }
 
-        return (cl < 0 ? ["#000000", "Invalid Color: " + color, false] : ["#" + this.names[cl][0], this.names[cl][1], false]);
-    };
+        return (cl < 0 ? ["#000000", "Invalid Color: " + color, "#000000", "", false] : ["#" + this.names[cl][0], this.names[cl][1], this.shadergb(this.names[cl][2]), this.names[cl][2], false]);
+    }
 
     // adopted from: Farbtastic 1.2
     // http://acko.net/dev/farbtastic
@@ -107,8 +86,7 @@ export class NameThatColor {
             s = delta / (l < 0.5 ? (2 * l) : (2 - 2 * l));
 
         h = 0;
-        if(delta > 0)
-        {
+        if(delta > 0) {
             if (max == r && max != g) h += (g - b) / delta;
             if (max == g && max != b) h += (2 + (b - r) / delta);
             if (max == b && max != r) h += (4 + (r - g) / delta);
@@ -119,9 +97,31 @@ export class NameThatColor {
 
     // adopted from: Farbtastic 1.2
     // http://acko.net/dev/farbtastic
-    rgb(color: string): number[] {
+    rgb(color: string) {
         return [parseInt('0x' + color.substring(1, 3)), parseInt('0x' + color.substring(3, 5)),  parseInt('0x' + color.substring(5, 7))];
+    }
+
+    shadergb(shadename: string) {
+        for(let i = 0; i < this.shades.length; i++) {
+            if(shadename == this.shades[i][1])
+                return "#" + this.shades[i][0];
+        }
+        console.warn('outta gas')
+        return "#000000";
     };
+
+    private shades = [
+        ["FF0000", "Red"],
+        ["FFA500", "Orange"],
+        ["FFFF00", "Yellow"],
+        ["008000", "Green"],
+        ["0000FF", "Blue"],
+        ["EE82EE", "Violet"],
+        ["A52A2A", "Brown"],
+        ["000000", "Black"],
+        ["808080", "Grey"],
+        ["FFFFFF", "White"]
+        ];
 
     private names: any[] = [
         ["000000", "Black"],
