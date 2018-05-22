@@ -6,6 +6,7 @@ import {ListSourceComponent} from "./basic/source/list.source.component";
 import {StreamModule} from "../stream/stream.module";
 import {RouterModule} from "@angular/router";
 import {MapViewComponent} from "./basic/intermediates/map.view.component";
+import {FilterViewComponent} from "./basic/intermediates/filter.view.component";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {MapViewComponent} from "./basic/intermediates/map.view.component";
         BasicsViewComponent,
         GenerativeSourceComponent,
         ListSourceComponent,
-        MapViewComponent
+        MapViewComponent,
+        FilterViewComponent,
     ],
     providers: []
 })

@@ -10,12 +10,12 @@ import {StreamModule} from "./stream/stream.module";
 import {BaseComponent} from "./views/basic/base.component";
 import {FlatmapSimpleComponent} from "./views/basic/flatmap.simple.component";
 import {LandingComponent} from "./landing.component";
-import {ListComponent} from "./views/basic/list.component";
 import {BasicsViewComponent} from "./views/basic/basics.view.component";
 import {ViewModule} from "./views/view.module";
 import {GenerativeSourceComponent} from "./views/basic/source/generative.source.component";
 import {ListSourceComponent} from "./views/basic/source/list.source.component";
 import {MapViewComponent} from "./views/basic/intermediates/map.view.component";
+import {FilterViewComponent} from "./views/basic/intermediates/filter.view.component";
 
 
 const appRoutes: Routes = [
@@ -23,6 +23,7 @@ const appRoutes: Routes = [
     {path: 'basics/source/generate', component: GenerativeSourceComponent},
     {path: 'basics/source/list', component: ListSourceComponent},
     {path: 'basics/intermediate/map', component: MapViewComponent},
+    {path: 'basics/intermediate/filter', component: FilterViewComponent},
     {path: 'basics/flatmap', component: FlatmapSimpleComponent},
     {
         path: '',

@@ -1,7 +1,7 @@
 <div>
-    <a class="btn btn-sm btn-warning"
-       routerLink="/basics">back</a>
     <div>
+        <a class="btn btn-sm btn-warning"
+           routerLink="/">back</a>
         <stream-item [streamItem]="list"></stream-item>
         <div class="stream-container">
             <div>
@@ -10,10 +10,10 @@
                         (outputStream)="sourceComplete($event)"></stream-source>
             </div>
             <div>
-                <map-stream (outputStream)="mapOneComplete($event)"
-                            [inputStream]="sourceOutput"
-                            [mappingFunction]="mapOne"
-                ></map-stream>
+                <filter-stream (outputStream)="filterOneComplete($event)"
+                               [inputStream]="sourceOutput"
+                               [filterFunction]="filterOne"
+                ></filter-stream>
             </div>
         </div>
     </div>

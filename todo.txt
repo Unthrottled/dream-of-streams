@@ -1,6 +1,5 @@
 basics
  - Intermediate options
-     - map
      - filter
      - flat map
 
