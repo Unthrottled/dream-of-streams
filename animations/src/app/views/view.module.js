@@ -15,6 +15,7 @@ var stream_module_1 = require("../stream/stream.module");
 var router_1 = require("@angular/router");
 var map_view_component_1 = require("./basic/intermediates/map.view.component");
 var filter_view_component_1 = require("./basic/intermediates/filter.view.component");
+var util_module_1 = require("../utilities/util.module");
 var ViewModule = /** @class */ (function () {
     function ViewModule() {
     }
@@ -22,7 +23,8 @@ var ViewModule = /** @class */ (function () {
         core_1.NgModule({
             imports: [
                 stream_module_1.StreamModule,
-                router_1.RouterModule
+                router_1.RouterModule,
+                util_module_1.UtilModule
             ],
             exports: [],
             declarations: [

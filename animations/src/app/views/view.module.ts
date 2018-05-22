@@ -7,12 +7,14 @@ import {StreamModule} from "../stream/stream.module";
 import {RouterModule} from "@angular/router";
 import {MapViewComponent} from "./basic/intermediates/map.view.component";
 import {FilterViewComponent} from "./basic/intermediates/filter.view.component";
+import {UtilModule} from "../utilities/util.module";
 
 
 @NgModule({
     imports: [
         StreamModule,
-        RouterModule
+        RouterModule,
+        UtilModule
     ],
     exports: [],
     declarations: [
