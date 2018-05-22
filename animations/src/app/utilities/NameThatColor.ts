@@ -41,7 +41,12 @@ export class NameThatColor {
         if(color.length % 3 == 0)
             color = "#" + color;
         if(color.length == 4)
-            color = "#" + color.substr(1, 1) + color.substr(1, 1) + color.substr(2, 1) + color.substr(2, 1) + color.substr(3, 1) + color.substr(3, 1);
+            color = "#" + color.substr(1, 1) +
+                color.substr(1, 1) +
+                color.substr(2, 1) +
+                color.substr(2, 1) +
+                color.substr(3, 1) +
+                color.substr(3, 1);
 
         let rgb = this.rgb(color);
         let r = rgb[0], g = rgb[1], b = rgb[2];
