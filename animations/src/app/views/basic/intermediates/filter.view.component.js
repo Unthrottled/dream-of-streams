@@ -17,14 +17,20 @@ var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService
 var TriangleStreamItemService_1 = require("../../../stream/TriangleStreamItemService");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var RanboShapeOptionsService_1 = require("../../../stream/RanboShapeOptionsService");
+var NameThatColor_1 = require("../../../utilities/NameThatColor");
 var FilterViewComponent = /** @class */ (function () {
-    function FilterViewComponent(triangleFactory, hip2B, circleService) {
+    function FilterViewComponent(triangleFactory, hip2B, circleService, nameThatColor) {
+        var _this = this;
         this.triangleFactory = triangleFactory;
         this.hip2B = hip2B;
         this.circleService = circleService;
+        this.nameThatColor = nameThatColor;
         this.filterOne = {
             test: function (item) {
-                item.element;
+                item.element.forEach(function (el) {
+                    var color = el.options.get('fill').color;
+                    console.warn(color + " " + _this.nameThatColor.name(color));
+                });
                 return false;
             }
         };
@@ -64,7 +70,8 @@ var FilterViewComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [TriangleStreamItemService_1.TriangleStreamItemService,
             SquareStreamItemService_1.SquareStreamItemService,
-            CircleStreamItemService_1.CircleStreamItemService])
+            CircleStreamItemService_1.CircleStreamItemService,
+            NameThatColor_1.NameThatColor])
     ], FilterViewComponent);
     return FilterViewComponent;
     var FilterViewComponent_1;
