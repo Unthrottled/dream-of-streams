@@ -24,6 +24,7 @@ var list_source_component_1 = require("./views/basic/source/list.source.componen
 var map_view_component_1 = require("./views/basic/intermediates/map.view.component");
 var filter_view_component_1 = require("./views/basic/intermediates/filter.view.component");
 var flatmap_101_component_1 = require("./views/basic/intermediates/flatmap.101.component");
+var multimap_component_1 = require("./views/basic/intermediates/multimap.component");
 var appRoutes = [
     { path: 'basics', component: basics_view_component_1.BasicsViewComponent },
     { path: 'basics/source/generate', component: generative_source_component_1.GenerativeSourceComponent },
@@ -31,6 +32,7 @@ var appRoutes = [
     { path: 'basics/intermediate/map', component: map_view_component_1.MapViewComponent },
     { path: 'basics/intermediate/filter', component: filter_view_component_1.FilterViewComponent },
     { path: 'basics/intermediate/flatmap', component: flatmap_101_component_1.Flatmap101Component },
+    { path: 'basics/intermediate/flatmap2', component: multimap_component_1.MultimapComponent },
     { path: 'basics/flatmap', component: flatmap_simple_component_1.FlatmapSimpleComponent },
     {
         path: '',

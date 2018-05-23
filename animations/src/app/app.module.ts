@@ -17,6 +17,7 @@ import {ListSourceComponent} from "./views/basic/source/list.source.component";
 import {MapViewComponent} from "./views/basic/intermediates/map.view.component";
 import {FilterViewComponent} from "./views/basic/intermediates/filter.view.component";
 import {Flatmap101Component} from "./views/basic/intermediates/flatmap.101.component";
+import {MultimapComponent} from "./views/basic/intermediates/multimap.component";
 
 
 const appRoutes: Routes = [
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
     {path: 'basics/intermediate/map', component: MapViewComponent},
     {path: 'basics/intermediate/filter', component: FilterViewComponent},
     {path: 'basics/intermediate/flatmap', component: Flatmap101Component},
+    {path: 'basics/intermediate/flatmap2', component: MultimapComponent},
     {path: 'basics/flatmap', component: FlatmapSimpleComponent},
     {
         path: '',

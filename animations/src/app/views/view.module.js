@@ -17,6 +17,7 @@ var map_view_component_1 = require("./basic/intermediates/map.view.component");
 var filter_view_component_1 = require("./basic/intermediates/filter.view.component");
 var util_module_1 = require("../utilities/util.module");
 var flatmap_101_component_1 = require("./basic/intermediates/flatmap.101.component");
+var multimap_component_1 = require("./basic/intermediates/multimap.component");
 var ViewModule = /** @class */ (function () {
     function ViewModule() {
     }
@@ -35,7 +36,8 @@ var ViewModule = /** @class */ (function () {
                 list_source_component_1.ListSourceComponent,
                 map_view_component_1.MapViewComponent,
                 filter_view_component_1.FilterViewComponent,
-                flatmap_101_component_1.Flatmap101Component
+                flatmap_101_component_1.Flatmap101Component,
+                multimap_component_1.MultimapComponent
             ],
             providers: []
         })
