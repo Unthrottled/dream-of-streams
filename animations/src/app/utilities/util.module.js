@@ -7,7 +7,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var NameThatColor_1 = require("./NameThatColor");
 var UtilModule = /** @class */ (function () {
     function UtilModule() {
     }
@@ -16,9 +15,7 @@ var UtilModule = /** @class */ (function () {
             imports: [],
             exports: [],
             declarations: [],
-            providers: [
-                NameThatColor_1.NameThatColor
-            ]
+            providers: []
         })
     ], UtilModule);
     return UtilModule;

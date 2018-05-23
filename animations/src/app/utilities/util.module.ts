@@ -1,5 +1,4 @@
 import {NgModule} from "@angular/core";
-import {NameThatColor} from "./NameThatColor";
 
 
 @NgModule({
@@ -7,7 +6,7 @@ import {NameThatColor} from "./NameThatColor";
     exports: [],
     declarations: [],
     providers: [
-        NameThatColor
+
     ]
 })
 export class UtilModule {

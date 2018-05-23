@@ -2,14 +2,12 @@ import {Component, OnInit} from "@angular/core";
 import './filter.view.component.htm';
 import {SingleStreamItem} from "../../../stream/SingleStreamItem";
 import {StreamItem} from "../../../stream/StreamItem";
-import {Observable} from "rxjs/Observable";
 import {Predicate} from "../../../stream/Predicate";
 import {SquareStreamItemService} from "../../../stream/SquareStreamItemService";
 import {CircleStreamItemService} from "../../../stream/CircleStreamItemService";
 import {TriangleStreamItemService} from "../../../stream/TriangleStreamItemService";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService";
-import {NameThatColor} from "../../../utilities/NameThatColor";
 
 @Component({
     selector: 'filter-view',
@@ -25,7 +23,6 @@ export class FilterViewComponent implements OnInit {
         test: (item: StreamItem) => {
             item.element.forEach(el=> {
                 let color = el.options.get('fill').color;
-                console.warn(color + " " + this.nameThatColor.name(color))
             });
             return false;
         }
@@ -39,8 +36,7 @@ export class FilterViewComponent implements OnInit {
 
     constructor(private triangleFactory: TriangleStreamItemService,
                 private hip2B: SquareStreamItemService,
-                private circleService: CircleStreamItemService,
-                private nameThatColor: NameThatColor) {
+                private circleService: CircleStreamItemService) {
     }
 
     ngOnInit(): void {
