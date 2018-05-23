@@ -51,7 +51,14 @@ var CompleteComponent = /** @class */ (function () {
             }); }
         };
         this.filterOne = {
-            test: function (item) { return item.identifier % 2 === 0; }
+            test: function (item) {
+                return item.element.reduce(function (allMatch, shape) {
+                    var color = shape.options.get('fill').color;
+                    return allMatch && !(color === 'purple' ||
+                        color === 'violet' ||
+                        color === 'indigo');
+                }, true);
+            }
         };
         this.sourceOutputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.sourceOutput = this.sourceOutputSubject.filter(function (item) { return !!item; });

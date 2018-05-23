@@ -49,7 +49,14 @@ export class CompleteComponent {
         })
     };
     filterOne: Predicate<StreamItem> = {
-        test: (item: StreamItem) => item.identifier % 2 === 0
+        test: (item: StreamItem) => {
+            return item.element.reduce((allMatch, shape) => {
+                let color = shape.options.get('fill').color;
+                return allMatch && !(color === 'purple' ||
+                    color === 'violet' ||
+                    color === 'indigo')
+            }, true);
+        }
     };
     private sourceOutputSubject = new BehaviorSubject(null);
     sourceOutput = this.sourceOutputSubject.filter(item => !!item);
