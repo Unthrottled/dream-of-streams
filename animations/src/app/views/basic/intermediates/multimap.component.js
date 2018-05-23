@@ -21,13 +21,26 @@ var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var RanboShapeOptionsService_1 = require("../../../stream/RanboShapeOptionsService");
 var MultimapComponent = /** @class */ (function () {
     function MultimapComponent(triangleFactory, hip2B, circleService) {
+        var _this = this;
         this.triangleFactory = triangleFactory;
         this.hip2B = hip2B;
         this.circleService = circleService;
         this.flatMapOne = {
             apply: function (streamItem) { return Observable_1.Observable.create(function (observer) {
+                var index = -1;
+                var objectFactories = [
+                    _this.triangleFactory,
+                    _this.hip2B,
+                    _this.circleService
+                ];
                 var triangle = function () {
-                    return new SingleStreamItem_1.SingleStreamItem([streamItem.element[0]]);
+                    return objectFactories[index = ++index % objectFactories.length].createStreamItem(function () {
+                        var element = streamItem.element[0];
+                        return {
+                            fill: element.options.get("fill"),
+                            stroke: element.options.get("stroke"),
+                        };
+                    });
                 };
                 observer.next(triangle());
                 Observable_1.Observable.interval(750, Rx_1.Scheduler.async)

@@ -12,6 +12,7 @@ import {CircleStreamItemService} from "../../../stream/CircleStreamItemService";
 import {TriangleStreamItemService} from "../../../stream/TriangleStreamItemService";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService";
+import {StreamItemFactory} from "../../../stream/StreamItemFactory";
 
 
 @Component({
@@ -25,8 +26,20 @@ export class MultimapComponent implements OnInit {
     list: StreamItem;
     flatMapOne: Function<StreamItem, Observable<StreamItem>> = {
         apply: (streamItem: StreamItem) => Observable.create((observer: Observer<StreamItem>) => {
+            let index = -1;
+            const objectFactories: StreamItemFactory[] = [
+                this.triangleFactory,
+                this.hip2B,
+                this.circleService
+            ];
             const triangle = () => {
-                return new SingleStreamItem([streamItem.element[0]]);
+                return objectFactories[index = ++index % objectFactories.length].createStreamItem(()=>{
+                    let element = streamItem.element[0];
+                    return {
+                        fill: element.options.get("fill"),
+                        stroke: element.options.get("stroke"),
+                    }
+                });
             };
             observer.next(triangle());
             Observable.interval(750, Scheduler.async)
