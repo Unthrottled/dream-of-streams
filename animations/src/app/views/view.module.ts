@@ -10,6 +10,7 @@ import {FilterViewComponent} from "./basic/intermediates/filter.view.component";
 import {UtilModule} from "../utilities/util.module";
 import {Flatmap101Component} from "./basic/intermediates/flatmap.101.component";
 import {MultimapComponent} from "./basic/intermediates/multimap.component";
+import {CompleteComponent} from "./basic/intermediates/complete.component";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {MultimapComponent} from "./basic/intermediates/multimap.component";
         MapViewComponent,
         FilterViewComponent,
         Flatmap101Component,
-        MultimapComponent
+        MultimapComponent,
+        CompleteComponent,
     ],
     providers: []
 })

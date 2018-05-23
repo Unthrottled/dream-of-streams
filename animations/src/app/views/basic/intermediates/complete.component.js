@@ -10,16 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-require("./base.component.htm");
-var SingleStreamItem_1 = require("../../stream/SingleStreamItem");
+require("./complete.component.htm");
+var SingleStreamItem_1 = require("../../../stream/SingleStreamItem");
 var Observable_1 = require("rxjs/Observable");
 var Rx_1 = require("rxjs/Rx");
-var SquareStreamItemService_1 = require("../../stream/SquareStreamItemService");
-var CircleStreamItemService_1 = require("../../stream/CircleStreamItemService");
-var TriangleStreamItemService_1 = require("../../stream/TriangleStreamItemService");
+var SquareStreamItemService_1 = require("../../../stream/SquareStreamItemService");
+var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService");
+var TriangleStreamItemService_1 = require("../../../stream/TriangleStreamItemService");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
-var BaseComponent = /** @class */ (function () {
-    function BaseComponent(triangleFactory, hip2B, circleService) {
+var CompleteComponent = /** @class */ (function () {
+    function CompleteComponent(triangleFactory, hip2B, circleService) {
         var _this = this;
         this.triangleFactory = triangleFactory;
         this.hip2B = hip2B;
@@ -62,30 +62,30 @@ var BaseComponent = /** @class */ (function () {
         this.streamSourceInputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.streamSourceInput = this.streamSourceInputSubject.filter(function (item) { return !!item; });
     }
-    BaseComponent.prototype.sourceComplete = function (item) {
+    CompleteComponent.prototype.sourceComplete = function (item) {
         this.sourceOutputSubject.next(item);
     };
-    BaseComponent.prototype.flatMapOneComplete = function (steamItem) {
+    CompleteComponent.prototype.flatMapOneComplete = function (steamItem) {
         this.flatMapSubject.next(steamItem);
     };
-    BaseComponent.prototype.mapOneComplete = function (steamItem) {
+    CompleteComponent.prototype.mapOneComplete = function (steamItem) {
         this.mapSubject.next(steamItem);
     };
-    BaseComponent.prototype.filterOneComplete = function (steamItem) {
+    CompleteComponent.prototype.filterOneComplete = function (steamItem) {
     };
-    BaseComponent.prototype.startStreamOne = function () {
+    CompleteComponent.prototype.startStreamOne = function () {
         this.streamSourceInputSubject.next(this.circleService.createStreamItem());
     };
-    BaseComponent = __decorate([
+    CompleteComponent = __decorate([
         core_1.Component({
             selector: 'base-view',
-            template: require('./base.component.htm')
+            template: require('./complete.component.htm')
         }),
         __metadata("design:paramtypes", [TriangleStreamItemService_1.TriangleStreamItemService,
             SquareStreamItemService_1.SquareStreamItemService,
             CircleStreamItemService_1.CircleStreamItemService])
-    ], BaseComponent);
-    return BaseComponent;
+    ], CompleteComponent);
+    return CompleteComponent;
 }());
-exports.BaseComponent = BaseComponent;
-//# sourceMappingURL=base.component.js.map
+exports.CompleteComponent = CompleteComponent;
+//# sourceMappingURL=complete.component.js.map

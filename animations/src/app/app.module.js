@@ -14,7 +14,7 @@ var animations_1 = require("@angular/platform-browser/animations");
 var app_component_1 = require("./app.component");
 var http_1 = require("@angular/common/http");
 var stream_module_1 = require("./stream/stream.module");
-var base_component_1 = require("./views/basic/base.component");
+var complete_component_1 = require("./views/basic/intermediates/complete.component");
 var flatmap_simple_component_1 = require("./views/basic/flatmap.simple.component");
 var landing_component_1 = require("./landing.component");
 var basics_view_component_1 = require("./views/basic/basics.view.component");
@@ -33,6 +33,7 @@ var appRoutes = [
     { path: 'basics/intermediate/filter', component: filter_view_component_1.FilterViewComponent },
     { path: 'basics/intermediate/flatmap', component: flatmap_101_component_1.Flatmap101Component },
     { path: 'basics/intermediate/flatmap2', component: multimap_component_1.MultimapComponent },
+    { path: 'basics/intermediate/complete', component: complete_component_1.CompleteComponent },
     { path: 'basics/flatmap', component: flatmap_simple_component_1.FlatmapSimpleComponent },
     {
         path: '',
@@ -60,7 +61,6 @@ var AppModule = /** @class */ (function () {
             ],
             declarations: [
                 app_component_1.AppComponent,
-                base_component_1.BaseComponent,
                 flatmap_simple_component_1.FlatmapSimpleComponent,
                 landing_component_1.LandingComponent,
             ],

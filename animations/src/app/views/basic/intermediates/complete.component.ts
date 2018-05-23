@@ -1,23 +1,23 @@
 import {Component} from "@angular/core";
-import './base.component.htm';
-import {SingleStreamItem} from "../../stream/SingleStreamItem";
-import {StreamItem} from "../../stream/StreamItem";
+import './complete.component.htm';
+import {SingleStreamItem} from "../../../stream/SingleStreamItem";
+import {StreamItem} from "../../../stream/StreamItem";
 import {Observer} from "rxjs/Observer";
 import {Observable} from "rxjs/Observable";
-import {Predicate} from "../../stream/Predicate";
-import {Function} from "../../stream/Function";
+import {Predicate} from "../../../stream/Predicate";
+import {Function} from "../../../stream/Function";
 import {Element} from "@progress/kendo-drawing";
 import {Scheduler} from "rxjs/Rx";
-import {SquareStreamItemService} from "../../stream/SquareStreamItemService";
-import {CircleStreamItemService} from "../../stream/CircleStreamItemService";
-import {TriangleStreamItemService} from "../../stream/TriangleStreamItemService";
+import {SquareStreamItemService} from "../../../stream/SquareStreamItemService";
+import {CircleStreamItemService} from "../../../stream/CircleStreamItemService";
+import {TriangleStreamItemService} from "../../../stream/TriangleStreamItemService";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Component({
     selector: 'base-view',
-    template: require('./base.component.htm')
+    template: require('./complete.component.htm')
 })
-export class BaseComponent {
+export class CompleteComponent {
 
 
     mapOne: Function<StreamItem, StreamItem> = {

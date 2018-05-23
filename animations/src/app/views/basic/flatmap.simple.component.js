@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-require("./base.component.htm");
 var SquareStreamItemService_1 = require("../../stream/SquareStreamItemService");
 var CircleStreamItemService_1 = require("../../stream/CircleStreamItemService");
 var TriangleStreamItemService_1 = require("../../stream/TriangleStreamItemService");

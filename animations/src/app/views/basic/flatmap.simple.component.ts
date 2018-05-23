@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import './base.component.htm';
 import {StreamItem} from "../../stream/StreamItem";
 import {Function} from "../../stream/Function";
 import {SquareStreamItemService} from "../../stream/SquareStreamItemService";

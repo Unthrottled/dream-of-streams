@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AppComponent} from "./app.component";
 import {HttpClientModule} from "@angular/common/http";
 import {StreamModule} from "./stream/stream.module";
-import {BaseComponent} from "./views/basic/base.component";
+import {CompleteComponent} from "./views/basic/intermediates/complete.component";
 import {FlatmapSimpleComponent} from "./views/basic/flatmap.simple.component";
 import {LandingComponent} from "./landing.component";
 import {BasicsViewComponent} from "./views/basic/basics.view.component";
@@ -28,6 +28,7 @@ const appRoutes: Routes = [
     {path: 'basics/intermediate/filter', component: FilterViewComponent},
     {path: 'basics/intermediate/flatmap', component: Flatmap101Component},
     {path: 'basics/intermediate/flatmap2', component: MultimapComponent},
+    {path: 'basics/intermediate/complete', component: CompleteComponent},
     {path: 'basics/flatmap', component: FlatmapSimpleComponent},
     {
         path: '',
@@ -53,7 +54,6 @@ const appRoutes: Routes = [
     ],
     declarations: [
         AppComponent,
-        BaseComponent,
         FlatmapSimpleComponent,
         LandingComponent,
     ],
