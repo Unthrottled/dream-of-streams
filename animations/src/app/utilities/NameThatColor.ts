@@ -20,101 +20,6 @@ Attribution 2.5 http://creativecommons.org/licenses/by/2.5/
 export class NameThatColor {
 
 
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        let color, rgb, hsl;
-        for(let i = 0; i < this.names.length; i++) {
-            color = "#" + this.names[i][0];
-            rgb = this.rgb(color);
-            hsl = this.hsl(color);
-            this.names[i].push(rgb[0], rgb[1], rgb[2], hsl[0], hsl[1], hsl[2]);
-        }
-    }
-
-    name(color: string) {
-        color = color.toUpperCase();
-        if(color.length < 3 || color.length > 7)
-            return ["#000000", "Invalid Color: " + color, "#000000", "", false];
-        if(color.length % 3 == 0)
-            color = "#" + color;
-        if(color.length == 4)
-            color = "#" + color.substr(1, 1) +
-                color.substr(1, 1) +
-                color.substr(2, 1) +
-                color.substr(2, 1) +
-                color.substr(3, 1) +
-                color.substr(3, 1);
-
-        let rgb = this.rgb(color);
-        let r = rgb[0], g = rgb[1], b = rgb[2];
-        let hsl = this.hsl(color);
-        let h = hsl[0], s = hsl[1], l = hsl[2];
-        let ndf1 = 0;
-        let ndf2 = 0;
-        let ndf = 0;
-        let cl = -1, df = -1;
-
-        for(let i = 0; i < this.names.length; i++) {
-            if(color == "#" + this.names[i][0])
-                return ["#" + this.names[i][0], this.names[i][1], this.shadergb(this.names[i][2]), this.names[i][2], true];
-
-            ndf1 = Math.pow(r - this.names[i][3], 2) + Math.pow(g - this.names[i][4], 2) + Math.pow(b - this.names[i][5], 2);
-            ndf2 = Math.abs(Math.pow(h - this.names[i][6], 2)) + Math.pow(s - this.names[i][7], 2) + Math.abs(Math.pow(l - this.names[i][8], 2));
-            ndf = ndf1 + ndf2 * 2;
-            if(df < 0 || df > ndf) {
-                df = ndf;
-                cl = i;
-            }
-        }
-
-        return (cl < 0 ? ["#000000", "Invalid Color: " + color, "#000000", "", false] : ["#" + this.names[cl][0], this.names[cl][1], this.shadergb(this.names[cl][2]), this.names[cl][2], false]);
-    }
-
-    // adopted from: Farbtastic 1.2
-    // http://acko.net/dev/farbtastic
-    hsl(color: string) {
-
-        let rgb = [parseInt('0x' + color.substring(1, 3)) / 255, parseInt('0x' + color.substring(3, 5)) / 255, parseInt('0x' + color.substring(5, 7)) / 255];
-        let min, max, delta, h, s, l;
-        let r = rgb[0], g = rgb[1], b = rgb[2];
-
-        min = Math.min(r, Math.min(g, b));
-        max = Math.max(r, Math.max(g, b));
-        delta = max - min;
-        l = (min + max) / 2;
-
-        s = 0;
-        if(l > 0 && l < 1)
-            s = delta / (l < 0.5 ? (2 * l) : (2 - 2 * l));
-
-        h = 0;
-        if(delta > 0) {
-            if (max == r && max != g) h += (g - b) / delta;
-            if (max == g && max != b) h += (2 + (b - r) / delta);
-            if (max == b && max != r) h += (4 + (r - g) / delta);
-            h /= 6;
-        }
-        return [h * 255, s * 255, l * 255];
-    }
-
-    // adopted from: Farbtastic 1.2
-    // http://acko.net/dev/farbtastic
-    rgb(color: string) {
-        return [parseInt('0x' + color.substring(1, 3)), parseInt('0x' + color.substring(3, 5)),  parseInt('0x' + color.substring(5, 7))];
-    }
-
-    shadergb(shadename: string) {
-        for(let i = 0; i < this.shades.length; i++) {
-            if(shadename == this.shades[i][1])
-                return "#" + this.shades[i][0];
-        }
-        console.warn('outta gas')
-        return "#000000";
-    };
-
     private shades = [
         ["FF0000", "Red"],
         ["FFA500", "Orange"],
@@ -126,8 +31,7 @@ export class NameThatColor {
         ["000000", "Black"],
         ["808080", "Grey"],
         ["FFFFFF", "White"]
-        ];
-
+    ];
     private names: any[] = [
         ["000000", "Black"],
         ["000080", "Navy Blue"],
@@ -1695,6 +1599,120 @@ export class NameThatColor {
         ["FFFFB4", "Portafino"],
         ["FFFFF0", "Ivory"],
         ["FFFFFF", "White"]
-        ]
+    ];
+
+    constructor() {
+        this.init();
+    }
+
+    // adopted from: Farbtastic 1.2
+
+    init() {
+        let color, rgb, hsl;
+        for (let i = 0; i < this.names.length; i++) {
+            color = "#" + this.names[i][0];
+            rgb = NameThatColor.rgb(color);
+            hsl = NameThatColor.hsl(color);
+            this.names[i].push(rgb[0], rgb[1], rgb[2], hsl[0], hsl[1], hsl[2]);
+        }
+    }
+
+    // adopted from: Farbtastic 1.2
+
+    name(color: string) {
+        color = color.toUpperCase();
+        if (color.length < 3 || color.length > 7)
+            return ["#000000", "Invalid Color: " + color, "#000000", "", false];
+        if (color.length % 3 == 0)
+            color = "#" + color;
+        if (color.length == 4)
+            color = "#" + color.substr(1, 1) +
+                color.substr(1, 1) +
+                color.substr(2, 1) +
+                color.substr(2, 1) +
+                color.substr(3, 1) +
+                color.substr(3, 1);
+
+        const rgb = NameThatColor.rgb(color);
+        const red = rgb[0];
+        const green = rgb[1];
+        const blue = rgb[2];
+        let hsl = NameThatColor.hsl(color);
+        const h = hsl[0];
+        const s = hsl[1];
+        const l = hsl[2];
+
+        let cl = -1, df = -1;
+
+        for (let i = 0; i < this.names.length; i++) {
+            if (color == "#" + this.names[i][0])
+                return ["#" + this.names[i][0], this.names[i][1],
+                    this.shadergb(this.names[i][2]),
+                    this.names[i][2], true];
+
+            const ndf1 = Math.pow(red - this.names[i][3], 2) +
+                Math.pow(green - this.names[i][4], 2) +
+                Math.pow(blue - this.names[i][5], 2);
+
+            const ndf2 = Math.abs(Math.pow(h - this.names[i][6], 2)) +
+                Math.pow(s - this.names[i][7], 2) +
+                Math.abs(Math.pow(l - this.names[i][8], 2));
+
+            const ndf = ndf1 + ndf2 * 2;
+
+            if (df < 0 || df > ndf) {
+                df = ndf;
+                cl = i;
+            }
+        }
+
+        return (cl < 0 ? ["#000000", "Invalid Color: " + color, "#000000", "", false] :
+            ["#" + this.names[cl][0],
+                this.names[cl][1],
+                this.shadergb(this.names[cl][2]),
+                this.names[cl][2], false]);
+    }
+
+    // http://acko.net/dev/farbtastic
+    static hsl(color: string) {
+
+        let rgb = [parseInt('0x' + color.substring(1, 3)) / 255, parseInt('0x' + color.substring(3, 5)) / 255, parseInt('0x' + color.substring(5, 7)) / 255];
+        let min, max, delta, h, s, l;
+        let r = rgb[0], g = rgb[1], b = rgb[2];
+
+        min = Math.min(r, Math.min(g, b));
+        max = Math.max(r, Math.max(g, b));
+        delta = max - min;
+        l = (min + max) / 2;
+
+        s = 0;
+        if (l > 0 && l < 1)
+            s = delta / (l < 0.5 ? (2 * l) : (2 - 2 * l));
+
+        h = 0;
+        if (delta > 0) {
+            if (max == r && max != g) h += (g - b) / delta;
+            if (max == g && max != b) h += (2 + (b - r) / delta);
+            if (max == b && max != r) h += (4 + (r - g) / delta);
+            h /= 6;
+        }
+        return [h * 255, s * 255, l * 255];
+    }
+
+    // http://acko.net/dev/farbtastic
+    static rgb(color: string) {
+        return [parseInt('0x' + color.substring(1, 3)),
+            parseInt('0x' + color.substring(3, 5)),
+            parseInt('0x' + color.substring(5, 7))];
+    }
+
+    shadergb(shadename: string) {
+        for (let i = 0; i < this.shades.length; i++) {
+            if (shadename == this.shades[i][1])
+                return "#" + this.shades[i][0];
+        }
+        console.warn('outta gas');
+        return "#000000";
+    };
 
 }
