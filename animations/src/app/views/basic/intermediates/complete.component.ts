@@ -60,6 +60,9 @@ export class CompleteComponent {
     private flatMapSubject = new BehaviorSubject(null);
     flatMapOutputStream = this.flatMapSubject.filter(item => !!item);
 
+    private filterSubject = new BehaviorSubject(null);
+    filterOutputStream = this.filterSubject.filter(item => !!item);
+
     private streamSourceInputSubject = new BehaviorSubject<StreamItem>(null);
     streamSourceInput = this.streamSourceInputSubject.filter(item => !!item);
 
@@ -81,8 +84,8 @@ export class CompleteComponent {
         this.mapSubject.next(steamItem)
     }
 
-    filterOneComplete(steamItem: StreamItem) {
-
+    filterOneComplete(streamItem: StreamItem) {
+        this.filterSubject.next(streamItem);
     }
 
     startStreamOne(): void {

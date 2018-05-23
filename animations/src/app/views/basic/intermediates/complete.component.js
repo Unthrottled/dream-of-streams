@@ -59,6 +59,8 @@ var CompleteComponent = /** @class */ (function () {
         this.mapOutputStream = this.mapSubject.filter(function (item) { return !!item; });
         this.flatMapSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.flatMapOutputStream = this.flatMapSubject.filter(function (item) { return !!item; });
+        this.filterSubject = new BehaviorSubject_1.BehaviorSubject(null);
+        this.filterOutputStream = this.filterSubject.filter(function (item) { return !!item; });
         this.streamSourceInputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.streamSourceInput = this.streamSourceInputSubject.filter(function (item) { return !!item; });
     }
@@ -71,7 +73,8 @@ var CompleteComponent = /** @class */ (function () {
     CompleteComponent.prototype.mapOneComplete = function (steamItem) {
         this.mapSubject.next(steamItem);
     };
-    CompleteComponent.prototype.filterOneComplete = function (steamItem) {
+    CompleteComponent.prototype.filterOneComplete = function (streamItem) {
+        this.filterSubject.next(streamItem);
     };
     CompleteComponent.prototype.startStreamOne = function () {
         this.streamSourceInputSubject.next(this.circleService.createStreamItem());

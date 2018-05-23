@@ -10,8 +10,14 @@
                         (outputStream)="sourceComplete($event)"></stream-source>
             </div>
             <div>
+                <filter-stream (outputStream)="filterOneComplete($event)"
+                               [inputStream]="sourceOutput"
+                               [filterFunction]="filterOne"
+                ></filter-stream>
+            </div>
+            <div>
                 <flatMap-stream (outputStream)="flatMapOneComplete($event)"
-                                [inputStream]="sourceOutput"
+                                [inputStream]="filterOutputStream"
                                 [mappingFunction]="flatMapOne"
                 ></flatMap-stream>
             </div>
@@ -20,12 +26,6 @@
                             [inputStream]="flatMapOutputStream"
                             [mappingFunction]="mapOne"
                 ></map-stream>
-            </div>
-            <div>
-                <filter-stream (outputStream)="filterOneComplete($event)"
-                               [inputStream]="mapOutputStream"
-                               [filterFunction]="filterOne"
-                ></filter-stream>
             </div>
         </div>
     </div>
