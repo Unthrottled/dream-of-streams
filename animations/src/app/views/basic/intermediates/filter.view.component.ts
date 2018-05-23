@@ -16,15 +16,17 @@ import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService
 export class FilterViewComponent implements OnInit {
 
 
-    private static numItems = 6;
+    private static numItems = 10;
 
     list: StreamItem;
     filterOne: Predicate<StreamItem> = {
         test: (item: StreamItem) => {
-            item.element.forEach(el=> {
-                let color = el.options.get('fill').color;
-            });
-            return false;
+            return item.element.reduce((allMatch, shape) => {
+                let color = shape.options.get('fill').color;
+                return allMatch && !(color === 'purple' ||
+                    color === 'violet' ||
+                    color === 'indigo')
+            }, true);
         }
     };
     private itemsToMoveAlong: StreamItem[] = [];
@@ -42,9 +44,9 @@ export class FilterViewComponent implements OnInit {
     ngOnInit(): void {
         this.list = this.circleService.createStreamItems(FilterViewComponent.numItems, RanboShapeOptionsService.createStreamOption);
         this.list.element
-            .map(el=>[el])
-            .map(element=>new SingleStreamItem(element))
-            .forEach(item=> this.itemsToMoveAlong.push(item));
+            .map(el => [el])
+            .map(element => new SingleStreamItem(element))
+            .forEach(item => this.itemsToMoveAlong.push(item));
         this.startStreamOne();
     }
 

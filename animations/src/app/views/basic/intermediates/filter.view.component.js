@@ -24,10 +24,12 @@ var FilterViewComponent = /** @class */ (function () {
         this.circleService = circleService;
         this.filterOne = {
             test: function (item) {
-                item.element.forEach(function (el) {
-                    var color = el.options.get('fill').color;
-                });
-                return false;
+                return item.element.reduce(function (allMatch, shape) {
+                    var color = shape.options.get('fill').color;
+                    return allMatch && !(color === 'purple' ||
+                        color === 'violet' ||
+                        color === 'indigo');
+                }, true);
             }
         };
         this.itemsToMoveAlong = [];
@@ -58,7 +60,7 @@ var FilterViewComponent = /** @class */ (function () {
         var itemIndex = this.listIndex = ++this.listIndex % FilterViewComponent_1.numItems;
         this.streamSourceInputSubject.next(this.itemsToMoveAlong[itemIndex]);
     };
-    FilterViewComponent.numItems = 6;
+    FilterViewComponent.numItems = 10;
     FilterViewComponent = FilterViewComponent_1 = __decorate([
         core_1.Component({
             selector: 'filter-view',
