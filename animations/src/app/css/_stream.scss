@@ -7,14 +7,15 @@
 }
 
 .stream-container > div {
-  outline: aquamarine solid;
   height: 100px;
+  background: rgba(25,25,35,0.25);
+  margin-right: 0.5em;
+  border-radius: $border-radius;
   flex-grow: 1;
 }
 
 .base-stream-component {
   height: 100%;
-  border: blue solid;
   flex-grow: 1;
   position: relative;
 }
@@ -24,6 +25,7 @@
   width: 100%;
   flex-grow: 1;
   border: rebeccapurple solid;
+  border-radius: $border-radius;
 }
 
 .stream-transition > div {
