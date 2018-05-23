@@ -8,7 +8,6 @@ import {AppComponent} from "./app.component";
 import {HttpClientModule} from "@angular/common/http";
 import {StreamModule} from "./stream/stream.module";
 import {CompleteComponent} from "./views/basic/intermediates/complete.component";
-import {FlatmapSimpleComponent} from "./views/basic/flatmap.simple.component";
 import {LandingComponent} from "./landing.component";
 import {BasicsViewComponent} from "./views/basic/basics.view.component";
 import {ViewModule} from "./views/view.module";
@@ -29,7 +28,6 @@ const appRoutes: Routes = [
     {path: 'basics/intermediate/flatmap', component: Flatmap101Component},
     {path: 'basics/intermediate/flatmap2', component: MultimapComponent},
     {path: 'basics/intermediate/complete', component: CompleteComponent},
-    {path: 'basics/flatmap', component: FlatmapSimpleComponent},
     {
         path: '',
         redirectTo: '/',
@@ -54,7 +52,6 @@ const appRoutes: Routes = [
     ],
     declarations: [
         AppComponent,
-        FlatmapSimpleComponent,
         LandingComponent,
     ],
     bootstrap: [AppComponent],
