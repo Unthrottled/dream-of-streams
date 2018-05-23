@@ -52,7 +52,6 @@ var FilterViewComponent = /** @class */ (function () {
     FilterViewComponent.prototype.sourceComplete = function (item) {
         this.sourceOutputSubject.next(item);
     };
-    //todo: need to make filter let when filter items completed.
     FilterViewComponent.prototype.filterOneComplete = function (steamItem) {
         this.startStreamOne();
     };

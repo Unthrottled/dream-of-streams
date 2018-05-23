@@ -54,7 +54,6 @@ export class FilterViewComponent implements OnInit {
         this.sourceOutputSubject.next(item);
     }
 
-    //todo: need to make filter let when filter items completed.
     filterOneComplete(steamItem: StreamItem) {
         this.startStreamOne();
     }
