@@ -15,6 +15,7 @@ var Observable_1 = require("rxjs/Observable");
 var FilterStreamComponent = /** @class */ (function () {
     function FilterStreamComponent() {
         this.outputStream = new core_1.EventEmitter();
+        this.filteredOutputStream = new core_1.EventEmitter();
     }
     Object.defineProperty(FilterStreamComponent.prototype, "filterFunction", {
         get: function () {
@@ -32,7 +33,13 @@ var FilterStreamComponent = /** @class */ (function () {
         },
         set: function (value) {
             var _this = this;
-            this._inputStream = value.filter(function (item) { return _this.filterFunction.test(item); });
+            this._inputStream = value.filter(function (item) {
+                var willPass = _this.filterFunction.test(item);
+                if (!willPass) {
+                    _this.filteredOutputStream.emit(item);
+                }
+                return willPass;
+            });
         },
         enumerable: true,
         configurable: true
@@ -44,6 +51,10 @@ var FilterStreamComponent = /** @class */ (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], FilterStreamComponent.prototype, "outputStream", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FilterStreamComponent.prototype, "filteredOutputStream", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object),

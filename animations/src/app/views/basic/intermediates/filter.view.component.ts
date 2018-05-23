@@ -2,7 +2,6 @@ import {Component, OnInit} from "@angular/core";
 import './filter.view.component.htm';
 import {SingleStreamItem} from "../../../stream/SingleStreamItem";
 import {StreamItem} from "../../../stream/StreamItem";
-import {Observable} from "rxjs/Observable";
 import {Predicate} from "../../../stream/Predicate";
 import {SquareStreamItemService} from "../../../stream/SquareStreamItemService";
 import {CircleStreamItemService} from "../../../stream/CircleStreamItemService";
@@ -17,11 +16,18 @@ import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService
 export class FilterViewComponent implements OnInit {
 
 
-    private static numItems = 6;
+    private static numItems = 10;
 
     list: StreamItem;
     filterOne: Predicate<StreamItem> = {
-        test: (item: StreamItem) => item.identifier % 2 === 0
+        test: (item: StreamItem) => {
+            return item.element.reduce((allMatch, shape) => {
+                let color = shape.options.get('fill').color;
+                return allMatch && !(color === 'purple' ||
+                    color === 'violet' ||
+                    color === 'indigo')
+            }, true);
+        }
     };
     private itemsToMoveAlong: StreamItem[] = [];
     private sourceOutputSubject = new BehaviorSubject(null);
@@ -36,13 +42,12 @@ export class FilterViewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.list = this.circleService.createStreamItems(FilterViewComponent.numItems, RanboShapeOptionsService.createStreamOption)
+        this.list = this.circleService.createStreamItems(FilterViewComponent.numItems, RanboShapeOptionsService.createStreamOption);
         this.list.element
-            .map(el => Observable.of(el))
+            .map(el => [el])
             .map(element => new SingleStreamItem(element))
-            .subscribe(item => this.itemsToMoveAlong.push(item), er => {
-                },
-                () => this.startStreamOne());
+            .forEach(item => this.itemsToMoveAlong.push(item));
+        this.startStreamOne();
     }
 
     sourceComplete(item: StreamItem) {

@@ -23,7 +23,8 @@ var StreamItemComponent = /** @class */ (function () {
     StreamItemComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.streamItem.element
-            .subscribe(function (element) { return _this.elements.push(element); }, console.warn, function () { return _this.allElementsReceived(); });
+            .forEach(function (element) { return _this.elements.push(element); });
+        this.allElementsReceived();
     };
     Object.defineProperty(StreamItemComponent.prototype, "streamItem", {
         get: function () {
@@ -78,7 +79,7 @@ var StreamItemComponent = /** @class */ (function () {
     StreamItemComponent = __decorate([
         core_1.Component({
             selector: 'stream-item',
-            template: "\n        <div>\n            <div *ngIf=\"heyGurlYouSingle\" class=\"single-item-stream\">\n                <div>\n                    <draw-stream-item [element]=\"streamItem.element | async\"\n                                      (drawn)=\"itemDrawn()\"></draw-stream-item>\n                </div>\n            </div>\n            <div *ngIf=\"heyGurlYouAFreak\" class=\"multi-item-stream\">\n                <div *ngFor=\"let element of elements\">\n                    <draw-stream-item [element]=\"element\"\n                                      (drawn)=\"itemDrawn()\"></draw-stream-item>\n                </div>\n            </div>\n        </div>\n    "
+            template: "\n        <div>\n            <div *ngIf=\"heyGurlYouSingle\" class=\"single-item-stream\">\n                <div *ngFor=\"let element of elements\">\n                    <draw-stream-item [element]=\"element\"\n                                      (drawn)=\"itemDrawn()\"></draw-stream-item>\n                </div>\n            </div>\n            <div *ngIf=\"heyGurlYouAFreak\" class=\"multi-item-stream\">\n                <div *ngFor=\"let element of elements\">\n                    <draw-stream-item [element]=\"element\"\n                                      (drawn)=\"itemDrawn()\"></draw-stream-item>\n                </div>\n            </div>\n        </div>\n    "
         }),
         __metadata("design:paramtypes", [core_1.ElementRef])
     ], StreamItemComponent);

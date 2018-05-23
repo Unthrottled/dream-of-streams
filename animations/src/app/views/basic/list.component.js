@@ -27,16 +27,16 @@ var ListComponent = /** @class */ (function () {
         this.circleService = circleService;
         this.itemsToMoveAlong = [];
         this.mapOne = {
-            apply: function (streamItem) { return new SingleStreamItem_1.SingleStreamItem(streamItem.element.flatMap(function (element) { return _this.hip2B.createStreamItem(function () {
+            apply: function (streamItem) { return new SingleStreamItem_1.SingleStreamItem(streamItem.element.map(function (element) { return _this.hip2B.createShape(function () {
                 return {
                     fill: element.options.get('fill'),
                     stroke: element.options.get('stroke'),
                 };
-            }).element; })); }
+            }); })); }
         };
         this.flatMapOne = {
             apply: function (streamItem) { return Observable_1.Observable.create(function (observer) {
-                streamItem.element.subscribe(function (element) {
+                streamItem.element.forEach(function (element) {
                     var triangle = function () {
                         return _this.triangleFactory.createStreamItem(function () {
                             return {
@@ -70,9 +70,9 @@ var ListComponent = /** @class */ (function () {
         var _this = this;
         this.list = this.circleService.createStreamItems(ListComponent_1.numItems, RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption);
         this.list.element
-            .map(function (el) { return Observable_1.Observable.of(el); })
+            .map(function (el) { return [el]; })
             .map(function (element) { return new SingleStreamItem_1.SingleStreamItem(element); })
-            .subscribe(function (item) { return _this.itemsToMoveAlong.push(item); });
+            .forEach(function (item) { return _this.itemsToMoveAlong.push(item); });
     };
     ListComponent.prototype.sourceComplete = function (item) {
         this.sourceOutputSubject.next(item);

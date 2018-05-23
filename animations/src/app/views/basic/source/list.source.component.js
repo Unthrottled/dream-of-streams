@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./list.source.component.htm");
 var SingleStreamItem_1 = require("../../../stream/SingleStreamItem");
-var Observable_1 = require("rxjs/Observable");
 var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var RanboShapeOptionsService_1 = require("../../../stream/RanboShapeOptionsService");
@@ -29,9 +28,10 @@ var ListSourceComponent = /** @class */ (function () {
         var _this = this;
         this.list = this.circleService.createStreamItems(ListSourceComponent_1.numItems, RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption);
         this.list.element
-            .map(function (el) { return Observable_1.Observable.of(el); })
+            .map(function (el) { return [el]; })
             .map(function (element) { return new SingleStreamItem_1.SingleStreamItem(element); })
-            .subscribe(function (item) { return _this.itemsToMoveAlong.push(item); }, function (er) { }, function () { return _this.startStreamOne(); });
+            .forEach(function (item) { return _this.itemsToMoveAlong.push(item); });
+        this.startStreamOne();
     };
     ListSourceComponent.prototype.sourceComplete = function (item) {
         this.startStreamOne();

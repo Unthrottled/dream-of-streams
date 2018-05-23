@@ -25,16 +25,16 @@ var BaseComponent = /** @class */ (function () {
         this.hip2B = hip2B;
         this.circleService = circleService;
         this.mapOne = {
-            apply: function (streamItem) { return new SingleStreamItem_1.SingleStreamItem(streamItem.element.flatMap(function (element) { return _this.hip2B.createStreamItem(function () {
+            apply: function (streamItem) { return new SingleStreamItem_1.SingleStreamItem(streamItem.element.map(function (element) { return _this.hip2B.createShape(function () {
                 return {
                     fill: element.options.get('fill'),
                     stroke: element.options.get('stroke'),
                 };
-            }).element; })); }
+            }); })); }
         };
         this.flatMapOne = {
             apply: function (streamItem) { return Observable_1.Observable.create(function (observer) {
-                streamItem.element.subscribe(function (element) {
+                streamItem.element.forEach(function (element) {
                     var triangle = function () {
                         return _this.triangleFactory.createStreamItem(function () {
                             return {

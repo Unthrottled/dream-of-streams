@@ -1,24 +1,10 @@
 import {Element} from "@progress/kendo-drawing";
-import {StreamItem} from "./StreamItem";
-import {Observable} from "rxjs/Observable";
+import {BaseStreamItem} from "./BaseStreamItem";
 
-export class SingleStreamItem implements StreamItem {
+export class SingleStreamItem extends BaseStreamItem {
 
-    constructor(private _element: Observable<Element>) {
-        this._identifier = new Date().getTime();
-    }
-
-    get element(): Observable<Element> {
-        return this._element;
-    }
-
-    private _identifier: number;
-
-    get identifier(): number {
-        return this._identifier;
-    }
-
-    toString(): String {
-        return this._identifier.toString();
+    //Sure would be nice to have a Mono or Flux :)
+    constructor(_element: Element[]) {
+        super(_element);
     }
 }

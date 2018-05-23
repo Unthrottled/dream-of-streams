@@ -4,8 +4,8 @@ services:
     build:
       dockerfile: Dockerfile-dev
       context: .
-    image: alexsimons/web-content:0.1.0
+    image: alexsimons/node:9.2.0
     volumes:
       - "./:/app"
     ports:
-      - "3000:3000"
+      - "9696:3000"
