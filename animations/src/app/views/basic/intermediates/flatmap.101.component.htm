@@ -1,0 +1,30 @@
+<div>
+    <div>
+        <a class="btn btn-sm btn-warning"
+           routerLink="/basics">back</a>
+        <div class="btn btn-lg btn-primary" (click)="startStreamOne()">
+            start stream
+        </div>
+        <stream-item [streamItem]="list"></stream-item>
+        <div class="stream-container">
+            <div>
+                <stream-source
+                        [inputStream]="streamSourceInput"
+                        (outputStream)="sourceComplete($event)"></stream-source>
+            </div>
+            <div>
+                <map-stream (outputStream)="mapOneComplete($event)"
+                            [inputStream]="sourceOutputStream"
+                            [mappingFunction]="mapOne"
+                ></map-stream>
+            </div>
+            <div>
+                <flatMap-stream (outputStream)="flatMapOneComplete($event)"
+                                [inputStream]="mapOutputStream"
+                                [mappingFunction]="flatMapOne"
+                ></flatMap-stream>
+            </div>
+        </div>
+    </div>
+</div>
+

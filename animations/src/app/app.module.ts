@@ -16,6 +16,7 @@ import {GenerativeSourceComponent} from "./views/basic/source/generative.source.
 import {ListSourceComponent} from "./views/basic/source/list.source.component";
 import {MapViewComponent} from "./views/basic/intermediates/map.view.component";
 import {FilterViewComponent} from "./views/basic/intermediates/filter.view.component";
+import {Flatmap101Component} from "./views/basic/intermediates/flatmap.101.component";
 
 
 const appRoutes: Routes = [
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
     {path: 'basics/source/list', component: ListSourceComponent},
     {path: 'basics/intermediate/map', component: MapViewComponent},
     {path: 'basics/intermediate/filter', component: FilterViewComponent},
+    {path: 'basics/intermediate/flatmap', component: Flatmap101Component},
     {path: 'basics/flatmap', component: FlatmapSimpleComponent},
     {
         path: '',
