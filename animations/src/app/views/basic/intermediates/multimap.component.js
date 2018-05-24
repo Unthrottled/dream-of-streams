@@ -44,7 +44,7 @@ var MultimapComponent = /** @class */ (function () {
                 };
                 observer.next(triangle());
                 Observable_1.Observable.interval(750, Rx_1.Scheduler.async)
-                    .take(5)
+                    .take(2)
                     .subscribe(function (_) { return observer.next(triangle()); }, observer.error, observer.complete);
             }); }
         };

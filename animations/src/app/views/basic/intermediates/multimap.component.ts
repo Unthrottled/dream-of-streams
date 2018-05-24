@@ -43,7 +43,7 @@ export class MultimapComponent implements OnInit {
             };
             observer.next(triangle());
             Observable.interval(750, Scheduler.async)
-                .take(5)
+                .take(2)
                 .subscribe(_ => observer.next(triangle()),
                     observer.error,
                     observer.complete);
