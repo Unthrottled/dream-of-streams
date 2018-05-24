@@ -1,19 +1,36 @@
 <div>
-    <a class="btn btn-sm btn-warning"
-       routerLink="/basics">back</a>
-    <div>
-        <stream-item [streamItem]="list"></stream-item>
-        <div class="stream-container">
+    <main role="main" class="container">
+        <div class="jumbotron">
+            <h1>Terminal Operations</h1>
             <div>
-                <stream-source
-                        [inputStream]="streamSourceInput"
-                        (outputStream)="sourceComplete($event)"></stream-source>
+                <p class="lead">
+                    TBD
+                </p>
+                <div>
+                    <p>
+                        There is not enough time in the day :)
+                    </p>
+                </div>
             </div>
-            <div>
-                <map-stream (outputStream)="mapOneComplete($event)"
-                            [inputStream]="sourceOutput"
-                            [mappingFunction]="mapOne"
-                ></map-stream>
+        </div>
+    </main>
+    <div>
+        <a class="btn btn-sm btn-warning"
+           routerLink="/basics">back</a>
+        <div>
+            <stream-item [streamItem]="list"></stream-item>
+            <div class="stream-container">
+                <div>
+                    <stream-source
+                            [inputStream]="streamSourceInput"
+                            (outputStream)="sourceComplete($event)"></stream-source>
+                </div>
+                <div>
+                    <map-stream (outputStream)="mapOneComplete($event)"
+                                [inputStream]="sourceOutput"
+                                [mappingFunction]="mapOne"
+                    ></map-stream>
+                </div>
             </div>
         </div>
     </div>
