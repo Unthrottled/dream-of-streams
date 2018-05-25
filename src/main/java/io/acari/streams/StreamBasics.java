@@ -202,6 +202,8 @@ public class StreamBasics {
             .min(String::compareTo));
     System.out.println();
 
+    /// this one
+
     List<String> iCanCount = Lists.newArrayList("one two three four five".split(" "));
     Stream<String> iCanCountStream = iCanCount.stream();
     iCanCount.add("six");

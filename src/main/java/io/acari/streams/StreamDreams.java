@@ -31,6 +31,9 @@ public class StreamDreams {
         .reduce("", (identity, streamString) -> identity + " " + streamString);
     //NOTE: By default streams are ordered and are processed from left to right.
 
+    ////////////////////
+
+
     System.out.println("\"" + truthStreamMessage + "\"");//todo: make note of needing to trim
     System.out.println();
 
