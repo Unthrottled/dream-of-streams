@@ -30,26 +30,6 @@ public class StreamAyslum {
 
 
     //Concurrently
-//    This method does not actually reorder the elements; it just tells the JVM that if an
-//    order-based stream operation is applied, the order can be ignored.
-    StringBuilder twentyNumbers = Stream.iterate(1, a -> ++a)
-        .unordered()
-        .parallel()
-        .limit(20)//Put it here results are undefined
-        .map(number -> number + " ")
-        .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append);
-    System.out.println(twentyNumbers.toString());
-    System.out.println();
-
-
-    StringBuilder twentyNumbersAlwaysTheSame = Stream.iterate(1, a -> ++a)
-        .limit(20)//Put it here results are defined
-        .unordered()
-        .parallel()
-        .map(number -> number + " ")
-        .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append);
-    System.out.println(twentyNumbersAlwaysTheSame.toString());
-    System.out.println();
 
     Optional<Integer> smittyWerbenjagemangensen = Stream.iterate(1, a -> ++a)
         .limit(30)
@@ -68,6 +48,39 @@ public class StreamAyslum {
         .findAny();//JVM selects the first thread to finish the task and retrieves its data
 
     probablyNotNumberOne.ifPresent(System.out::println);
+    System.out.println();
+
+
+    System.out.println(Collectors.toList().characteristics());
+    System.out.println(Collectors.toMap(Function.identity(), Function.identity())
+        .characteristics());
+    //the only two concurrent
+    System.out.println(Collectors.toConcurrentMap(Function.identity(), Function.identity())
+        .characteristics());
+    System.out.println(Collectors.groupingByConcurrent(Function.identity(), Collectors.toSet())
+        .characteristics());
+
+
+//    This method does not actually reorder the elements; it just tells the JVM that if an
+//    order-based stream operation is applied, the order can be ignored.
+    StringBuilder twentyNumbers = Stream.iterate(1, a -> ++a)
+        .unordered()
+        .parallel()
+        .limit(20)//Put it here results are undefined
+        .map(number -> number + " ")
+        .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append);
+
+    System.out.println(twentyNumbers.toString());
+    System.out.println();
+
+
+    StringBuilder twentyNumbersAlwaysTheSame = Stream.iterate(1, a -> ++a)
+        .limit(20)//Put it here results are defined
+        .unordered()
+        .parallel()
+        .map(number -> number + " ")
+        .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append);
+    System.out.println(twentyNumbersAlwaysTheSame.toString());
     System.out.println();
 
 //    Any stream operation that is based on order, including findFirst() , limit() , or
@@ -94,16 +107,6 @@ public class StreamAyslum {
 
     System.out.println(thisShouldBeOrderedToo);
     System.out.println();
-
-
-    System.out.println(Collectors.toList().characteristics());
-    System.out.println(Collectors.toMap(Function.identity(), Function.identity())
-        .characteristics());
-    //the only two concurrent
-    System.out.println(Collectors.toConcurrentMap(Function.identity(), Function.identity())
-        .characteristics());
-    System.out.println(Collectors.groupingByConcurrent(Function.identity(), Collectors.toSet())
-        .characteristics());
 
     LinkedList<Integer> list = Stream.iterate(1, a -> ++a)
         .limit(10000)

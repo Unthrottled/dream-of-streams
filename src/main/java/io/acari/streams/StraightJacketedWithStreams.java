@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -51,6 +52,22 @@ public class StraightJacketedWithStreams {
             Collectors.mapping(Map.Entry::getValue, Collectors.toSet())));
 
     System.out.println(interestsToPodMember);
+
+
+    //CONCURRENCY
+
+
+    //START OF WITH NUMBERS
+
+    //THEN COLLECTIONS
+    System.out.println(Collectors.toList().characteristics());
+    System.out.println(Collectors.toMap(Function.identity(), Function.identity())
+        .characteristics());
+    //the only two concurrent
+    System.out.println(Collectors.toConcurrentMap(Function.identity(), Function.identity())
+        .characteristics());
+    System.out.println(Collectors.groupingByConcurrent(Function.identity(), Collectors.toSet())
+        .characteristics());
 
 
   }
