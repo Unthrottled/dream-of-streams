@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StraightJacketedWithStreams {
@@ -55,6 +56,19 @@ public class StraightJacketedWithStreams {
 
 
     //CONCURRENCY
+    List<Integer> theNumbersMason = IntStream.rangeClosed(1, 50)
+        .boxed()
+        .collect(Collectors.toList());
+
+    Optional<Integer> smittyWerbenjagermangensen = theNumbersMason.stream().findAny();
+    smittyWerbenjagermangensen.ifPresent(System.out::println);
+
+    IntStream.rangeClosed(0,10)
+        .forEach(__->
+            theNumbersMason.parallelStream().findAny().ifPresent(System.out::println)//JVM selects the first thread to finish the task and retrieves its data
+        );
+
+
 
 
     //START OF WITH NUMBERS
