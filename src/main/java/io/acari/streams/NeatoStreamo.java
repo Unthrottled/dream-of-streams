@@ -58,6 +58,12 @@ public class NeatoStreamo {
 
       System.out.println(podMembersEnhanced);
 
+      List<PodMember> sanePodMembers = podMembersEnhanced.stream()
+          .filter(podMember -> podMember.getInterests().areSane())
+          .collect(Collectors.toList());
+
+      System.out.println(sanePodMembers);
+
     }
   }
 
@@ -74,4 +80,8 @@ class PodMember {
 @AllArgsConstructor
 class Interests {
   private List<String> coreIntrests;
+
+  public boolean areSane() {
+    return coreIntrests.stream().noneMatch(interest->interest.contains("bugs") || interest.contains("spiders"));
+  }
 }
