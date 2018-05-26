@@ -1,13 +1,16 @@
 package io.acari.streams;
 
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class NeatoStreamo {
 
-  public static void main(String... args){
+  public static void main(String... args) {
     Stream<String> theCoolCrew = Stream.of("Alex;Steve;Amy;Chad;Bill".split(";"));
     theCoolCrew.forEach(System.out::println);
 
@@ -24,7 +27,23 @@ public class NeatoStreamo {
 
       System.out.println(coolCrew);
 
+      List<PodMember> simplePod = coolCrew.stream()
+          .map(podMemberInfo -> PodMember.builder()
+              .name(podMemberInfo))
+          .map(PodMember.PodMemberBuilder::build)
+          .collect(Collectors.toList());
+
+      System.out.println(simplePod);
+
+
 
     }
   }
+
+}
+
+@Data
+@Builder
+class PodMember {
+  private String name;
 }
