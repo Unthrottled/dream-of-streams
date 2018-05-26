@@ -1,6 +1,8 @@
 package io.acari.streams;
 
 
+import com.google.common.collect.Lists;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -25,6 +27,8 @@ public class NeatoStreamo {
       List<String> coolCrew = Stream.of("Alex;Steve;Amy;Chad;Bill".split(";"))
           .collect(Collectors.toList());
 
+      //create podmember with name
+
       System.out.println(coolCrew);
 
       List<PodMember> simplePod = coolCrew.stream()
@@ -35,7 +39,24 @@ public class NeatoStreamo {
 
       System.out.println(simplePod);
 
+      // create interest and add as field
 
+      List<PodMember> podMembersEnhanced = Stream.of((
+          "Alex Java,Functional_Programming,Javascript,Fixing_bugs,Fun_Commit_Messages;" +
+              "Steve Cobol,Ada,Java,Groovy,Pineapples,Sunday_Mornings;" +
+              "Amy Javascript,HTML,CSS,Spiders,Lombok;" +
+              "Chad PHP,Java,Ruby,Green_Stuff,Anime;" +
+              "Mira Python,Ruby,Whitespaces,Curly_Brace_Placement").split(";"))
+          .map(podMemberInfo -> {
+            String[] split = podMemberInfo.split(" ");
+            return PodMember.builder()
+                .name(split[0])
+                .interests(new Interests(Lists.newArrayList(split[1].split(","))))
+                .build();
+          })
+          .collect(Collectors.toList());
+
+      System.out.println(podMembersEnhanced);
 
     }
   }
@@ -46,4 +67,11 @@ public class NeatoStreamo {
 @Builder
 class PodMember {
   private String name;
+  private Interests interests;
+}
+
+@Data
+@AllArgsConstructor
+class Interests {
+  private List<String> coreIntrests;
 }
