@@ -1,6 +1,8 @@
 package io.acari.streams;
 
+import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +37,13 @@ public class StraightJacketedWithStreams {
 
     System.out.println(pod);
 
+    Multimap<String, PodMember> thereCanBeMoreThanOne = pod.fetchPodMembers()
+        .collect(LinkedListMultimap::create,
+            (map, podMember) -> map.put(podMember.getName(), podMember),
+            Multimap::putAll);
+
+    System.out.println(thereCanBeMoreThanOne.get("Alex"));
+
     Map<String, Set<PodMember>> interestsToPodMember = pod.fetchPodMembers()
         .flatMap(podMember -> podMember.getInterests().fetchInterests()
             .map(interest -> new AbstractMap.SimpleEntry<>(interest, podMember)))
@@ -42,6 +51,7 @@ public class StraightJacketedWithStreams {
             Collectors.mapping(Map.Entry::getValue, Collectors.toSet())));
 
     System.out.println(interestsToPodMember);
+
 
   }
 
