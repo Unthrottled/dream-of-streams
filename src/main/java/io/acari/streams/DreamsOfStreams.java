@@ -4,8 +4,12 @@ import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,7 +32,27 @@ public class DreamsOfStreams {
         })
         .collect(Collectors.toList());
 
+    Pod pod = podMembersEnhanced.stream()
+        .collect(Pod::new, Pod::addPodMumber, Pod::assimatePod);
 
+
+  }
+
+  @Data
+  @Builder
+  @NoArgsConstructor
+  static class Pod {
+    private Set<PodMember> podMembers;
+
+    public Pod addPodMumber(PodMember podMember){
+      podMembers.add(podMember);
+      return this;
+    }
+
+    public Pod assimatePod(Pod otherPod){//resistance is futile assimilation is eminent
+      podMembers.addAll(otherPod.podMembers);
+      return this;
+    }
   }
 
 
