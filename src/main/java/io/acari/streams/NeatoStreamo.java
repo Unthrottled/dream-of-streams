@@ -74,27 +74,27 @@ public class NeatoStreamo {
     }
   }
 
-}
-
-@Data
-@Builder
-class PodMember {
-  private String name;
-  private Interests interests;
-}
-
-@Data
-@AllArgsConstructor
-class Interests {
-  private List<String> coreIntrests;
-
-  public boolean areSane() {
-    return coreIntrests.stream().noneMatch(interest->interest.contains("bugs") || interest.contains("spiders"));
+  @Data
+  @Builder
+  static class PodMember {
+    private String name;
+    private Interests interests;
   }
 
-  public boolean hasInterest(String interest) {
-    final String _interest = interest.toUpperCase();
-    return coreIntrests.stream().map(String::toUpperCase)
-        .anyMatch(i->i.contains(_interest));
+  @Data
+  @AllArgsConstructor
+  static class Interests {
+    private List<String> coreIntrests;
+
+    public boolean areSane() {
+      return coreIntrests.stream().noneMatch(interest->interest.contains("bugs") || interest.contains("spiders"));
+    }
+
+    public boolean hasInterest(String interest) {
+      final String _interest = interest.toUpperCase();
+      return coreIntrests.stream().map(String::toUpperCase)
+          .anyMatch(i->i.contains(_interest));
+    }
   }
+
 }
