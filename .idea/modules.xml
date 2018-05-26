@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/dream-of-streams.iml" filepath="$PROJECT_DIR$/.idea/modules/dream-of-streams.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dream-of-streams_main.iml" filepath="$PROJECT_DIR$/.idea/modules/dream-of-streams_main.iml" group="dream-of-streams" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dream-of-streams_test.iml" filepath="$PROJECT_DIR$/.idea/modules/dream-of-streams_test.iml" group="dream-of-streams" />
     </modules>
   </component>
 </project>
