@@ -18,6 +18,7 @@ var SquareStreamItemService_1 = require("../../../stream/SquareStreamItemService
 var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService");
 var TriangleStreamItemService_1 = require("../../../stream/TriangleStreamItemService");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
+var RanboShapeOptionsService_1 = require("../../../stream/RanboShapeOptionsService");
 var CompleteComponent = /** @class */ (function () {
     function CompleteComponent(triangleFactory, hip2B, circleService) {
         var _this = this;
@@ -60,6 +61,8 @@ var CompleteComponent = /** @class */ (function () {
                 }, true);
             }
         };
+        this.itemsToMoveAlong = [];
+        this.listIndex = -1;
         this.sourceOutputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.sourceOutput = this.sourceOutputSubject.filter(function (item) { return !!item; });
         this.mapSubject = new BehaviorSubject_1.BehaviorSubject(null);
@@ -71,6 +74,7 @@ var CompleteComponent = /** @class */ (function () {
         this.streamSourceInputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.streamSourceInput = this.streamSourceInputSubject.filter(function (item) { return !!item; });
     }
+    CompleteComponent_1 = CompleteComponent;
     CompleteComponent.prototype.sourceComplete = function (item) {
         this.sourceOutputSubject.next(item);
     };
@@ -84,9 +88,19 @@ var CompleteComponent = /** @class */ (function () {
         this.filterSubject.next(streamItem);
     };
     CompleteComponent.prototype.startStreamOne = function () {
-        this.streamSourceInputSubject.next(this.circleService.createStreamItem());
+        var itemIndex = this.listIndex = ++this.listIndex % CompleteComponent_1.numItems;
+        this.streamSourceInputSubject.next(this.itemsToMoveAlong[itemIndex]);
     };
-    CompleteComponent = __decorate([
+    CompleteComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.list = this.circleService.createStreamItems(CompleteComponent_1.numItems, RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption);
+        this.list.element
+            .map(function (el) { return [el]; })
+            .map(function (element) { return new SingleStreamItem_1.SingleStreamItem(element); })
+            .forEach(function (item) { return _this.itemsToMoveAlong.push(item); });
+    };
+    CompleteComponent.numItems = 6;
+    CompleteComponent = CompleteComponent_1 = __decorate([
         core_1.Component({
             selector: 'base-view',
             template: require('./complete.component.htm')
@@ -96,6 +110,7 @@ var CompleteComponent = /** @class */ (function () {
             CircleStreamItemService_1.CircleStreamItemService])
     ], CompleteComponent);
     return CompleteComponent;
+    var CompleteComponent_1;
 }());
 exports.CompleteComponent = CompleteComponent;
 //# sourceMappingURL=complete.component.js.map

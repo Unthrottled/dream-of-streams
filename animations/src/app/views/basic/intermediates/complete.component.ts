@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import './complete.component.htm';
 import {SingleStreamItem} from "../../../stream/SingleStreamItem";
 import {StreamItem} from "../../../stream/StreamItem";
@@ -12,13 +12,18 @@ import {SquareStreamItemService} from "../../../stream/SquareStreamItemService";
 import {CircleStreamItemService} from "../../../stream/CircleStreamItemService";
 import {TriangleStreamItemService} from "../../../stream/TriangleStreamItemService";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {MultimapComponent} from "./multimap.component";
+import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService";
 
 @Component({
     selector: 'base-view',
     template: require('./complete.component.htm')
 })
-export class CompleteComponent {
+export class CompleteComponent implements OnInit {
 
+    private static numItems = 6;
+
+    list: StreamItem;
 
     mapOne: Function<StreamItem, StreamItem> = {
         apply: (streamItem: StreamItem) => new SingleStreamItem(
@@ -58,6 +63,10 @@ export class CompleteComponent {
             }, true);
         }
     };
+
+    private itemsToMoveAlong: StreamItem[] = [];
+    private listIndex = -1;
+
     private sourceOutputSubject = new BehaviorSubject(null);
     sourceOutput = this.sourceOutputSubject.filter(item => !!item);
 
@@ -96,7 +105,17 @@ export class CompleteComponent {
     }
 
     startStreamOne(): void {
-        this.streamSourceInputSubject.next(this.circleService.createStreamItem());
+        const itemIndex = this.listIndex = ++this.listIndex % CompleteComponent.numItems;
+        this.streamSourceInputSubject.next(this.itemsToMoveAlong[itemIndex]);
+    }
+
+
+    ngOnInit(): void {
+        this.list = this.circleService.createStreamItems(CompleteComponent.numItems, RanboShapeOptionsService.createStreamOption);
+        this.list.element
+            .map(el => [el])
+            .map(element => new SingleStreamItem(element))
+            .forEach(item => this.itemsToMoveAlong.push(item))
     }
 
 }
