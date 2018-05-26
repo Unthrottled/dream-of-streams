@@ -63,6 +63,21 @@ public class DreamsOfStreams {
 
     System.out.print(interestsSamples.size());
 
+    String allInterests = pod.fetchPodMembers()
+        .map(PodMember::getInterests)
+        .flatMap(Interests::fetchInterests)
+        .collect(Collectors.joining(", "));
+
+    System.out.println(allInterests);
+
+    String distinctInterests = pod.fetchPodMembers()
+        .map(PodMember::getInterests)
+        .flatMap(Interests::fetchInterests)
+        .distinct()
+        .collect(Collectors.joining(", "));
+
+    System.out.println(distinctInterests);
+
   }
 
   @Data
