@@ -39,7 +39,20 @@ public class DreamsOfStreams {
 
     System.out.println(pod);
 
-    //todo: flatto mappo
+    //add a pod member stream in the pod class and interest stream on pod member
+
+    Set<String> allPodMemberInterests = pod.fetchPodMembers()
+        .map(PodMember::getInterests)
+        .map(Interests::fetchInterests)
+        .peek(stream->{
+          System.out.println();
+          System.out.println(stream);
+        })
+        .flatMap(stringStream -> stringStream)
+        .peek(System.out::println)
+        .collect(Collectors.toCollection(HashSet::new));
+
+    System.out.println(allPodMemberInterests);
 
 
   }
@@ -60,6 +73,10 @@ public class DreamsOfStreams {
       podMembers.addAll(otherPod.podMembers);
       return this;
     }
+
+    public Stream<PodMember> fetchPodMembers(){
+      return podMembers.stream();
+    }
   }
 
 
@@ -74,6 +91,10 @@ public class DreamsOfStreams {
   @AllArgsConstructor
   static class Interests {
     private List<String> coreIntrests;
+
+    public Stream<String> fetchInterests(){
+      return coreIntrests.stream();
+    }
 
     public boolean areSane() {
       return coreIntrests.stream().noneMatch(interest->interest.contains("bugs") || interest.contains("spiders"));
