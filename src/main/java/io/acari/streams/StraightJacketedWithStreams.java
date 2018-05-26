@@ -6,9 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,6 +35,14 @@ public class StraightJacketedWithStreams {
 
     System.out.println(pod);
 
+    Map<String, Set<PodMember>> interestsToPodMember = pod.fetchPodMembers()
+        .flatMap(podMember -> podMember.getInterests().fetchInterests()
+            .map(interest -> new AbstractMap.SimpleEntry<>(interest, podMember)))
+        .collect(Collectors.groupingBy(Map.Entry::getKey,
+            Collectors.mapping(Map.Entry::getValue, Collectors.toSet())));
+
+    System.out.println(interestsToPodMember);
+
   }
 
   @Data
@@ -46,17 +52,17 @@ public class StraightJacketedWithStreams {
   static class Pod {
     private Set<PodMember> podMembers = new HashSet<>();
 
-    public Pod addPodMumber(PodMember podMember){
+    public Pod addPodMumber(PodMember podMember) {
       podMembers.add(podMember);
       return this;
     }
 
-    public Pod assimatePod(Pod otherPod){//resistance is futile assimilation is eminent
+    public Pod assimatePod(Pod otherPod) {//resistance is futile assimilation is eminent
       podMembers.addAll(otherPod.podMembers);
       return this;
     }
 
-    public Stream<PodMember> fetchPodMembers(){
+    public Stream<PodMember> fetchPodMembers() {
       return podMembers.stream();
     }
   }
@@ -68,7 +74,7 @@ public class StraightJacketedWithStreams {
     private String name;
     private Interests interests;
 
-    public boolean isSane(){
+    public boolean isSane() {
       return interests.areSane();
     }
   }
@@ -78,20 +84,20 @@ public class StraightJacketedWithStreams {
   static class Interests {
     private List<String> coreIntrests;
 
-    public Stream<String> fetchInterests(){
+    public Stream<String> fetchInterests() {
       return coreIntrests.stream();
     }
 
     public boolean areSane() {
       return coreIntrests.stream()
           .map(String::toLowerCase)
-          .noneMatch(interest->interest.contains("bugs") || interest.contains("spiders"));
+          .noneMatch(interest -> interest.contains("bugs") || interest.contains("spiders"));
     }
 
     public boolean hasInterest(String interest) {
       final String _interest = interest.toUpperCase();
       return coreIntrests.stream().map(String::toUpperCase)
-          .anyMatch(i->i.contains(_interest));
+          .anyMatch(i -> i.contains(_interest));
     }
   }
 }
