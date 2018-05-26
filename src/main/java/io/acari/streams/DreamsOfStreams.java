@@ -78,9 +78,16 @@ public class DreamsOfStreams {
     //add the sane interest method on pod member
 
     Map<Boolean, List<PodMember>> sanePodMembers = pod.fetchPodMembers()
-        .collect(Collectors.groupingBy(PodMember::isSane));
+        .collect(Collectors.groupingBy(PodMember::isSane));//also could have used partitioningBy
 
     System.out.println(sanePodMembers);
+
+    Map<Boolean, Set<PodMember>> sanePodMemberSet = pod.fetchPodMembers()
+        .collect(Collectors.groupingBy(PodMember::isSane, Collectors.toSet()));//also could have used partitioningBy
+
+    System.out.println(sanePodMemberSet);
+
+
 
   }
 
