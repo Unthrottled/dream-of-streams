@@ -32,17 +32,24 @@ public class DreamsOfStreams {
         })
         .collect(Collectors.toList());
 
+    //create pod with with set, add pod member, and assimilate pod
+
     Pod pod = podMembersEnhanced.stream()
         .collect(Pod::new, Pod::addPodMumber, Pod::assimatePod);
+
+    System.out.println(pod);
+
+    //todo: flatto mappo
 
 
   }
 
   @Data
   @Builder
+  @AllArgsConstructor
   @NoArgsConstructor
   static class Pod {
-    private Set<PodMember> podMembers;
+    private Set<PodMember> podMembers = new HashSet<>();
 
     public Pod addPodMumber(PodMember podMember){
       podMembers.add(podMember);

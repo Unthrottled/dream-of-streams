@@ -89,10 +89,37 @@ public class StreamDreams {
     System.out.println(theNumbersMason.getClass());
     System.out.println();
 
+    //tomorrow alex start here with introducing flatmap <-----
+
+    Integer[][] arraysAreCool = new Integer[][]{
+        {1,2,3,4,5},
+        {6,7,8,9,10}
+    };
+
+    Arrays.stream(arraysAreCool)
+        .map(Arrays::toString)
+        .forEach(System.out::print);
+    System.out.println();
+    System.out.println();
+
+    List<Integer> iHeardYouLikedStreams = Arrays.stream(arraysAreCool)
+        .map(Arrays::stream)//yo dog
+        .peek(stream-> {
+          System.out.println(stream);
+          System.out.println();
+        })
+        .flatMap(stream -> stream)
+        .peek(System.out::println)
+        .collect(Collectors.toList());
+
+    System.out.println(iHeardYouLikedStreams);
+    System.out.println();
+
+
 
     List<Integer> theBestCollection = Stream.iterate(1, a -> ++a)
         .limit(30)
-        .collect(Collectors.toCollection(LinkedList::new));
+        .collect(Collectors.toCollection(LinkedList::new));//todo: bring this up once flatmap comes around.
 
     theBestCollection.stream()
         .map(number -> number + " ")
@@ -127,30 +154,6 @@ public class StreamDreams {
         .collect(Collectors.joining());
 
     System.out.println(allCapsSoup);
-    System.out.println();
-
-    Integer[][] arraysAreCool = new Integer[][]{
-        {1,2,3,4,5},
-        {6,7,8,9,10}
-    };
-
-    Arrays.stream(arraysAreCool)
-        .map(Arrays::toString)
-        .forEach(System.out::print);
-    System.out.println();
-    System.out.println();
-
-    List<Integer> iHeardYouLikedStreams = Arrays.stream(arraysAreCool)
-        .map(Arrays::stream)//yo dog
-        .peek(stream-> {
-          System.out.println(stream);
-          System.out.println();
-        })
-        .flatMap(stream -> stream)
-        .peek(System.out::println)
-        .collect(Collectors.toList());
-
-    System.out.println(iHeardYouLikedStreams);
     System.out.println();
 
     Map<Boolean, List<Character>> ocdAlphabetSoup = Stream.iterate(50, a->++a)
