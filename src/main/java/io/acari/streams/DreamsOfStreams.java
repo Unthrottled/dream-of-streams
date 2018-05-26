@@ -55,6 +55,14 @@ public class DreamsOfStreams {
     System.out.println(allPodMemberInterests);
 
 
+    Set<String> interestsSamples = pod.fetchPodMembers()
+        .map(PodMember::getInterests)
+        .flatMap(Interests::fetchInterests)
+        .limit(10)//show that you can limit more than exist in the stream
+        .collect(Collectors.toSet());
+
+    System.out.print(interestsSamples.size());
+
   }
 
   @Data

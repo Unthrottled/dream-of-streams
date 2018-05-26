@@ -119,7 +119,7 @@ public class StreamDreams {
 
     List<Integer> theBestCollection = Stream.iterate(1, a -> ++a)
         .limit(30)
-        .collect(Collectors.toCollection(LinkedList::new));//todo: bring this up once flatmap comes around.
+        .collect(Collectors.toCollection(LinkedList::new));
 
     theBestCollection.stream()
         .map(number -> number + " ")
