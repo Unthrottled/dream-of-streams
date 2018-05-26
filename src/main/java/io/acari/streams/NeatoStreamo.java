@@ -44,9 +44,9 @@ public class NeatoStreamo {
       List<PodMember> podMembersEnhanced = Stream.of((
           "Alex Java,Functional_Programming,Javascript,Fixing_bugs,Fun_Commit_Messages;" +
               "Steve Cobol,Ada,Java,Groovy,Pineapples,Sunday_Mornings;" +
-              "Amy Javascript,HTML,CSS,Spiders,Lombok;" +
-              "Chad PHP,Java,Ruby,Green_Stuff,Anime;" +
-              "Mira Python,Ruby,Whitespaces,Curly_Brace_Placement").split(";"))
+              "Amy Javascript,HTML,CSS,Spiders,Assembly;" +
+              "Chad PHP,Java,Ruby,Purple_Stuff,Anime;" +
+              "Mira Python,Ruby,Whitespaces,Java,Lombok,Curly_Brace_Placement").split(";"))
           .map(podMemberInfo -> {
             String[] split = podMemberInfo.split(" ");
             return PodMember.builder()
@@ -63,6 +63,13 @@ public class NeatoStreamo {
           .collect(Collectors.toList());
 
       System.out.println(sanePodMembers);
+
+      //create the has interest
+
+      boolean allOfThemLikeJava = podMembersEnhanced.stream()
+          .allMatch(podMember -> podMember.getInterests().hasInterest("java"));
+
+      System.out.println(allOfThemLikeJava);
 
     }
   }
@@ -83,5 +90,11 @@ class Interests {
 
   public boolean areSane() {
     return coreIntrests.stream().noneMatch(interest->interest.contains("bugs") || interest.contains("spiders"));
+  }
+
+  public boolean hasInterest(String interest) {
+    final String _interest = interest.toUpperCase();
+    return coreIntrests.stream().map(String::toUpperCase)
+        .anyMatch(i->i.contains(_interest));
   }
 }
