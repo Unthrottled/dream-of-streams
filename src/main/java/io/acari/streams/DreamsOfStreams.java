@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -87,8 +88,30 @@ public class DreamsOfStreams {
 
     System.out.println(sanePodMemberSet);
 
+    Map<String, PodMember> podMembersByName = pod.fetchPodMembers()
+        .collect(Collectors.toMap(PodMember::getName, Function.identity()));
 
+    System.out.println(podMembersByName);
 
+    pod.addPodMumber(PodMember.builder()
+        .name("Alex")
+        .interests(new Interests(Lists.newArrayList("Imitation,Java,Cobol,Obscure_References".split(","))))
+        .build());
+
+    try {
+       pod.fetchPodMembers()
+          .collect(Collectors.toMap(PodMember::getName, Function.identity()));
+    } catch (IllegalStateException e){
+      System.out.println("THERE CAN ONLY BE ONE ALEX!!! " + e.getMessage());
+    }
+
+    Map<String, PodMember> thereCanOnlyBeOne = pod.fetchPodMembers()
+        .collect(Collectors.toMap(PodMember::getName, Function.identity(), (originalPodMember, imposter)->{
+          //long live the king
+          return originalPodMember;
+        }, LinkedHashMap::new));
+
+    System.out.println(thereCanOnlyBeOne);
   }
 
   @Data
