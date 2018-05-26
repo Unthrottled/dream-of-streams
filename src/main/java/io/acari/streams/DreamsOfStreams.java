@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -78,6 +75,13 @@ public class DreamsOfStreams {
 
     System.out.println(distinctInterests);
 
+    //add the sane interest method on pod member
+
+    Map<Boolean, List<PodMember>> sanePodMembers = pod.fetchPodMembers()
+        .collect(Collectors.groupingBy(PodMember::isSane));
+
+    System.out.println(sanePodMembers);
+
   }
 
   @Data
@@ -108,6 +112,10 @@ public class DreamsOfStreams {
   static class PodMember {
     private String name;
     private Interests interests;
+
+    public boolean isSane(){
+      return interests.areSane();
+    }
   }
 
   @Data
@@ -120,7 +128,9 @@ public class DreamsOfStreams {
     }
 
     public boolean areSane() {
-      return coreIntrests.stream().noneMatch(interest->interest.contains("bugs") || interest.contains("spiders"));
+      return coreIntrests.stream()
+          .map(String::toLowerCase)
+          .noneMatch(interest->interest.contains("bugs") || interest.contains("spiders"));
     }
 
     public boolean hasInterest(String interest) {

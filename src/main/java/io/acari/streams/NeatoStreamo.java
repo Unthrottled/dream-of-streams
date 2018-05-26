@@ -99,7 +99,9 @@ public class NeatoStreamo {
     private List<String> coreIntrests;
 
     public boolean areSane() {
-      return coreIntrests.stream().noneMatch(interest->interest.contains("bugs") || interest.contains("spiders"));
+      return coreIntrests.stream()
+          .map(String::toLowerCase)
+          .noneMatch(interest->interest.contains("bugs") || interest.contains("spiders"));
     }
 
     public boolean hasInterest(String interest) {
