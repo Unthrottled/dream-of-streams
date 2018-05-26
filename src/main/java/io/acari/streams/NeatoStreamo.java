@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -70,6 +71,17 @@ public class NeatoStreamo {
           .allMatch(podMember -> podMember.getInterests().hasInterest("java"));
 
       System.out.println(allOfThemLikeJava);
+
+      Stream<PodMember> podStream = podMembersEnhanced.stream();
+      podMembersEnhanced.add(PodMember.builder()
+          .name("Smitty Werbenjagermangensen")
+          .interests(new Interests(Lists.newArrayList("Being Number one", "Soda")))
+          .build());
+
+      // thuderdome reference then comparator.
+
+      podStream.max(Comparator.comparingInt(pod -> pod.getName().length()))
+          .ifPresent(System.out::println);
 
     }
   }
