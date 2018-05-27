@@ -29,17 +29,26 @@
         <stream-item [streamItem]="list"></stream-item>
         <div class="stream-container">
             <div>
+                <div>
+                    <img src="{{sourcePicture}}"/>
+                </div>
                 <stream-source
                         [inputStream]="streamSourceInput"
                         (outputStream)="sourceComplete($event)"></stream-source>
             </div>
             <div>
+                <div>
+                    <img src="{{circleListPicture}}"/>
+                </div>
                 <map-stream (outputStream)="mapOneComplete($event)"
                             [inputStream]="sourceOutputStream"
                             [mappingFunction]="mapOne"
                 ></map-stream>
             </div>
             <div>
+                <div>
+                    <img src="{{flatmapPicture}}"/>
+                </div>
                 <flatMap-stream (outputStream)="flatMapOneComplete($event)"
                                 [inputStream]="mapOutputStream"
                                 [mappingFunction]="flatMapOne"

@@ -13,6 +13,7 @@ import {TriangleStreamItemService} from "../../../stream/TriangleStreamItemServi
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {MultiStreamItem} from "../../../stream/MultiStreamItem";
 import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService";
+import {ImageUtility} from "../../../utilities/ImageUtility";
 
 @Component({
     selector: 'flatmap-view',
@@ -65,6 +66,10 @@ export class Flatmap101Component implements OnInit {
                 private hip2B: SquareStreamItemService,
                 private circleService: CircleStreamItemService) {
     }
+
+    sourcePicture = ImageUtility.circleSource;
+    circleListPicture = ImageUtility.circleList;
+    flatmapPicture = ImageUtility.circleMany;
 
     ngOnInit(): void {
         this.list = this.circleService.createStreamItems(Flatmap101Component.numItems, RanboShapeOptionsService.createStreamOption)

@@ -20,6 +20,7 @@ var TriangleStreamItemService_1 = require("../../../stream/TriangleStreamItemSer
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var MultiStreamItem_1 = require("../../../stream/MultiStreamItem");
 var RanboShapeOptionsService_1 = require("../../../stream/RanboShapeOptionsService");
+var ImageUtility_1 = require("../../../utilities/ImageUtility");
 var Flatmap101Component = /** @class */ (function () {
     function Flatmap101Component(triangleFactory, hip2B, circleService) {
         var _this = this;
@@ -60,6 +61,9 @@ var Flatmap101Component = /** @class */ (function () {
         this.streamSourceInputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.streamSourceInput = this.streamSourceInputSubject.filter(function (item) { return !!item; });
         this.listIndex = -1;
+        this.sourcePicture = ImageUtility_1.ImageUtility.circleSource;
+        this.circleListPicture = ImageUtility_1.ImageUtility.circleList;
+        this.flatmapPicture = ImageUtility_1.ImageUtility.circleMany;
     }
     Flatmap101Component_1 = Flatmap101Component;
     Flatmap101Component.prototype.ngOnInit = function () {
