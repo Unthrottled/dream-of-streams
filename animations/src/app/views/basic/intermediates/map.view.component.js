@@ -17,6 +17,7 @@ var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService
 var TriangleStreamItemService_1 = require("../../../stream/TriangleStreamItemService");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var RanboShapeOptionsService_1 = require("../../../stream/RanboShapeOptionsService");
+var ImageUtility_1 = require("../../../utilities/ImageUtility");
 var MapViewComponent = /** @class */ (function () {
     function MapViewComponent(triangleFactory, hip2B, circleService) {
         var _this = this;
@@ -31,6 +32,8 @@ var MapViewComponent = /** @class */ (function () {
                 };
             }); })); }
         };
+        this.sourcePicture = ImageUtility_1.ImageUtility.circleSource;
+        this.mapPicture = ImageUtility_1.ImageUtility.circleSquare;
         this.itemsToMoveAlong = [];
         this.sourceOutputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.sourceOutput = this.sourceOutputSubject.filter(function (item) { return !!item; });

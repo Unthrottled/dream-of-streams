@@ -10,6 +10,7 @@ import {CircleStreamItemService} from "../../../stream/CircleStreamItemService";
 import {TriangleStreamItemService} from "../../../stream/TriangleStreamItemService";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService";
+import {ImageUtility} from "../../../utilities/ImageUtility";
 
 @Component({
     selector: 'map-view',
@@ -30,6 +31,9 @@ export class MapViewComponent implements OnInit {
                 })
             ))
     };
+
+    sourcePicture = ImageUtility.circleSource;
+    mapPicture = ImageUtility.circleSquare;
     private itemsToMoveAlong: StreamItem[] = [];
     private sourceOutputSubject = new BehaviorSubject(null);
     sourceOutput = this.sourceOutputSubject.filter(item => !!item);
