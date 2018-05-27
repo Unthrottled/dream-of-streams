@@ -2,17 +2,10 @@ import {Component, OnInit} from "@angular/core";
 import './list.source.component.htm';
 import {SingleStreamItem} from "../../../stream/SingleStreamItem";
 import {StreamItem} from "../../../stream/StreamItem";
-import {Observer} from "rxjs/Observer";
-import {Observable} from "rxjs/Observable";
-import {Predicate} from "../../../stream/Predicate";
-import {Function} from "../../../stream/Function";
-import {Element} from "@progress/kendo-drawing";
-import {Scheduler} from "rxjs/Rx";
-import {SquareStreamItemService} from "../../../stream/SquareStreamItemService";
 import {CircleStreamItemService} from "../../../stream/CircleStreamItemService";
-import {TriangleStreamItemService} from "../../../stream/TriangleStreamItemService";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService";
+import {ImageUtility} from "../../../utilities/ImageUtility";
 
 @Component({
     selector: 'list-view',
@@ -20,32 +13,30 @@ import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService
 })
 export class ListSourceComponent implements OnInit {
 
-
     private static numItems = 6;
-
+    picture = ImageUtility.circleSource;
     list: StreamItem;
-    private itemsToMoveAlong: StreamItem[] =[];
-    ngOnInit(): void {
-        this.list = this.circleService.createStreamItems(ListSourceComponent.numItems,RanboShapeOptionsService.createStreamOption)
-        this.list.element
-            .map(el=>[el])
-            .map(element=>new SingleStreamItem(element))
-            .forEach(item=> this.itemsToMoveAlong.push(item));
-        this.startStreamOne();
-    }
-
+    private itemsToMoveAlong: StreamItem[] = [];
     private streamSourceInputSubject = new BehaviorSubject<StreamItem>(null);
     streamSourceInput = this.streamSourceInputSubject.filter(item => !!item);
+    private listIndex = -1;
 
     constructor(private circleService: CircleStreamItemService) {
+    }
+
+    ngOnInit(): void {
+        this.list = this.circleService.createStreamItems(ListSourceComponent.numItems, RanboShapeOptionsService.createStreamOption)
+        this.list.element
+            .map(el => [el])
+            .map(element => new SingleStreamItem(element))
+            .forEach(item => this.itemsToMoveAlong.push(item));
+        this.startStreamOne();
     }
 
     sourceComplete(item: StreamItem) {
         this.startStreamOne();
     }
 
-
-    private listIndex = -1;
     startStreamOne(): void {
         let itemIndex = this.listIndex = ++this.listIndex % ListSourceComponent.numItems;
         this.streamSourceInputSubject.next(this.itemsToMoveAlong[itemIndex]);

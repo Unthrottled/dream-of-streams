@@ -15,9 +15,11 @@ var SingleStreamItem_1 = require("../../../stream/SingleStreamItem");
 var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var RanboShapeOptionsService_1 = require("../../../stream/RanboShapeOptionsService");
+var ImageUtility_1 = require("../../../utilities/ImageUtility");
 var ListSourceComponent = /** @class */ (function () {
     function ListSourceComponent(circleService) {
         this.circleService = circleService;
+        this.picture = ImageUtility_1.ImageUtility.circleSource;
         this.itemsToMoveAlong = [];
         this.streamSourceInputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.streamSourceInput = this.streamSourceInputSubject.filter(function (item) { return !!item; });

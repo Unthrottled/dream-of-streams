@@ -20,6 +20,9 @@
         <stream-item [streamItem]="list"></stream-item>
         <div class="stream-container">
             <div>
+                <div>
+                    <img src="{{picture}}"/>
+                </div>
                 <stream-source
                         [inputStream]="streamSourceInput"
                         (outputStream)="sourceComplete($event)"></stream-source>
