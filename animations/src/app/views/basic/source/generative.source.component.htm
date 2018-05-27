@@ -19,7 +19,9 @@
            routerLink="/basics">back</a>
         <div class="stream-container">
             <div>
-                <img src="{{picture}}"/>
+                <div>
+                    <img src="{{picture}}"/>
+                </div>
                 <stream-source
                         [inputStream]="streamSourceInput"
                         (outputStream)="sourceComplete($event)"></stream-source>

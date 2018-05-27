@@ -7,7 +7,7 @@
 }
 
 .stream-container > div {
-  height: 100px;
+  min-height: 100px;
   background: rgba(25,25,35,0.25);
   margin-right: 0.5em;
   border-radius: $border-radius;
@@ -15,7 +15,7 @@
 }
 
 .base-stream-component {
-  height: 100%;
+  min-height: 100px;
   flex-grow: 1;
   position: relative;
 }
