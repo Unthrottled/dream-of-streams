@@ -17,6 +17,7 @@ var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService
 var TriangleStreamItemService_1 = require("../../../stream/TriangleStreamItemService");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var RanboShapeOptionsService_1 = require("../../../stream/RanboShapeOptionsService");
+var ImageUtility_1 = require("../../../utilities/ImageUtility");
 var FilterViewComponent = /** @class */ (function () {
     function FilterViewComponent(triangleFactory, hip2B, circleService) {
         this.triangleFactory = triangleFactory;
@@ -38,6 +39,8 @@ var FilterViewComponent = /** @class */ (function () {
         this.streamSourceInputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.streamSourceInput = this.streamSourceInputSubject.filter(function (item) { return !!item; });
         this.listIndex = -1;
+        this.sourcePicture = ImageUtility_1.ImageUtility.circleSource;
+        this.filterPicture = ImageUtility_1.ImageUtility.filterCircle;
     }
     FilterViewComponent_1 = FilterViewComponent;
     FilterViewComponent.prototype.ngOnInit = function () {

@@ -8,6 +8,7 @@ import {CircleStreamItemService} from "../../../stream/CircleStreamItemService";
 import {TriangleStreamItemService} from "../../../stream/TriangleStreamItemService";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService";
+import {ImageUtility} from "../../../utilities/ImageUtility";
 
 @Component({
     selector: 'filter-view',
@@ -35,6 +36,8 @@ export class FilterViewComponent implements OnInit {
     private streamSourceInputSubject = new BehaviorSubject<StreamItem>(null);
     streamSourceInput = this.streamSourceInputSubject.filter(item => !!item);
     private listIndex = -1;
+    sourcePicture = ImageUtility.circleSource;
+    filterPicture = ImageUtility.filterCircle;
 
     constructor(private triangleFactory: TriangleStreamItemService,
                 private hip2B: SquareStreamItemService,

@@ -26,11 +26,17 @@
         <stream-item [streamItem]="list"></stream-item>
         <div class="stream-container">
             <div>
+                <div>
+                    <img src="{{sourcePicture}}"/>
+                </div>
                 <stream-source
                         [inputStream]="streamSourceInput"
                         (outputStream)="sourceComplete($event)"></stream-source>
             </div>
             <div>
+                <div>
+                    <img src="{{filterPicture}}"/>
+                </div>
                 <filter-stream (outputStream)="filterOneComplete($event)"
                                (filteredOutputStream)="filterOneComplete($event)"
                                [inputStream]="sourceOutput"
