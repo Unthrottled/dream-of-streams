@@ -19,6 +19,7 @@ var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService
 var TriangleStreamItemService_1 = require("../../../stream/TriangleStreamItemService");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var RanboShapeOptionsService_1 = require("../../../stream/RanboShapeOptionsService");
+var ImageUtility_1 = require("../../../utilities/ImageUtility");
 var CompleteComponent = /** @class */ (function () {
     function CompleteComponent(triangleFactory, hip2B, circleService) {
         var _this = this;
@@ -73,6 +74,10 @@ var CompleteComponent = /** @class */ (function () {
         this.filterOutputStream = this.filterSubject.filter(function (item) { return !!item; });
         this.streamSourceInputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.streamSourceInput = this.streamSourceInputSubject.filter(function (item) { return !!item; });
+        this.sourcePicture = ImageUtility_1.ImageUtility.circleSource;
+        this.filterPicture = ImageUtility_1.ImageUtility.filterCircle;
+        this.flatmapPicture = ImageUtility_1.ImageUtility.circleTriangle;
+        this.mapPicture = ImageUtility_1.ImageUtility.triangeSquare;
     }
     CompleteComponent_1 = CompleteComponent;
     CompleteComponent.prototype.sourceComplete = function (item) {

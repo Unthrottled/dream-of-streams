@@ -14,6 +14,7 @@ import {TriangleStreamItemService} from "../../../stream/TriangleStreamItemServi
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {MultimapComponent} from "./multimap.component";
 import {RanboShapeOptionsService} from "../../../stream/RanboShapeOptionsService";
+import {ImageUtility} from "../../../utilities/ImageUtility";
 
 @Component({
     selector: 'base-view',
@@ -81,6 +82,11 @@ export class CompleteComponent implements OnInit {
 
     private streamSourceInputSubject = new BehaviorSubject<StreamItem>(null);
     streamSourceInput = this.streamSourceInputSubject.filter(item => !!item);
+
+    sourcePicture = ImageUtility.circleSource;
+    filterPicture = ImageUtility.filterCircle;
+    flatmapPicture = ImageUtility.circleTriangle;
+    mapPicture = ImageUtility.triangeSquare;
 
     constructor(private triangleFactory: TriangleStreamItemService,
                 private hip2B: SquareStreamItemService,
