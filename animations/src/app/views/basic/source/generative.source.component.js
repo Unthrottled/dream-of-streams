@@ -13,9 +13,11 @@ var core_1 = require("@angular/core");
 require("./generative.source.component.htm");
 var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
+var ImageUtility_1 = require("../../../utilities/ImageUtility");
 var GenerativeSourceComponent = /** @class */ (function () {
     function GenerativeSourceComponent(circleService) {
         this.circleService = circleService;
+        this.picture = ImageUtility_1.ImageUtility.circleSource;
         this.streamSourceInputSubject = new BehaviorSubject_1.BehaviorSubject(null);
         this.streamSourceInput = this.streamSourceInputSubject.filter(function (item) { return !!item; });
     }
