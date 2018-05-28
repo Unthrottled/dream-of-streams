@@ -10,14 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-require("./list.source.component.htm");
+require("./collection.source.component.htm");
 var SingleStreamItem_1 = require("../../../stream/SingleStreamItem");
 var CircleStreamItemService_1 = require("../../../stream/CircleStreamItemService");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var RanboShapeOptionsService_1 = require("../../../stream/RanboShapeOptionsService");
 var ImageUtility_1 = require("../../../utilities/ImageUtility");
-var ListSourceComponent = /** @class */ (function () {
-    function ListSourceComponent(circleService) {
+var CollectionSourceComponent = /** @class */ (function () {
+    function CollectionSourceComponent(circleService) {
         this.circleService = circleService;
         this.picture = ImageUtility_1.ImageUtility.circleSource;
         this.itemsToMoveAlong = [];
@@ -25,33 +25,33 @@ var ListSourceComponent = /** @class */ (function () {
         this.streamSourceInput = this.streamSourceInputSubject.filter(function (item) { return !!item; });
         this.listIndex = -1;
     }
-    ListSourceComponent_1 = ListSourceComponent;
-    ListSourceComponent.prototype.ngOnInit = function () {
+    CollectionSourceComponent_1 = CollectionSourceComponent;
+    CollectionSourceComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.list = this.circleService.createStreamItems(ListSourceComponent_1.numItems, RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption);
+        this.list = this.circleService.createStreamItems(CollectionSourceComponent_1.numItems, RanboShapeOptionsService_1.RanboShapeOptionsService.createStreamOption);
         this.list.element
             .map(function (el) { return [el]; })
             .map(function (element) { return new SingleStreamItem_1.SingleStreamItem(element); })
             .forEach(function (item) { return _this.itemsToMoveAlong.push(item); });
         this.startStreamOne();
     };
-    ListSourceComponent.prototype.sourceComplete = function (item) {
+    CollectionSourceComponent.prototype.sourceComplete = function (item) {
         this.startStreamOne();
     };
-    ListSourceComponent.prototype.startStreamOne = function () {
-        var itemIndex = this.listIndex = ++this.listIndex % ListSourceComponent_1.numItems;
+    CollectionSourceComponent.prototype.startStreamOne = function () {
+        var itemIndex = this.listIndex = ++this.listIndex % CollectionSourceComponent_1.numItems;
         this.streamSourceInputSubject.next(this.itemsToMoveAlong[itemIndex]);
     };
-    ListSourceComponent.numItems = 6;
-    ListSourceComponent = ListSourceComponent_1 = __decorate([
+    CollectionSourceComponent.numItems = 6;
+    CollectionSourceComponent = CollectionSourceComponent_1 = __decorate([
         core_1.Component({
             selector: 'list-view',
-            template: require('./list.source.component.htm')
+            template: require('./collection.source.component.htm')
         }),
         __metadata("design:paramtypes", [CircleStreamItemService_1.CircleStreamItemService])
-    ], ListSourceComponent);
-    return ListSourceComponent;
-    var ListSourceComponent_1;
+    ], CollectionSourceComponent);
+    return CollectionSourceComponent;
+    var CollectionSourceComponent_1;
 }());
-exports.ListSourceComponent = ListSourceComponent;
-//# sourceMappingURL=list.source.component.js.map
+exports.CollectionSourceComponent = CollectionSourceComponent;
+//# sourceMappingURL=collection-source.component.js.map

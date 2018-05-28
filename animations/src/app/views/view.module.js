@@ -10,7 +10,7 @@ var core_1 = require("@angular/core");
 var basics_view_component_1 = require("./basic/basics.view.component");
 var list_component_1 = require("./basic/list.component");
 var generative_source_component_1 = require("./basic/source/generative.source.component");
-var list_source_component_1 = require("./basic/source/list.source.component");
+var collection_source_component_1 = require("./basic/source/collection-source.component");
 var stream_module_1 = require("../stream/stream.module");
 var router_1 = require("@angular/router");
 var map_view_component_1 = require("./basic/intermediates/map.view.component");
@@ -34,7 +34,7 @@ var ViewModule = /** @class */ (function () {
                 list_component_1.ListComponent,
                 basics_view_component_1.BasicsViewComponent,
                 generative_source_component_1.GenerativeSourceComponent,
-                list_source_component_1.ListSourceComponent,
+                collection_source_component_1.CollectionSourceComponent,
                 map_view_component_1.MapViewComponent,
                 filter_view_component_1.FilterViewComponent,
                 flatmap_101_component_1.Flatmap101Component,

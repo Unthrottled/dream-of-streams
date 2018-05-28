@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import './list.source.component.htm';
+import './collection.source.component.htm';
 import {SingleStreamItem} from "../../../stream/SingleStreamItem";
 import {StreamItem} from "../../../stream/StreamItem";
 import {CircleStreamItemService} from "../../../stream/CircleStreamItemService";
@@ -9,9 +9,9 @@ import {ImageUtility} from "../../../utilities/ImageUtility";
 
 @Component({
     selector: 'list-view',
-    template: require('./list.source.component.htm')
+    template: require('./collection.source.component.htm')
 })
-export class ListSourceComponent implements OnInit {
+export class CollectionSourceComponent implements OnInit {
 
     private static numItems = 6;
     picture = ImageUtility.circleSource;
@@ -25,7 +25,7 @@ export class ListSourceComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.list = this.circleService.createStreamItems(ListSourceComponent.numItems, RanboShapeOptionsService.createStreamOption)
+        this.list = this.circleService.createStreamItems(CollectionSourceComponent.numItems, RanboShapeOptionsService.createStreamOption)
         this.list.element
             .map(el => [el])
             .map(element => new SingleStreamItem(element))
@@ -38,7 +38,7 @@ export class ListSourceComponent implements OnInit {
     }
 
     startStreamOne(): void {
-        let itemIndex = this.listIndex = ++this.listIndex % ListSourceComponent.numItems;
+        let itemIndex = this.listIndex = ++this.listIndex % CollectionSourceComponent.numItems;
         this.streamSourceInputSubject.next(this.itemsToMoveAlong[itemIndex]);
     }
 
