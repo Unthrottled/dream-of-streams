@@ -25,14 +25,14 @@ var filter_view_component_1 = require("./views/basic/intermediates/filter.view.c
 var flatmap_101_component_1 = require("./views/basic/intermediates/flatmap.101.component");
 var multimap_component_1 = require("./views/basic/intermediates/multimap.component");
 var appRoutes = [
-    { path: 'basics', component: basics_view_component_1.BasicsViewComponent },
-    { path: 'basics/source/generate', component: generative_source_component_1.GenerativeSourceComponent },
-    { path: 'basics/source/collection', component: collection_source_component_1.CollectionSourceComponent },
-    { path: 'basics/intermediate/map', component: map_view_component_1.MapViewComponent },
-    { path: 'basics/intermediate/filter', component: filter_view_component_1.FilterViewComponent },
-    { path: 'basics/intermediate/flatmap', component: flatmap_101_component_1.Flatmap101Component },
-    { path: 'basics/intermediate/flatmap2', component: multimap_component_1.MultimapComponent },
-    { path: 'basics/intermediate/complete', component: complete_component_1.CompleteComponent },
+    { path: 'streams', component: basics_view_component_1.BasicsViewComponent },
+    { path: 'streams/source/generate', component: generative_source_component_1.GenerativeSourceComponent },
+    { path: 'streams/source/collection', component: collection_source_component_1.CollectionSourceComponent },
+    { path: 'streams/intermediate/map', component: map_view_component_1.MapViewComponent },
+    { path: 'streams/intermediate/filter', component: filter_view_component_1.FilterViewComponent },
+    { path: 'streams/intermediate/flatmap', component: flatmap_101_component_1.Flatmap101Component },
+    { path: 'streams/intermediate/flatmap2', component: multimap_component_1.MultimapComponent },
+    { path: 'streams/intermediate/complete', component: complete_component_1.CompleteComponent },
     {
         path: '',
         redirectTo: '/',

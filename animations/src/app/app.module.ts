@@ -20,14 +20,14 @@ import {MultimapComponent} from "./views/basic/intermediates/multimap.component"
 
 
 const appRoutes: Routes = [
-    {path: 'basics', component: BasicsViewComponent},
-    {path: 'basics/source/generate', component: GenerativeSourceComponent},
-    {path: 'basics/source/collection', component: CollectionSourceComponent},
-    {path: 'basics/intermediate/map', component: MapViewComponent},
-    {path: 'basics/intermediate/filter', component: FilterViewComponent},
-    {path: 'basics/intermediate/flatmap', component: Flatmap101Component},
-    {path: 'basics/intermediate/flatmap2', component: MultimapComponent},
-    {path: 'basics/intermediate/complete', component: CompleteComponent},
+    {path: 'streams', component: BasicsViewComponent},
+    {path: 'streams/source/generate', component: GenerativeSourceComponent},
+    {path: 'streams/source/collection', component: CollectionSourceComponent},
+    {path: 'streams/intermediate/map', component: MapViewComponent},
+    {path: 'streams/intermediate/filter', component: FilterViewComponent},
+    {path: 'streams/intermediate/flatmap', component: Flatmap101Component},
+    {path: 'streams/intermediate/flatmap2', component: MultimapComponent},
+    {path: 'streams/intermediate/complete', component: CompleteComponent},
     {
         path: '',
         redirectTo: '/',
