@@ -10,4 +10,5 @@ export class ImageUtility {
     public static filterCircle = require('../images/filter_circle.png');
     public static triangeSquare = require('../images/triangle_square.png');
     public static circleToMany = require('../images/cirle_many_shapes.png');
+    public static bueller = require('../images/ferris_wheel.gif');
 }

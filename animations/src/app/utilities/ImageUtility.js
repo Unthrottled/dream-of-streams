@@ -11,6 +11,7 @@ var ImageUtility = /** @class */ (function () {
     ImageUtility.filterCircle = require('../images/filter_circle.png');
     ImageUtility.triangeSquare = require('../images/triangle_square.png');
     ImageUtility.circleToMany = require('../images/cirle_many_shapes.png');
+    ImageUtility.bueller = require('../images/ferris_wheel.gif');
     return ImageUtility;
 }());
 exports.ImageUtility = ImageUtility;

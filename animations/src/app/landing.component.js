@@ -8,8 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./landing.component.htm");
+var ImageUtility_1 = require("./utilities/ImageUtility");
 var LandingComponent = /** @class */ (function () {
     function LandingComponent() {
+        this.bueller = ImageUtility_1.ImageUtility.bueller;
     }
     LandingComponent = __decorate([
         core_1.Component({
