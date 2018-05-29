@@ -37,6 +37,8 @@ public class DreamsOfStreams {
     Pod pod = podMembersEnhanced.stream()
         .collect(Pod::new, Pod::addPodMumber, Pod::assimatePod);
 
+    //first presentation should end here
+
     System.out.println(pod);
 
     //add a pod member stream in the pod class and interest stream on pod member

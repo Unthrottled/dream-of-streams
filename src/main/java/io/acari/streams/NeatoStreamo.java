@@ -28,6 +28,7 @@ public class NeatoStreamo {
       List<String> coolCrew = Stream.of("Alex;Steve;Amy;Chad;Bill".split(";"))
           .collect(Collectors.toList());
 
+      //probably want to get rid of all of the other helper classes
       //create podmember with name
 
       System.out.println(coolCrew);
@@ -52,7 +53,7 @@ public class NeatoStreamo {
             String[] split = podMemberInfo.split(" ");
             return PodMember.builder()
                 .name(split[0])
-                .interests(new Interests(Lists.newArrayList(split[1].split(","))))
+                .interests(new Interests(Lists.newArrayList(split[1].split(","))))//Todo: you messed this up
                 .build();
           })
           .collect(Collectors.toList());
