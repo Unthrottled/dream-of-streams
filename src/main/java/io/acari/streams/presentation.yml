@@ -62,8 +62,6 @@ Dream:
 
    - Create pod from pod collection
 
-#   Probably stop the first one here!
-
    - Need to find all of the things our pod members are interested in
       - flatMap
        - peek after interests
@@ -73,6 +71,8 @@ Dream:
       - What if we want to know all distinct interests
         - To set
         - distinct
+
+        #stopped here
       - What if we want to sample?
         - limit
       - What if we want to turn it into a single string?
