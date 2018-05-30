@@ -1,0 +1,109 @@
+Beginning:
+
+  -Solve Problems that looks like the Information Radiator team might have to solve
+    - managing pods and pod members
+
+
+Basics:
+  - Create a stream of the 5 pod members (alex, steve, amy, chad, and mira)
+
+  - Need the ability to see all of the members in pod
+    - forEach
+    - Show that streams are one shot wonders
+
+  - Need the ability to reuse our pod stream
+    - collection
+    -print the list
+
+  - Need the ability to performe more operations on things
+    - Create a Podmember Class
+    - @Data @Builder
+    - String name field
+
+  - Convert the collection of names into a collection of Pod members
+    - simplePod
+
+  - Need to find what each PodMember is interested in, pod members have many interests
+    - Create a Interests class
+      - @Data @Builder
+      - coreInterests field as a set
+    - Give PodMember an interests field
+
+  - Give PodMembers personalities (new stream)
+    - Alex: Like functional programming, fixing bugs, fun descriptive commit messages, and java/javascript
+    - Steve: Is a bit oldschool, interests vary (has java)
+    - Amy: Quirky frontend dev
+    - Chad: Doesn't like sunny d, dabbles in ruby, java, and php, anime fan
+    - Mira: Whitespace fan: she likes Python, whitespaces, java, lombok, and curly brace placment
+
+  - Convert the stream podMembersEnhanced
+    - Make sure that interest index is 1
+
+  - Need to group bug free podmembers
+    - Filter on interests areSane //new method
+    - to lowercase!!!
+
+  - Want to determine if all of the pod members share a collective interest
+    - allMatch using hasInterest //new method
+    - to lowercase!!
+
+  - Show that streams are lazily created from collections
+    - add Smitty Werbenjagermangensen
+
+  - Want to find the pod member with the longest name.
+    - Start of with lambda
+    - show Comparator
+
+Dream:
+  - Raise the level of abstraction of a pod, we want more functionality
+    - Create Pod class
+      - @Data @Builder @NoArgsConstructor @AllArgsConstructor
+      - Needs a podMembers intstance field (set)
+
+   - Create pod from pod collection
+
+#   Probably stop the first one here!
+
+   - Need to find all of the things our pod members are interested in
+      - flatMap
+       - peek after interests
+        - println then println the stream
+       - peek afte flatmap
+        - println
+      - What if we want to know all distinct interests
+        - To set
+        - distinct
+      - What if we want to sample?
+        - limit
+      - What if we want to turn it into a single string?
+        - joining
+
+    - What if we want to group the insectphiles together?
+      - add areSane method to the interest class
+      - partition
+        - change grouping collector to set
+      - Show that grouping by does the same thing
+
+    - What if we need to reference podMembers quickly by name?
+      - toMap
+      - What happens when we have duplicates?
+        - show merge
+        - also show the supplier
+      - What if we want to preserve pod members?
+        - groupingBy!
+
+Asylum:
+  - What if we want to collect into a different Data Struture?
+    - Multi map collect //remember it is creat and not new
+      - Data structure that used in denoting http headers
+
+  - What if we need to find all pod members to a particular interest?
+    - flat map intrests to podmember using abstract map entry
+      - Wanted to use a tuple.
+    - groupingBy/mapping
+
+
+  Concurrency:
+
+
+
