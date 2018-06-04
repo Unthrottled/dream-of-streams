@@ -102,6 +102,41 @@ Asylum:
       - Wanted to use a tuple.
     - groupingBy/mapping
 
+  - What if we want to create a type-ahead index?
+    - Flatmap Interests
+    - FlatMap on the subsequences
+
+  - What if our streams grow to large numbers and we need to iterate and process them?
+    - Streams can become parallel!
+      - Basic streams can become parallel
+      - Collections also support parellel streams!
+
+  - How do we get the most bang for our buck?
+    - Overhead!
+    - Unordered Streams!
+
+      - This method does not actually reorder the elements; it just tells the JVM that if an
+      - order-based stream operation is applied, the order can be ignored.
+
+      ---
+
+      - Any stream operation that is based on order, including findFirst() , limit() , or
+      - skip() , may actually perform more slowly in a parallel environment.
+      - This is a result of a parallel processing task being forced to coordinate all of its threads in a synchronized-like
+      - fashion.
+
+      ---
+
+      Demonstrate limit positioning:
+
+    - Terminal Operators
+      - FindAny
+      - Count, Max, Min,
+      - Collect with three arguments
+      - Collect with a collector with the `Concurrency` Characterstic
+      - Reduce
+
+
 
   Concurrency:
 
