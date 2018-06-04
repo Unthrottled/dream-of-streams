@@ -135,6 +135,7 @@ Asylum:
       - FindAny #Demonstrate un-defined functionality.
       - Count, Max, Min,
       - Collect with a collector with the `Concurrency` && `Unordered` Characterstic
+        - groupingByConcurrent && toConcurrentMap
 
       REDUCTION:
         - Collect with three arguments
@@ -148,6 +149,21 @@ Asylum:
           - The combiner operator must also be associative and stateless and compatible with the
           - identity, such that for all u and t combiner.apply(u,accumulator.apply(identity,t))
           - is equal to accumulator.apply(u,t) .
+
+      - IntStream Range Parallel String reduction
+        - limit (move it around to show defined/undefined results)
+        - unordered
+        - parallel
+        - map to string
+
+      - Word stream linked list collection
+        - Show that all remain ordered
+        - Show the fork-join bits
+
+      - Really long integer list reduction
+
+      - Addition v Subtraction parallel streams
+        - Show the nested stream tests
 
 
 
