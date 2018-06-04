@@ -106,6 +106,8 @@ Asylum:
     - Flatmap Interests
     - FlatMap on the subsequences
 
+  Concurrency:
+
   - What if our streams grow to large numbers and we need to iterate and process them?
     - Streams can become parallel!
       - Basic streams can become parallel
@@ -130,15 +132,22 @@ Asylum:
       Demonstrate limit positioning:
 
     - Terminal Operators
-      - FindAny
+      - FindAny #Demonstrate un-defined functionality.
       - Count, Max, Min,
-      - Collect with three arguments
-      - Collect with a collector with the `Concurrency` Characterstic
-      - Reduce
+      - Collect with a collector with the `Concurrency` && `Unordered` Characterstic
 
+      REDUCTION:
+        - Collect with three arguments
+        - Reduce
+          - The identity must be defined such that for all elements in the stream u ,
+          - combiner.apply(identity, u) is equal to u .
 
+          - The accumulator operator op must be associative and stateless such that (a op b) op c
+          - is equal to a op (b op c) .
 
-  Concurrency:
+          - The combiner operator must also be associative and stateless and compatible with the
+          - identity, such that for all u and t combiner.apply(u,accumulator.apply(identity,t))
+          - is equal to accumulator.apply(u,t) .
 
 
 
