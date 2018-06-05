@@ -153,18 +153,15 @@ Asylum:
 
           - Show how I think that it works under the hood
 
-      - IntStream Range Parallel String reduction
+      - All interests sorted Parallel list reduction
+        - source sorted interests
         - limit (move it around to show defined/undefined results)
         - unordered
         - parallel
         - map to string
-
-      - Word stream linked list collection
+        - collect on linked list
         - Show that all remain ordered
         - Show the fork-join bits
-
-      - Really long integer list reduction
-
 
 Primitive Streams:
   -DoubleStream
