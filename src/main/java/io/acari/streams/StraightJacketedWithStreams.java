@@ -105,6 +105,21 @@ public class StraightJacketedWithStreams {
 
 
 
+    IntStream.rangeClosed(0,200)
+        .forEach(i->{
+          IntStream.rangeClosed(0,20)
+              .forEach(j-> {
+                String wolf = Stream.of("w","o","l","f")
+                    .unordered()
+                    .parallel()
+                    .flatMap(letter->IntStream.rangeClosed(0,20)
+                        .mapToObj(__->letter))
+                    .map(String::toUpperCase)
+                    .reduce("x", String::concat);
+                System.out.print(wolf + " ");
+              });
+          System.out.println();
+        });
   }
 
   @Data
