@@ -94,7 +94,7 @@ Dream:
 
 Asylum:
   - What if we want to collect into a different Data Struture?
-    - Multi map collect //remember it is creat and not new
+    - Multi map collect //remember it is create and not new
       - Data structure that used in denoting http headers
 
   - What if we need to find all pod members to a particular interest?
@@ -115,6 +115,7 @@ Asylum:
 
   - How do we get the most bang for our buck?
     - Overhead!
+
     - Unordered Streams!
 
       - This method does not actually reorder the elements; it just tells the JVM that if an
@@ -166,12 +167,34 @@ Asylum:
         - Show the nested stream tests
 
 
+- Primitive Streams
+  -DoubleStream
+  -LongStream
+  -IntStream
+
+    -boxed
+    -mapTo(Double,Long,Int)
+
+  - Sources
+    -Range, RangeClosed, generate, interate
+  - Terminal Operations
+    - Optional return types are special
+    - Summarizing Statistics
+  - Intermediate Operations
+    - Special functions with the primitive name (still the same lambda)
 
 Optionals:
     Sources:
+      - of
+      - ofNullable
     IntermediatOperations:
+      - map
+      - Filter
+      - Flatmap
     TerminalOperations:
-
-- Primitive Streams
+      - get
+      - orElse
+      - orElseGet
+      - orElseThrow
 
 
