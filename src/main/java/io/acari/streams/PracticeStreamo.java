@@ -1,21 +1,16 @@
 package io.acari.streams;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class StreamsAreCool {
+public class PracticeStreamo {
 
-    public static void main(String... args) {
-
+    public static void main(String... args){
         List<PodMember> podMembersEnhanced = Stream.of((
                 "Alex Java,Functional_Programming,Javascript,Fixing_bugs,Fun_Commit_Messages;" +
                         "Steve Cobol,Ada,Java,Groovy,Pineapples,Sunday_Mornings;" +
@@ -42,56 +37,14 @@ public class StreamsAreCool {
 
         Pod pod = podMemberStream.collect(Pod::new, Pod::addPodMember, Pod::combinePod);
 
+        Set<String> allInterests = pod.fetchPodMembers()
+                .map(PodMember::getInterests)
+                .map(Interests::getCoreInterests)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
 
+        System.out.print(allInterests);
 
         System.out.println("Done");
-    }
-}
-
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-class Pod {
-    private Set<PodMember> podMembers = new HashSet<>();
-
-    public Pod addPodMember(PodMember podMember){
-        podMembers.add(podMember);
-        return this;
-    }
-
-    public Pod combinePod(Pod otherPod){
-        podMembers.addAll(otherPod.getPodMembers());
-        return this;
-    }
-
-    public Stream<PodMember> fetchPodMembers(){
-        return podMembers.stream();
-    }
-}
-
-
-@Data
-@Builder
-class PodMember {
-    private String name;
-    private Interests interests;
-}
-
-@Data
-@AllArgsConstructor
-class Interests {
-    private List<String> coreInterests = new ArrayList<>();
-
-    public boolean areSane() {
-        return coreInterests.stream()
-                .map(String::toLowerCase)
-                .noneMatch(interest -> interest.contains("bug") || interest.contains("spider"));
-    }
-
-    public boolean hasInterest(String java) {
-        return coreInterests.stream()
-                .map(String::toLowerCase)
-                .anyMatch(interest-> interest.contains(java));
     }
 }
