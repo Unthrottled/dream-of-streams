@@ -110,7 +110,7 @@ Asylum:
   - What if our streams grow to large numbers and we need to iterate and process them?
     - Streams can become parallel!
       - Basic streams can become parallel
-      - Collections also support parellel streams!
+      - Collections also support parallel streams!
 
   - How do we get the most bang for our buck?
     - Overhead!
@@ -150,7 +150,7 @@ Asylum:
           - identity, such that for all u and t combiner.apply(u,accumulator.apply(identity,t))
           - is equal to accumulator.apply(u,t) .
 
-          - Show how I think that it works under the hood
+          - Show how I think that it works under the hood (fork_join.png)
 
       - All interests sorted Parallel list reduction
         - source sorted interests
@@ -162,6 +162,8 @@ Asylum:
         - Show that all remain ordered
         - Show the fork-join bits
 
+      - flat map on a Parallel stream will always be sequential
+
 Primitive Streams:
   -DoubleStream
   -LongStream
@@ -169,6 +171,7 @@ Primitive Streams:
 
     -boxed
     -mapTo(Double,Long,Int)
+      - interest length
 
   - Sources
     -Range, RangeClosed, generate, interate

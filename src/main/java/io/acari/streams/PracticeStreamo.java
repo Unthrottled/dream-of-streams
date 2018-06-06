@@ -3,9 +3,9 @@ package io.acari.streams;
 import com.google.common.collect.Lists;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.*;
 
 public class PracticeStreamo {
 
@@ -81,6 +81,62 @@ public class PracticeStreamo {
                         Collectors.toCollection(HashSet::new)));
 
         System.out.println(saneAsylum);
+
+        long count = thereCanOnlyBeOne.entrySet()
+                .stream()
+                .parallel()
+                .unordered()
+                .count();
+
+        System.out.println(count);
+
+        System.out.println(Collectors.toList().characteristics());
+        System.out.println(Collectors.groupingByConcurrent(a->a).characteristics());
+        System.out.println(Collectors.toConcurrentMap(a->a,a->a).characteristics());
+
+//        - The identity must be defined such that for all elements in the stream u ,
+//        - combiner.apply(identity, u) is equal to u .
+//
+//        - The accumulator operator op must be associative and stateless such that (a op b) op c
+//        - is equal to a op (b op c) . (1 + 2) + 5 == 1 + (2 + 5)
+//
+//        - The combiner operator must also be associative and stateless and compatible with the
+//        - identity, such that for all u and t combiner.apply(u,accumulator.apply(identity,t))
+//                - is equal to accumulator.apply(u,t) .
+
+        List<String> sortedInterests = pod.fetchPodMembers()
+                .map(PodMember::getInterests)
+                .map(Interests::getCoreInterests)
+                .flatMap(List::parallelStream)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+
+        System.out.println(sortedInterests);
+
+        List<String> sameSortedInterests = sortedInterests.parallelStream()
+                .peek((a)-> System.out.println(Thread.currentThread().getName()))
+                .collect(()->{
+                    System.out.println("creating list!!!");
+                    return new LinkedList<>();
+                }, LinkedList::add, (listOne, listTwo) -> {
+                    System.out.println("Joining lists!!");
+                    listOne.addAll(listTwo);
+                });
+
+        System.out.println(sameSortedInterests);
+
+
+        IntStream.rangeClosed(0,10)
+        .summaryStatistics();
+
+        double first =
+                sortedInterests.stream()
+                        .parallel()
+                        .mapToDouble(String::length)
+                .findAny().getAsDouble();
+
+        System.out.println(first);
 
         System.out.println("Done");
     }
