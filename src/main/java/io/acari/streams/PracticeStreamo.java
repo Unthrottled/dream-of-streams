@@ -37,11 +37,12 @@ public class PracticeStreamo {
 
         Pod pod = podMemberStream.collect(Pod::new, Pod::addPodMember, Pod::combinePod);
 
-        Set<String> allInterests = pod.fetchPodMembers()
+        List<String> allInterests = pod.fetchPodMembers()
                 .map(PodMember::getInterests)
                 .map(Interests::getCoreInterests)
                 .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
+                .distinct()
+                .collect(Collectors.toList());
 
         System.out.print(allInterests);
 
