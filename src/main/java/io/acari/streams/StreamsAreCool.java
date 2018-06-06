@@ -17,7 +17,7 @@ public class StreamsAreCool {
     public static void main(String... args) {
 
         List<PodMember> podMembersEnhanced = Stream.of((
-                "Alex Java,Java,Functional_Programming,Javascript,Fixing_bugs,Fun_Commit_Messages;" +
+                "Alex Java,Functional_Programming,Javascript,Fixing_bugs,Fun_Commit_Messages;" +
                         "Steve Cobol,Cobol,Ada,Java,Groovy,Pineapples,Sunday_Mornings;" +
                         "Amy Javascript,Javascript,HTML,CSS,Spiders,Assembly;" +
                         "Chad PHP,PHP,Java,Ruby,Purple_Stuff,Anime;" +
