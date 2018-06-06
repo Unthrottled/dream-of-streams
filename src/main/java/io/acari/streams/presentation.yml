@@ -79,10 +79,8 @@ Dream:
         - joining
 
     - What if we want to group the insectphiles together?
-      - add areSane method to the interest class
       - partition
         - change grouping collector to set
-      - Show that grouping by does the same thing
 
     - What if we need to reference podMembers quickly by name?
       - toMap
@@ -91,6 +89,7 @@ Dream:
         - also show the supplier
       - What if we want to preserve pod members?
         - groupingBy!
+        - Show that grouping by does the same thing as partitioning by
 
 Asylum:
   - What if we want to collect into a different Data Struture?

@@ -17,11 +17,11 @@ public class StreamsAreCool {
     public static void main(String... args) {
 
         List<PodMember> podMembersEnhanced = Stream.of((
-                "Alex Java,Functional_Programming,Javascript,Fixing_bugs,Fun_Commit_Messages;" +
-                        "Steve Cobol,Ada,Java,Groovy,Pineapples,Sunday_Mornings;" +
-                        "Amy Javascript,HTML,CSS,Spiders,Assembly;" +
-                        "Chad PHP,Java,Ruby,Purple_Stuff,Anime;" +
-                        "Mira Python,Ruby,Whitespaces,Java,Lombok,Curly_Brace_Placement").split(";"))
+                "Alex Java,Java,Functional_Programming,Javascript,Fixing_bugs,Fun_Commit_Messages;" +
+                        "Steve Cobol,Cobol,Ada,Java,Groovy,Pineapples,Sunday_Mornings;" +
+                        "Amy Javascript,Javascript,HTML,CSS,Spiders,Assembly;" +
+                        "Chad PHP,PHP,Java,Ruby,Purple_Stuff,Anime;" +
+                        "Mira Python,Python,Ruby,Whitespaces,Java,Lombok,Curly_Brace_Placement").split(";"))
                 .map(podMemberInfo -> {
                     String[] split = podMemberInfo.split(" ");
                     return PodMember.builder()
@@ -76,6 +76,10 @@ class Pod {
 class PodMember {
     private String name;
     private Interests interests;
+
+    public boolean areSane(){
+        return interests.areSane();
+    }
 }
 
 @Data
