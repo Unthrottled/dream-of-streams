@@ -164,6 +164,9 @@ Asylum:
 
       - flat map on a Parallel stream will always be sequential
 
+
+#last one :)
+
 Primitive Streams:
   -DoubleStream
   -LongStream
