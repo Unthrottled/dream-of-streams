@@ -1,6 +1,9 @@
-package io.acari.streams;
+package io.acari.streams.practice;
 
 import com.google.common.collect.Lists;
+import io.acari.streams.Interests;
+import io.acari.streams.Pod;
+import io.acari.streams.PodMember;
 
 import java.util.*;
 import java.util.function.BinaryOperator;

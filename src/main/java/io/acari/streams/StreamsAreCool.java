@@ -38,7 +38,7 @@ public class StreamsAreCool {
                 PodMember.builder()
                         .name("Smitty Werberjagermangensen")
                         .interests(new Interests(Lists.newArrayList("Having are really long name",
-                                "Being Number One","Spelling mistakes in his name")))
+                                "Being Number One", "Spelling mistakes in his name")))
                         .build()
         );
 
@@ -48,25 +48,29 @@ public class StreamsAreCool {
         pod.addPodMember(PodMember.builder()
                 .name("Alex")
                 .interests(new Interests(Lists.newArrayList("Imitation", "Not being real")))
-        .build());
+                .build());
 
 
-        Map<String, List<PodMember>> byInterest = pod.fetchPodMembers()
+        Map<String, Map<String, List<PodMember>>> typeaheadInterests = pod.fetchPodMembers()
                 .distinct()
                 .flatMap(podMember -> podMember.getInterests().interestsAsStream().map(interest -> new AbstractMap.SimpleEntry<>(interest, podMember)))
                 .flatMap(stringPodMemberSimpleEntry -> {
-                    Stream.Builder<AbstractMap.SimpleEntry<String, PodMember>> bob = Stream.builder();
+                    Stream.Builder<AbstractMap.SimpleEntry<String, AbstractMap.SimpleEntry<String, PodMember>>> bob = Stream.builder();
                     String interest = stringPodMemberSimpleEntry.getKey();
                     for (int i = 0; i < interest.length(); i++) {
-                        for (int j = i + 1 ; j <= interest.length(); j++) {
-                            bob.accept(new AbstractMap.SimpleEntry<>(interest.substring(i,j),
-                                    stringPodMemberSimpleEntry.getValue()));
+                        for (int j = i + 1; j <= interest.length(); j++) {
+                            bob.accept(new AbstractMap.SimpleEntry<>(interest.substring(i, j),
+                                    stringPodMemberSimpleEntry));
                         }
                     }
                     return bob.build().parallel();
                 })
                 .collect(Collectors.groupingBy(Map.Entry::getKey,
-                        Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
+                        Collectors.mapping(Map.Entry::getValue,
+                                Collectors.groupingBy(Map.Entry::getKey,
+                                        Collectors.mapping(Map.Entry::getValue, Collectors.toList())))));
+
+        System.out.println(typeaheadInterests.get("Jav"));
 
 
         List<String> sortedInterests = pod.fetchPodMembers().map(PodMember::getInterests)
@@ -101,61 +105,5 @@ public class StreamsAreCool {
 
 
         System.out.println("Done");
-    }
-}
-
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-class Pod {
-    private Set<PodMember> podMembers = new HashSet<>();
-
-    public Pod addPodMember(PodMember podMember){
-        podMembers.add(podMember);
-        return this;
-    }
-
-    public Pod combinePod(Pod otherPod){
-        podMembers.addAll(otherPod.getPodMembers());
-        return this;
-    }
-
-    public Stream<PodMember> fetchPodMembers(){
-        return podMembers.stream();
-    }
-}
-
-
-@Data
-@Builder
-class PodMember {
-    private String name;
-    private Interests interests;
-
-    public boolean areSane(){
-        return interests.areSane();
-    }
-}
-
-@Data
-@AllArgsConstructor
-class Interests {
-    private List<String> coreInterests = new ArrayList<>();
-
-    public boolean areSane() {
-        return coreInterests.stream()
-                .map(String::toLowerCase)
-                .noneMatch(interest -> interest.contains("bug") || interest.contains("spider"));
-    }
-
-    public boolean hasInterest(String java) {
-        return coreInterests.stream()
-                .map(String::toLowerCase)
-                .anyMatch(interest-> interest.contains(java));
-    }
-
-    public Stream<String> interestsAsStream(){
-        return coreInterests.stream();
     }
 }

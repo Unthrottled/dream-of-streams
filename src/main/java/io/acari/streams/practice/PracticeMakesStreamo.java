@@ -1,8 +1,11 @@
-package io.acari.streams;
+package io.acari.streams.practice;
 
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import io.acari.streams.Interests;
+import io.acari.streams.Pod;
+import io.acari.streams.PodMember;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.*;
