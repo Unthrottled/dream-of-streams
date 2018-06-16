@@ -139,6 +139,7 @@ Asylum:
 
       REDUCTION:
         - Collect with three arguments
+        - Show how I think that it works under the hood (fork_join.png)
         - Reduce
           - The identity must be defined such that for all elements in the stream u ,
           - combiner.apply(identity, u) is equal to u .
@@ -149,8 +150,6 @@ Asylum:
           - The combiner operator must also be associative and stateless and compatible with the
           - identity, such that for all u and t combiner.apply(u,accumulator.apply(identity,t))
           - is equal to accumulator.apply(u,t) .
-
-          - Show how I think that it works under the hood (fork_join.png)
 
       - All interests sorted Parallel list reduction
         - source sorted interests
